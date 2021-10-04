@@ -43,6 +43,7 @@ io.on("connection", function(socket) {
     console.log("[INFO] JOIN received !!! ");
 
     var data = JSON.parse(_data);
+    console.log(data);
 
     // fills out with the information emitted by the player in the unity
     currentUser = {
@@ -59,7 +60,7 @@ io.on("connection", function(socket) {
       timeOut: 0,
       isDead: false
     }; //new user  in clients list
-
+    console.log("[INFO] socket" + currentUser.socketID);
     console.log("[INFO] player " + currentUser.name + ": logged!");
     console.log("[INFO] currentUser.position " + currentUser.position);
 
