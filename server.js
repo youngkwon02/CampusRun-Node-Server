@@ -13,7 +13,13 @@ app.use(
   express.static(__dirname + "/public/TemplateData")
 );
 app.use("/public/Build", express.static(__dirname + "/public/Build"));
+
+// routes settings
+const indexRoute = require("./routes/index");
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use("/", indexRoute);
 
 var clients = []; // to storage clients
 var clientLookup = {}; // clients search engine
