@@ -8,6 +8,9 @@ var http = require("http").Server(app); // create a http web server using the ht
 var io = require("socket.io")(http); // import socketio communication module
 var shortId = require("shortid"); //import shortid module
 
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(
   "/public/TemplateData",
   express.static(__dirname + "/public/TemplateData")
@@ -15,11 +18,15 @@ app.use(
 app.use("/public/Build", express.static(__dirname + "/public/Build"));
 
 // routes settings
-const indexRoute = require("./routes/index");
-app.set("views", __dirname + "/views");
+// const indexRoute = require("./routes/base");
+app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-app.use("/", indexRoute);
+// app.use("/", indexRoute);
+
+app.get("/", (req, res) => {
+  res.render("index");
+});
 
 var clients = []; // to storage clients
 var clientLookup = {}; // clients search engine
