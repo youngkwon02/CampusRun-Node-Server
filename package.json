@@ -1,0 +1,27 @@
+{
+  "name": "campus_run",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "shortid": "^2.2.16",
+    "socketio": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Campus-Run/unity-campus-run.git"
+  },
+  "author": "oereo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Campus-Run/unity-campus-run/issues"
+  },
+  "homepage": "https://github.com/Campus-Run/unity-campus-run#readme"
+}
