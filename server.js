@@ -24,8 +24,14 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 // app.use("/", indexRoute);
 
+// Page View
+
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+app.get("/plaza", (req, res) => {
+  res.render("plaza");
 });
 
 var clients = []; // to storage clients
