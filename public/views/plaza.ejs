@@ -24,7 +24,7 @@
     <script src="Build/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
-    <script src="test.js"></script>
+    <!-- <script src="test.js"></script> -->
 
     <script>
       var unityInstance = UnityLoader.instantiate(
@@ -46,6 +46,21 @@
         <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
       </div>
     </div>
-    <button class="start-btn" id = "btn_id" onclick="emitJoin()">GO TO PLAZA</button>
+    <button class="start-btn" id="btn_id" onclick="emitJoin()">
+      GO TO PLAZA
+    </button>
   </body>
+  <script>
+    function emitJoin() {
+      socket.emit(
+        "LOGIN",
+        JSON.stringify({
+          name: `<%= kakaoEmail %>`,
+          position: "3.3:2.633828:0",
+          avatar: "1"
+        })
+      );
+      document.getElementById("btn_id").style.display = "none";
+    }
+  </script>
 </html>

@@ -54,7 +54,23 @@ app.get("/", (req, res) => {
 });
 
 app.get("/plaza", (req, res) => {
-  res.render("plaza");
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
+    console.log(response);
+    user = response.data;
+    console.log(user);
+    res.render("plaza", {
+      userNameTest: "sdf",
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail
+    });
+  });
 });
 
 app.get("/home", (req, res) => {
