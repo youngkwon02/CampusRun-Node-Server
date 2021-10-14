@@ -23,9 +23,10 @@ app.use(
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 app.get("/kakaoLogin", (req, res) => {
-  console.log(req.query.idToken);
-  sess = req.session;
-  sess.token = req.query.idToken;
+  console.log("Get request");
+  console.log(`idToken in get kakao ${req.query.idToken}`);
+  res.cookie("cookieToken", req.query.idToken);
+  res.redirect("/home");
   res.send();
 });
 const bodyParser = require("body-parser");
@@ -47,46 +48,6 @@ const kakaoConfig = {
 };
 
 // Page View
-app.get(kakaoConfig.redirectUri);
-app.get("/auth/kakao", (req, res) => {
-  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfig.clientID}&redirect_uri=${kakaoConfig.redirectUri}&response_type=code`;
-  res.redirect(kakaoAuthURL);
-});
-
-app.get("/login/kakao/callback", async (req, res) => {
-  try {
-    token = await axios({
-      method: "POST",
-      url: "https://kauth.kakao.com/oauth/token",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      data: qs.stringify({
-        grant_type: "authorization_code",
-        client_id: kakaoConfig.clientID,
-        redirectUri: kakaoConfig.redirectUri,
-        code: req.query.code
-      })
-    });
-  } catch (err) {
-    res.json(err.data);
-  }
-  let user;
-  try {
-    console.log(token);
-    user = await axios({
-      method: "get",
-      url: "https://kapi.kakao.com/v2/user/me",
-      headers: {
-        Authorization: `Bearer ${token.data.access_token}`
-      }
-    });
-  } catch (e) {
-    res.json(e.data);
-  }
-
-  res.send("success");
-});
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -97,7 +58,30 @@ app.get("/plaza", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  res.render("mainPage");
+  setTimeout(() => {
+    console.log("token이다" + req.cookies["cookieToken"]);
+  }, 100);
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
+    console.log(response);
+    user = response.data;
+    console.log(user);
+    res.render("mainPage", {
+      userNameTest: "sdf",
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail
+    });
+  });
+  // console.log(user.user);
+  setTimeout(() => {
+    console.log("token이다" + req.cookies["cookieToken"]);
+  }, 100);
 });
 
 var clients = []; // to storage clients
