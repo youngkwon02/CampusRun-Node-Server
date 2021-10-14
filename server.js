@@ -6,25 +6,70 @@ var express = require("express"); //import express NodeJS framework module
 var app = express(); // create an object of the express module
 var http = require("http").Server(app); // create a http web server using the http library
 var io = require("socket.io")(http); // import socketio communication module
+const qs = require("qs");
+const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
+const config = require("./public/config/secret");
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// routes settings
 app.use(
   "/public/TemplateData",
   express.static(__dirname + "/public/TemplateData")
 );
 app.use("/public/Build", express.static(__dirname + "/public/Build"));
-
-// routes settings
-// const indexRoute = require("./routes/base");
 app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-// app.use("/", indexRoute);
+
+const kakaoConfig = {
+  clientID: config.REST_API_KEY,
+  redirectUri: config.REDIRECT_URI
+};
 
 // Page View
+app.get(kakaoConfig.redirectUri);
+app.get("/auth/kakao", (req, res) => {
+  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfig.clientID}&redirect_uri=${kakaoConfig.redirectUri}&response_type=code&scope=profile,account_email`;
+  res.redirect(kakaoAuthURL);
+});
+
+app.get("/login/kakao/callback", async (req, res) => {
+  try {
+    token = await axios({
+      method: "POST",
+      url: "https://kauth.kakao.com/oauth/token",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      data: qs.stringify({
+        grant_type: "authorization_code",
+        client_id: kakaoConfig.clientID,
+        redirectUri: kakaoConfig.redirectUri,
+        code: req.query.code
+      })
+    });
+  } catch (err) {
+    res.json(err.data);
+  }
+  let user;
+  try {
+    console.log(token);
+    user = await axios({
+      method: "get",
+      url: "https://kapi.kakao.com/v2/user/me",
+      headers: {
+        Authorization: `Bearer ${token.data.access_token}`
+      }
+    });
+  } catch (e) {
+    res.json(e.data);
+  }
+
+  res.send("success");
+});
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -270,7 +315,7 @@ io.on("connection", function(socket) {
   }); //END_SOCKET_ON
 }); //END_IO.ON
 
-http.listen(process.env.PORT || 3000, function() {
-  console.log("listening on *:3000");
+http.listen(process.env.PORT || 8000, function() {
+  console.log("listening on *:8000");
 });
 console.log("------- server is running -------");
