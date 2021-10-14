@@ -10,7 +10,22 @@ const qs = require("qs");
 const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
 const config = require("./public/config/secret");
-
+var indexRouter = require('./routes/index');
+// app.use('/', indexRouter);
+var session = require('express-session');
+app.use(session({
+  secret: '@#@$MYSIGN#@$#$',
+  resave: false,
+  saveUninitialized: true
+ }));
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.get('/kakaoLogin', (req, res) => {
+  console.log(req.query.idToken);
+  sess = req.session;
+  sess.token = req.query.idToken;
+  res.send();
+})
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -315,7 +330,7 @@ io.on("connection", function(socket) {
   }); //END_SOCKET_ON
 }); //END_IO.ON
 
-http.listen(process.env.PORT || 8000, function() {
-  console.log("listening on *:8000");
+http.listen(process.env.PORT || 3000, function() {
+  console.log("listening on *:3000");
 });
 console.log("------- server is running -------");

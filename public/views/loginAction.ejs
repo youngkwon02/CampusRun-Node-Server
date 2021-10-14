@@ -1,0 +1,13 @@
+<script>
+  window.onload = () => {
+    console.log("LOGIN-ACTION");
+    let token = document.querySelector('#token');
+    console.log(token);
+    localStorage.setItem('idToken', token);
+  }
+</script>
+
+<html>
+  <input id='token' type="hidden" value="<%= idToken %>">
+  </input>
+</html>
