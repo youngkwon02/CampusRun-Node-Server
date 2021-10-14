@@ -10,22 +10,24 @@ const qs = require("qs");
 const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
 const config = require("./public/config/secret");
-var indexRouter = require('./routes/index');
+var indexRouter = require("./routes/index");
 // app.use('/', indexRouter);
-var session = require('express-session');
-app.use(session({
-  secret: '@#@$MYSIGN#@$#$',
-  resave: false,
-  saveUninitialized: true
- }));
-const cookieParser = require('cookie-parser');
+var session = require("express-session");
+app.use(
+  session({
+    secret: "@#@$MYSIGN#@$#$",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+const cookieParser = require("cookie-parser");
 app.use(cookieParser());
-app.get('/kakaoLogin', (req, res) => {
+app.get("/kakaoLogin", (req, res) => {
   console.log(req.query.idToken);
   sess = req.session;
   sess.token = req.query.idToken;
   res.send();
-})
+});
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -92,6 +94,10 @@ app.get("/", (req, res) => {
 
 app.get("/plaza", (req, res) => {
   res.render("plaza");
+});
+
+app.get("/home", (req, res) => {
+  res.render("mainPage");
 });
 
 var clients = []; // to storage clients
