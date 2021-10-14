@@ -9,4 +9,5 @@ function emitJoin() {
       avatar: "1"
     })
   );
+  document.getElementById("btn_id").style.display = "none";
 }
