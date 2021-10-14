@@ -1,0 +1,30 @@
+.landingBackground {
+  border: 0;
+  padding: 0;
+  background-image: url("../../Assets/image/LandingPageBackground.png");
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.subLandingBackground {
+  border: 0;
+  width: 65%;
+  min-height: 80%;
+  z-index: 5;
+  float: center;
+  text-align: center;
+  vertical-align: middle;
+}
