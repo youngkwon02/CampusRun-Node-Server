@@ -32,7 +32,7 @@ const kakaoConfig = {
 // Page View
 app.get(kakaoConfig.redirectUri);
 app.get("/auth/kakao", (req, res) => {
-  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfig.clientID}&redirect_uri=${kakaoConfig.redirectUri}&response_type=code&scope=profile,account_email`;
+  const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoConfig.clientID}&redirect_uri=${kakaoConfig.redirectUri}&response_type=code`;
   res.redirect(kakaoAuthURL);
 });
 
