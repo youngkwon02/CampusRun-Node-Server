@@ -65,7 +65,6 @@ app.get("/plaza", (req, res) => {
     user = response.data;
     console.log(user);
     res.render("plaza", {
-      userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail
@@ -74,9 +73,6 @@ app.get("/plaza", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-  setTimeout(() => {
-    console.log("token이다" + req.cookies["cookieToken"]);
-  }, 100);
   user = axios({
     method: "get",
     url: "http://localhost:8000/user/",
@@ -91,7 +87,8 @@ app.get("/home", (req, res) => {
       userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,
-      kakaoEmail: user.kakaoEmail
+      kakaoEmail: user.kakaoEmail,
+      idToken: req.cookies["cookieToken"]
     });
   });
   // console.log(user.user);

@@ -19,15 +19,13 @@
       href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../static//css/fontawesome.css" />
-    <link rel="stylesheet" href="../static//css/tooplate-style.css" />
-    <link rel="stylesheet" href="../static//css/owl.css" />
-    <link rel="stylesheet" href="../static//css/lightbox.css" />
+    <link rel="stylesheet" href="../static/css/fontawesome.css" />
+    <link rel="stylesheet" href="../static/css/tooplate-style.css" />
+    <link rel="stylesheet" href="../static/css/owl.css" />
+    <link rel="stylesheet" href="../static/css/lightbox.css" />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   </head>
-  <!--
-Tooplate 2116 Blugoon
-https://www.tooplate.com/view/2116-blugoon
--->
   <body>
     <div id="page-wraper">
       <!-- Sidebar Menu -->
@@ -53,28 +51,8 @@ https://www.tooplate.com/view/2116-blugoon
                 <li><a href="#section1">Play</a></li>
                 <li><a href="#section2">Ranking</a></li>
                 <li><a href="#section3">Event</a></li>
-                <!-- <li><a href="#section4">Contact</a></li> -->
               </ul>
             </nav>
-            <div class="social-network">
-              <!-- <ul class="soial-icons">
-                <li>
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-linkedin"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-dribbble"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-rss"></i></a>
-                </li>
-              </ul> -->
-            </div>
             <div class="copyright-text">
               <p>
                 Team <strong>Junction Again</strong><br />
@@ -84,7 +62,7 @@ https://www.tooplate.com/view/2116-blugoon
           </div>
         </div>
       </div>
-
+      <span id="idToken" style="display: none;"><%= idToken %></span>
       <section class="section about-me" data-section="section1">
         <div class="container">
           <div class="section-heading">
@@ -108,7 +86,7 @@ https://www.tooplate.com/view/2116-blugoon
                     학교대항전 등, 다양하고 특별한 게임을 즐길 수 있습니다!
                   </p>
                   <div class="white-button">
-                    <a href="#">인증하기</a>
+                    <a href="javascript:verifyModalOn()">인증하기</a>
                   </div>
                 </div>
               </div>
@@ -189,16 +167,6 @@ https://www.tooplate.com/view/2116-blugoon
                 </p>
               </div>
             </div>
-            <!-- <div class="col-md-6">
-              <div class="service-item">
-                <i class="fa fa-support"></i>
-                <h4>Quick Support</h4>
-                <p>
-                  Mauris eu est vitae erat condimentum pellentesque. Fusce
-                  vehicula nunc.
-                </p>
-              </div>
-            </div> -->
           </div>
         </div>
       </section>
@@ -354,83 +322,22 @@ https://www.tooplate.com/view/2116-blugoon
         </div>
       </section>
 
-      <!-- <section class="section contact-me" data-section="section4">
-        <div class="container">
-          <div class="section-heading">
-            <h2>Contact</h2>
-            <div class="line-dec"></div>
-            <span
-              >Aenean a consectetur mi, sit amet consequat velit. Mauris vitae
-              nunc viverra, mattis arcu quis, vestibulum eros.
-            </span>
-          </div>
-          <div class="row">
-            <div class="right-content">
-              <div class="container">
-                <form id="contact" action="" method="post">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <fieldset>
-                        <input
-                          name="name"
-                          type="text"
-                          class="form-control"
-                          id="name"
-                          placeholder="Your name..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                      <fieldset>
-                        <input
-                          name="email"
-                          type="text"
-                          class="form-control"
-                          id="email"
-                          placeholder="Your email..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <input
-                          name="subject"
-                          type="text"
-                          class="form-control"
-                          id="subject"
-                          placeholder="Subject..."
-                          required=""
-                        />
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <textarea
-                          name="message"
-                          rows="6"
-                          class="form-control"
-                          id="message"
-                          placeholder="Your message..."
-                          required=""
-                        ></textarea>
-                      </fieldset>
-                    </div>
-                    <div class="col-md-12">
-                      <fieldset>
-                        <button type="submit" id="form-submit" class="button">
-                          Send Message
-                        </button>
-                      </fieldset>
-                    </div>
-                  </div>
-                </form>
-              </div>
+      <div class="verify-modal" style="display: none;">
+        <div style="background-color: #e663a4; border-radius: 16px; width: 400px; height: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+          <br><br>
+          <h5 style="text-align: center;">대학교 메일주소를 입력하세요</h5>
+          <input type="text" class="email-address" style="position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); width: 70%; height: 30px;">
+          <div style="text-align: center; position: absolute; left: 50%; bottom: 14px; transform: translate(-50%, -50%); width: 100%;">
+            <div class="white-button" style="display: inline-block; margin: 0 10px; border-radius: 10px;">
+              <a href="javascript:univEmailVerify()">인증메일 전송</a>
+            </div>
+            <div class="white-button" style="display: inline-block; margin: 0 10px; border-radius: 10px;">
+              <a href="javascript:verifyModalOff()">닫기</a>
             </div>
           </div>
         </div>
-      </section> -->
+      </div>
+     
     </div>
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
@@ -490,6 +397,38 @@ https://www.tooplate.com/view/2116-blugoon
       $(window).scroll(function() {
         checkSection();
       });
+
+      const verifyModalOn = () => {
+        document.querySelector('.verify-modal').style.display = 'block';
+        document.querySelector('html').style.overflow = 'hidden';
+      }
+
+      const verifyModalOff = () => {
+        document.querySelector('.verify-modal').style.display = 'none';
+        document.querySelector('html').style.overflow = 'scrollY';
+      }
+
+      const univEmailVerify = () => {
+      let address = document.querySelector('.email-address').value;
+      const IDTOKEN = document.querySelector('#idToken').innerHTML;
+      $.ajax({
+        url: 'http://localhost:8000/verifyUnivAction/',
+        type: 'GET',
+        async: false,
+        data: {
+          'token': IDTOKEN,
+          'email': address
+        },
+        success: function(data) {
+            console.log(data)
+            if(data === 'success') {
+              alert(`${address}로 전송된 이메일을 통해 대학 인증을 완료하세요!`);
+            } else {
+              alert(`인증메일 전송에 실패하였습니다\n잠시후 다시 시도하세요.`);
+            }
+        }
+      });
+      }
     </script>
   </body>
 </html>
