@@ -1,0 +1,66 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CampusRun</title>
+  </head>
+  <body>
+    <h1>Campus Run</h1>
+    <p>Campus Run 사이트 입니다.</p>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>CampusRun</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+    <link rel="stylesheet" href="TemplateData/style.css" />
+    <link rel="stylesheet" href="TemplateData/progressbar.css" />
+    <link rel="stylesheet" href="TemplateData/plaza_style.css" />
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+    <!-- <script src="test.js"></script> -->
+
+    <script>
+      var unityInstance = UnityLoader.instantiate(
+        "unityContainer",
+        "Build/[Capstone]_webgl_test.json",
+        { onProgress: UnityProgress }
+      );
+    </script>
+  </head>
+  <body>
+    <div class="progresscontent">
+      <div class="progressbar">
+        <div class="color"></div>
+      </div>
+    </div>
+    <div class="webgl-content">
+      <div id="unityContainer" style="width: 960px; height: 600px"></div>
+      <div class="footer">
+        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
+      </div>
+    </div>
+    <button class="start-btn" id="btn_id" onclick="emitJoin()">
+      GO TO PLAZA
+    </button>
+  </body>
+  <script>
+    function emitJoin() {
+      socket.emit(
+        "LOGIN",
+        JSON.stringify({
+          name: `<%= kakaoEmail %>`,
+          position: "3.3:2.633828:0",
+          avatar: "1"
+        })
+      );
+      document.getElementById("btn_id").style.display = "none";
+    }
+  </script>
+</html>

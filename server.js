@@ -33,11 +33,18 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes settings
+// app.use(
+//   "/public/TemplateData",
+//   express.static(__dirname + "/public/TemplateData")
+// );
+// app.use("/public/Build", express.static(__dirname + "/public/Build"));
+
 app.use(
-  "/public/TemplateData",
-  express.static(__dirname + "/public/TemplateData")
+  "/public/TemplateDataPlaza",
+  express.static(__dirname + "/public/TemplateDataPlaza")
 );
-app.use("/public/Build", express.static(__dirname + "/public/Build"));
+app.use("/public/BuildPlaza", express.static(__dirname + "/public/BuildPlaza"));
+
 app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -73,6 +80,26 @@ app.get("/plaza", (req, res) => {
   });
 });
 
+app.get("/game", (req, res) => {
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
+    console.log(response);
+    user = response.data;
+    console.log(user);
+    res.render("gameScene", {
+      userNameTest: "sdf",
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail
+    });
+  });
+});
+
 app.get("/home", (req, res) => {
   setTimeout(() => {
     console.log("token이다" + req.cookies["cookieToken"]);
@@ -84,9 +111,9 @@ app.get("/home", (req, res) => {
       token: req.cookies["cookieToken"]
     }
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
     user = response.data;
-    console.log(user);
+    // console.log(user);
     res.render("mainPage", {
       userNameTest: "sdf",
       userName: user.userName,
@@ -96,7 +123,7 @@ app.get("/home", (req, res) => {
   });
   // console.log(user.user);
   setTimeout(() => {
-    console.log("token이다" + req.cookies["cookieToken"]);
+    // console.log("token이다" + req.cookies["cookieToken"]);
   }, 100);
 });
 
