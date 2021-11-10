@@ -7,6 +7,7 @@ var app = express(); // create an object of the express module
 var http = require("http").Server(app); // create a http web server using the http library
 var io = require("socket.io")(http); // import socketio communication module
 const qs = require("qs");
+const fs = require("fs");
 const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
 const config = require("./public/config/secret");
@@ -71,6 +72,14 @@ app.get("/plaza", (req, res) => {
     console.log(response);
     user = response.data;
     console.log(user);
+    // fs.readFile("../views/plaza.html", (err, data) => {
+    //   if (err) throw err;
+    //   res
+    //     .writeHead(200, { "Content-Type": "text/html" })
+    //     .write(data)
+    //     .end();
+    // });
+
     res.render("plaza", {
       userNameTest: "sdf",
       userName: user.userName,
@@ -135,9 +144,32 @@ var sockets = {}; //// to storage sockets
 io.on("connection", function(socket) {
   //print a log in node.js command prompt
   console.log("A user ready for connection!");
-
+  // io.on('connection', socket => {
+  //   socket.on('message', msg =>{
+  //         console.log(msg);
+  //         socket.emit('Mmessage', msg);
+  //         socket.emit('Omessage', msg);
+  //     });
+  // });
   //to store current client connection
   var currentUser;
+  socket.on("newUserConnect", function(name) {
+    socket.name = name;
+    io.sockets.emit("updateMessage", {
+      name: "SERVER",
+      message: name + "님이 접속했습니다."
+    });
+  });
+  socket.on("userDisconnect", function() {
+    io.sockets.emit("updateMessage", {
+      name: "SERVER",
+      message: socket.name + "님이 퇴장했습니다."
+    });
+  });
+  socket.on("sendMessage", function(data) {
+    data.name = socket.name;
+    io.sockets.emit("updateMessage", data);
+  });
 
   //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
   socket.on("PING", function(_pack) {
