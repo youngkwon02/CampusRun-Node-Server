@@ -9,10 +9,16 @@
     <link rel="stylesheet" href="TemplateDataPlaza/progressbar.css" />
     <link rel="stylesheet" href="TemplateDataPlaza/plaza_style.css" />
     <link rel="stylesheet" href="../static/css/chat.css" />
+    <link rel="stylesheet" href="../static/css/modal.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+
     <script src="TemplateDataPlaza/UnityProgress.js"></script>
     <script src="BuildPlaza/UnityLoader1.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+
+    <!-- for UnityScene -->
     <script>
       var unityInstance = UnityLoader.instantiate(
         "unityContainer",
@@ -22,6 +28,7 @@
     </script>
   </head>
   <body>
+    <!-- for Chatting Section -->
     <div class="app__wrap" style="float:right">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
@@ -36,17 +43,89 @@
         <button id="chatMessageSendBtn" class="app__button">전송</button>
       </div>
     </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+      data-bs-whatever="@mdo"
+    >
+      방만들기
+    </button>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >게임방 제목</label
+                >
+                <input type="text" class="form-control" id="recipient-name" />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >학교 대전상대 선택</label
+                >
+                <div class="mb-3">
+                  <select
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected>Open this select menu</option>
+                    <option value="1">숭실대</option>
+                    <option value="2">서울대</option>
+                    <option value="3">한양대</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+            <button type="button" class="btn btn-primary">만들기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ProgressBar for loading GameView -->
     <div class="progresscontent">
       <div class="progressbar">
         <div class="color"></div>
       </div>
     </div>
+
+    <!-- Unity Game View rendering -->
     <div class="webgl-content">
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
         <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
       </div>
     </div>
+
+    <!-- EmitJoin for connecting socket -->
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
       GO TO PLAZA
     </button>
@@ -66,6 +145,8 @@
       document.getElementById("btn_id").style.display = "none";
     }
   </script>
+
+  <!-- chatting JS -->
   <script>
     var chatWindow = document.getElementById("chatWindow");
     var sendButton = document.getElementById("chatMessageSendBtn");

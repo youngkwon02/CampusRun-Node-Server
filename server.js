@@ -33,6 +33,10 @@ app.get("/kakaoLogin", (req, res) => {
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// bootstrap module
+app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js")); // redirect bootstrap JS
+app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css")); // redirect CSS bootstrap
+
 // routes settings
 // app.use(
 //   "/public/TemplateData",
