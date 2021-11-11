@@ -1,8 +1,8 @@
 const drawSection1 = () => {
-  const mainImg = document.querySelector("#main-img");
+  const mainImg = document.querySelector("#first-img");
   const WIDTH = window.innerWidth;
   const HEIGHT = window.innerHeight;
-  var canvas = document.querySelector("#my-canvas");
+  var canvas = document.querySelector("#my-canvas-01");
   canvas.width = WIDTH;
   canvas.height = HEIGHT;
   var ctx = canvas.getContext("2d"); // 변수선언
