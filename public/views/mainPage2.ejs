@@ -32,18 +32,23 @@
     <script src="../static/js/mainScript.js"></script>
   </head>
   <body>
-    <img
-      id="first-img"
-      src="../Assets/image/main-bg.png"
-      style="display: none"
-    />
-    <img
-      id="third-img"
-      src="../Assets/image/third-sec.jpg"
-      style="display: none"
-    />
-    <nav></nav>
-    <div class="section">
+    <div>
+      <img
+        id="first-img"
+        src="../Assets/image/main-bg.png"
+        style="display: none"
+      />
+      <img
+        id="third-img"
+        src="../Assets/image/third-sec.jpg"
+        style="display: none"
+      />
+    </div>
+
+    <nav>
+      <div id="nav-title">Capmus - Run</div>
+    </nav>
+    <div class="section" id="sec-01">
       <canvas id="my-canvas-01"></canvas>
       <script>
         drawSection1();

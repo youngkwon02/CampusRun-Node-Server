@@ -4,7 +4,7 @@ const drawSection1 = () => {
   const HEIGHT = window.innerHeight;
   var canvas = document.querySelector("#my-canvas-01");
   canvas.width = WIDTH;
-  canvas.height = HEIGHT;
+  canvas.height = HEIGHT - 80;
   var ctx = canvas.getContext("2d"); // 변수선언
 
   var tempCanvas = document.createElement("canvas"),
@@ -25,9 +25,9 @@ const drawSection1 = () => {
 
   ctx.beginPath(); //스따뚜
   ctx.moveTo(0, 0); //x,y좌표 각각 0에서 출발. 단위는 픽셀
-  ctx.lineTo(0, HEIGHT - 200);
-  ctx.lineTo(WIDTH / 2, HEIGHT - 40);
-  ctx.lineTo(WIDTH, HEIGHT - 200);
+  ctx.lineTo(0, HEIGHT - 280);
+  ctx.lineTo(WIDTH / 2, HEIGHT - 120);
+  ctx.lineTo(WIDTH, HEIGHT - 280);
   ctx.lineTo(WIDTH, 0);
 
   ctx.closePath(); //출발지점으로 마지막 직선을 그림
@@ -63,10 +63,10 @@ const drawSection3 = () => {
   );
 
   ctx.beginPath(); //스따뚜
-  ctx.moveTo(WIDTH, 0); //x,y좌표 각각 0에서 출발. 단위는 픽셀
-  ctx.lineTo(0, HEIGHT / 5);
-  ctx.lineTo(0, (4 * HEIGHT) / 5);
-  ctx.lineTo(WIDTH, HEIGHT); //x값 60지점을 향해 직선으로 선을 그음
+  ctx.moveTo(WIDTH, 100); //x,y좌표 각각 0에서 출발. 단위는 픽셀
+  ctx.lineTo(0, HEIGHT / 4);
+  ctx.lineTo(0, (3 * HEIGHT) / 4);
+  ctx.lineTo(WIDTH, HEIGHT - 100); //x값 60지점을 향해 직선으로 선을 그음
   ctx.lineTo(WIDTH, 0); //x값 60지점을 향해 직선으로 선을 그음
 
   ctx.closePath(); //출발지점으로 마지막 직선을 그림
@@ -81,4 +81,27 @@ const bodyRearrange = () => {
   const VH = window.innerHeight;
   let newHeight = BODY.offsetHeight - 2 * VH;
   BODY.style.height = newHeight + "px";
+};
+
+const applyNavColor = () => {
+  const nav = document.querySelector("nav");
+  const navElem = document.querySelectorAll("nav *");
+  if (window.scrollY > 50) {
+    nav.style.backgroundColor = "rgba(255, 255, 255, .45)";
+    for (let i = 0; i < navElem.length; i++) {
+      navElem[i].style.color = "#101010";
+    }
+  } else {
+    nav.style.backgroundColor = "rgba(0, 0, 0, 85)";
+    for (let i = 0; i < navElem.length; i++) {
+      navElem[i].style.color = "#efefef";
+    }
+  }
+};
+
+window.onload = () => {
+  applyNavColor();
+  window.addEventListener("scroll", function (e) {
+    applyNavColor();
+  });
 };
