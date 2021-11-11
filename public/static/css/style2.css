@@ -17,6 +17,10 @@ nav div {
   display: inline-block;
 }
 
+nav .fa {
+  font-size: 24px;
+}
+
 #nav-title {
   display: inline-block;
   width: 300px;
