@@ -33,9 +33,9 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <script src="../static/js/univVerify.js"></script>
     <script src="../static/js/mainScript.js"></script>
     <script src="../static/js/scrollHandler.js"></script>
-    <script src="../static/js/univVerify.js"></script>
   </head>
   <body>
     <div>
@@ -57,7 +57,7 @@
         <div><a href="#sec-02">PLAZA</a></div>
         <div><a href="#sec-03">RANKING</a></div>
         <div><a href="#sec-04">EVENT</a></div>
-        <div onclick="verifyModalOn()">대학메일 인증</div>
+        <div id="mail-verify-btn" onclick="verifyModalOn()">대학메일 인증</div>
         <div><i class="fa fa-envelope"></i></div>
         <div></div>
       </div>
@@ -115,6 +115,7 @@
 
     <div class="verify-modal" style="display: none">
       <span id="idToken" style="display: none"><%= idToken %></span>
+      <span id="univName" style="display: none"><%= univName %></span>
       <div class="modal-board">
         <br /><br />
         <h5 style="text-align: center">대학 메일주소를 입력하세요!</h5>

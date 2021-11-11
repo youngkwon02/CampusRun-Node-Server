@@ -31,3 +31,13 @@ const univEmailVerify = () => {
     },
   });
 };
+
+const verifyBtnAct = () => {
+  const univ = document.querySelector("#univName").innerHTML;
+  if (univ !== "") {
+    const btn = document.querySelector("#mail-verify-btn");
+    btn.innerHTML = univ + " 인증 성공!";
+    btn.onclick = "";
+    btn.style.cursor = "auto";
+  }
+};

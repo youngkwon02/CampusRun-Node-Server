@@ -123,4 +123,6 @@ window.onload = () => {
   window.addEventListener("scroll", function (e) {
     applyNavColor();
   });
+
+  verifyBtnAct();
 };
