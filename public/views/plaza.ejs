@@ -29,7 +29,7 @@
   </head>
   <body>
     <!-- for Chatting Section -->
-    <div class="app__wrap" style="float:right">
+    <div class="app__wrap" style="float:right; z-index:4">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
       <div class="app__input__wrap">
@@ -71,12 +71,17 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="POST" name="roomMake" action="/room/add">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label"
                   >게임방 제목</label
                 >
-                <input type="text" class="form-control" id="recipient-name" />
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-name"
+                  name="title"
+                />
               </div>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label"
@@ -86,14 +91,16 @@
                   <select
                     class="form-select"
                     aria-label="Default select example"
+                    name="opponentUniversity"
                   >
-                    <option selected>Open this select menu</option>
-                    <option value="1">숭실대</option>
+                    <option selected>숭실대</option>
+                    <option value="1">건국대</option>
                     <option value="2">서울대</option>
                     <option value="3">한양대</option>
                   </select>
                 </div>
               </div>
+              <button type="submit" class="btn btn-primary">만들기</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -104,7 +111,6 @@
             >
               취소
             </button>
-            <button type="button" class="btn btn-primary">만들기</button>
           </div>
         </div>
       </div>
@@ -118,7 +124,7 @@
     </div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content">
+    <div class="webgl-content" style=>
       <div id="unityContainer" style="width: 960px; height: 600px"></div>
       <div class="footer">
         <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
