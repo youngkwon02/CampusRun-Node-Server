@@ -1,3 +1,10 @@
+body {
+  height: auto;
+}
+
+nav {
+}
+
 .section {
   position: relative;
   left: 0;
@@ -13,12 +20,27 @@
 
 #sec-02 {
   width: 100vw;
-  height: calc(100vh + 100px);
+  height: calc(100vh + 200px);
   background: url("../../Assets/image/second-sec.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  transform: translate(0, -270px);
+  transform: translate(0, -36vh);
+  z-index: -1;
+}
+
+#sec-03 {
+  transform: translate(0, -52vw);
+}
+
+#sec-04 {
+  width: 100vw;
+  height: calc(100vh + 200px);
+  background: url("../../Assets/image/last-sec.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(0, -140vh);
   z-index: -1;
 }
 
