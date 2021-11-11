@@ -123,7 +123,7 @@ app.get("/home", (req, res) => {
     // console.log(response);
     user = response.data;
     // console.log(user);
-    res.render("mainPage", {
+    res.render("mainPage2", {
       userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,

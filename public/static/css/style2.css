@@ -69,7 +69,7 @@ nav div {
 }
 
 #sec-03 {
-  transform: translate(0, -45vw);
+  transform: translate(0, -40vw);
   z-index: 1;
 }
 
@@ -131,6 +131,7 @@ a {
   text-align: center;
   font-size: 20px;
   font-family: "twayair";
+  z-index: 15;
 }
 
 #sec-02 .plaza-btn {
@@ -147,7 +148,7 @@ a {
 #sec-03 .content {
   color: #c1a744;
   position: absolute;
-  top: 40%;
+  top: 44%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -155,10 +156,21 @@ a {
   font-family: "twayair";
 }
 
+.ranking-icon {
+  display: inline-block;
+  margin: 0 54px;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.ranking-icon i {
+  font-size: 90px;
+}
+
 #sec-04 .content {
   color: #565d66;
   position: absolute;
-  top: 40%;
+  top: 36%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
