@@ -1,12 +1,4 @@
-const timer = () => {
-  let time = 0;
-  setInterval(() => {
-    time += 10;
-    console.log(`${millisToMinutesAndSeconds(time)} `);
-  }, 10);
-};
-
-function millisToMinutesAndSeconds(millis) {
+const millisToMinutesAndSeconds(millis) {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
   let remain = String((millis % 1000).toFixed(0));
@@ -17,4 +9,10 @@ function millisToMinutesAndSeconds(millis) {
   return minutes + "분" + (seconds < 10 ? "0" : "") + seconds + "초" + remain;
 }
 
-timer();
+const timer = () => {
+  let time = 0;
+  setInterval(() => {
+    time += 10;
+    console.log(`${millisToMinutesAndSeconds(time)} `);
+  }, 10);
+};
