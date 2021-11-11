@@ -35,7 +35,7 @@
     <div>
       <img
         id="first-img"
-        src="../Assets/image/main-bg.png"
+        src="../Assets/image/bg-blur.png"
         style="display: none"
       />
       <img
@@ -46,11 +46,12 @@
     </div>
 
     <nav>
-      <div id="nav-title"></div>
+      <div id="nav-title" onclick="window.scrollTo(0,0);"></div>
       <div class="nav-right-side">
-        <div>PLAZA</div>
-        <div>RANKING</div>
-        <div>EVENT</div>
+        <div><a href="#sec-02">PLAZA</a></div>
+        <div><a href="#sec-03">RANKING</a></div>
+        <div><a href="#sec-04">EVENT</a></div>
+        <div class="dummy-space"></div>
       </div>
     </nav>
     <div class="section" id="sec-01">
@@ -63,7 +64,7 @@
     <div class="section" id="sec-02">
       <div class="content">
         <div class="content-title">
-          <img src="../Assets/image/campus-plaza.png" />
+          <img src="../Assets/image/campus-plaza-cyan.png" />
         </div>
         <br />
         <div>
@@ -79,16 +80,12 @@
 
     <div class="section" id="sec-03">
       <div class="content">
-        <div class="content-title">Campus Plaza</div>
-        <br />
-        <div>
-          Campus Plaza에서 새로운 사람들과 소통하고 경쟁하세요!<br />
-          Campus Plaza에는 사적모임 인원제한이 없습니다! ^^
+        <div class="content-title">
+          <img src="../Assets/image/ranking-gold.png" />
         </div>
+        <br />
+        <div>Campus Run 최고의 실력자는 누구일지 확인해보세요!</div>
         <br /><br />
-        <a href="/plaza">
-          <div class="plaza-btn">이동하기</div>
-        </a>
       </div>
       <canvas id="my-canvas-03"></canvas>
       <script>
@@ -97,6 +94,13 @@
     </div>
 
     <div class="section" id="sec-04">
+      <div class="content">
+        <div class="content-title">
+          <img src="../Assets/image/event-gray.png" />
+        </div>
+        <br />
+        <div>Campus Run 최신 소식을 학인해보세요!</div>
+      </div>
       <script>
         bodyRearrange();
       </script>
