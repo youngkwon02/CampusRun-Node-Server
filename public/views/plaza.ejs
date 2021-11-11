@@ -28,7 +28,21 @@
     </script>
   </head>
   <body>
-    
+    <!-- for Chatting Section -->
+    <div class="app__wrap" style="float: right">
+      <div id="info" class="app__info"></div>
+      <div id="chatWindow" class="app__window"></div>
+      <div class="app__input__wrap">
+        <input
+          id="chatInput"
+          type="text"
+          class="app__input"
+          autofocus
+          placeholder="대화를 입력해주세요."
+        />
+        <button id="chatMessageSendBtn" class="app__button">전송</button>
+      </div>
+    </div>
     <button
       type="button"
       class="btn btn-primary"
@@ -138,18 +152,26 @@
 
     <script src="../static/js/chat.js"></script>
   </body>
+  <script src="../static/js/timer.js"></script>
   <script>
+    let timerInterv;
+
     function emitJoin() {
       socket.emit(
         "LOGIN",
         JSON.stringify({
           name: `<%= userName %>`,
           position: "3.3:2.633828:0",
-          avatar: "1"
+          avatar: "1",
         })
       );
       document.getElementById("btn_id").style.display = "none";
       document.getElementById("chatWrap").style.display = "block";
+      timerInterv = timerStart();
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterv);
     }
   </script>
 
@@ -159,11 +181,11 @@
     var sendButton = document.getElementById("chatMessageSendBtn");
     var chatInput = document.getElementById("chatInput");
 
-    socket.on("connect", function() {
+    socket.on("connect", function () {
       socket.emit("newUserConnect", `<%= userName %>`);
     });
 
-    socket.on("updateMessage", function(data) {
+    socket.on("updateMessage", function (data) {
       if (data.name === "SERVER") {
         var info = document.getElementById("info");
         info.innerHTML = data.message;
@@ -179,13 +201,13 @@
       }
     });
 
-    sendButton.addEventListener("click", function() {
+    sendButton.addEventListener("click", function () {
       var message = chatInput.value;
 
       if (!message) return false;
 
       socket.emit("sendMessage", {
-        message
+        message,
       });
 
       chatInput.value = "";

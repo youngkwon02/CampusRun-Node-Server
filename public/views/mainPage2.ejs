@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>CampusRun</title>
+    <meta name="description" content="" />
+    <meta name="author" content="Tooplate" />
+    <!-- Bootstrap core CSS -->
+    <link
+      href="../static/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Additional CSS Files -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/css/fontawesome.css" />
+    <link rel="stylesheet" href="../static/css/tooplate-style.css" />
+    <link rel="stylesheet" href="../static/css/owl.css" />
+    <link rel="stylesheet" href="../static/css/lightbox.css" />
+    <link rel="stylesheet" href="../static/css/style2.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/js/mainScript.js"></script>
+    <script src="../static/js/scrollHandler.js"></script>
+    <script src="../static/js/univVerify.js"></script>
+  </head>
+  <body>
+    <div>
+      <img
+        id="first-img"
+        src="../Assets/image/bg-blur.png"
+        style="display: none"
+      />
+      <img
+        id="third-img"
+        src="../Assets/image/third-sec.jpg"
+        style="display: none"
+      />
+    </div>
+
+    <nav>
+      <div id="nav-title" onclick="location.href='/home'"></div>
+      <div class="nav-right-side">
+        <div><a href="#sec-02">PLAZA</a></div>
+        <div><a href="#sec-03">RANKING</a></div>
+        <div><a href="#sec-04">EVENT</a></div>
+        <div onclick="verifyModalOn()">대학메일 인증</div>
+        <div><i class="fa fa-envelope"></i></div>
+        <div></div>
+      </div>
+    </nav>
+    <div class="section" id="sec-01">
+      <canvas id="my-canvas-01"></canvas>
+    </div>
+
+    <div class="section" id="sec-02">
+      <div class="content">
+        <div class="content-title">
+          <img src="../Assets/image/campus-plaza-cyan.png" />
+        </div>
+        <br />
+        <div>
+          Campus Plaza에서 새로운 사람들과 소통하고 경쟁하세요!<br />
+          Campus Plaza에는 사적모임 인원제한이 없습니다! ^^
+        </div>
+        <br /><br />
+        <a href="/plaza">
+          <div class="plaza-btn">이동하기</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section" id="sec-03">
+      <div class="content">
+        <div class="content-title">
+          <img src="../Assets/image/ranking-gold.png" />
+        </div>
+        <br />
+        <div>Campus Run 최고의 실력자는 누구일지 확인해보세요!</div>
+        <br /><br /><br /><br />
+        <div class="ranking-icon">
+          <i class="fa fa-area-chart"></i><br />
+          <span>Speedy Player</span>
+        </div>
+        <div class="ranking-icon">
+          <i class="fa fa-university"></i><br />
+          <span>Best University</span>
+        </div>
+      </div>
+      <canvas id="my-canvas-03"></canvas>
+    </div>
+
+    <div class="section" id="sec-04">
+      <div class="content">
+        <div class="content-title">
+          <img src="../Assets/image/event-gray.png" />
+        </div>
+        <br />
+        <div>Campus Run 최신 소식을 학인해보세요!</div>
+      </div>
+    </div>
+
+    <div class="verify-modal" style="display: none">
+      <span id="idToken" style="display: none"><%= idToken %></span>
+      <div class="modal-board">
+        <br /><br />
+        <h5 style="text-align: center">대학 메일주소를 입력하세요!</h5>
+        <div style="text-align: center">(abcde@xxx.ac.kr OR abcde@xxx.edu)</div>
+        <input
+          type="text"
+          class="email-address"
+          style="
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            height: 30px;
+          "
+        />
+        <div
+          style="
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            bottom: 14px;
+            transform: translate(-50%, -50%);
+            width: 100%;
+          "
+        >
+          <div
+            class="white-button"
+            style="display: inline-block; margin: 0 10px; border-radius: 10px"
+          >
+            <a href="javascript:univEmailVerify()">인증메일 전송</a>
+          </div>
+          <div
+            class="white-button"
+            style="display: inline-block; margin: 0 10px; border-radius: 10px"
+          >
+            <a href="javascript:verifyModalOff()">닫기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
