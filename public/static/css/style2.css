@@ -14,10 +14,19 @@ nav div {
 }
 
 #nav-title {
-  color: #efefef;
+  /* color: #efefef;
   font-size: 30px;
   line-height: 80px;
-  padding-left: 20px;
+  padding-left: 20px; */
+
+  display: inline-block;
+  width: 300px;
+  height: 80px;
+  margin-left: 50px;
+  background-image: url("../../Assets/image/logo-long-white.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .section {
@@ -35,6 +44,7 @@ nav div {
 
 #sec-01 {
   transform: translate(0, 80px);
+  z-index: 1;
 }
 
 #sec-02 {
@@ -45,11 +55,12 @@ nav div {
   background-repeat: no-repeat;
   background-position: center;
   transform: translate(0, -36vh);
-  z-index: -1;
+  z-index: 0;
 }
 
 #sec-03 {
   transform: translate(0, -45vw);
+  z-index: 1;
 }
 
 @media screen and (max-width: 1200px) {
@@ -77,4 +88,49 @@ nav div {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content-title {
+  font-size: 32px;
+  font-family: "impact";
+  letter-spacing: 2px;
+}
+
+.content {
+  color: #c1a744;
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 20px;
+  font-family: "twayair";
+}
+
+#sec-02 .plaza-btn {
+  border: solid 2px #c1a744;
+  border-radius: 14px;
+  padding: 10px;
+  display: inline-block;
+  width: 180px;
+  height: 50px;
+  font-size: 20px;
+  color: #c1a744;
+}
+
+@font-face {
+  font-family: "impact";
+  src: url("../fonts/impact.ttf");
+}
+
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
