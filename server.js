@@ -7,6 +7,7 @@ var app = express(); // create an object of the express module
 var http = require("http").Server(app); // create a http web server using the http library
 var io = require("socket.io")(http); // import socketio communication module
 const qs = require("qs");
+const fs = require("fs");
 const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
 const config = require("./public/config/secret");
@@ -32,12 +33,23 @@ app.get("/kakaoLogin", (req, res) => {
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// bootstrap module
+app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js")); // redirect bootstrap JS
+app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css")); // redirect CSS bootstrap
+
 // routes settings
+// app.use(
+//   "/public/TemplateData",
+//   express.static(__dirname + "/public/TemplateData")
+// );
+// app.use("/public/Build", express.static(__dirname + "/public/Build"));
+
 app.use(
-  "/public/TemplateData",
-  express.static(__dirname + "/public/TemplateData")
+  "/public/TemplateDataPlaza",
+  express.static(__dirname + "/public/TemplateDataPlaza")
 );
-app.use("/public/Build", express.static(__dirname + "/public/Build"));
+app.use("/public/BuildPlaza", express.static(__dirname + "/public/BuildPlaza"));
+
 app.set("views", __dirname + "/public/views");
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
@@ -64,7 +76,35 @@ app.get("/plaza", (req, res) => {
     console.log(response);
     user = response.data;
     console.log(user);
+    // fs.readFile("../views/plaza.html", (err, data) => {
+    //   if (err) throw err;
+    //   res
+    //     .writeHead(200, { "Content-Type": "text/html" })
+    //     .write(data)
+    //     .end();
+    // });
+
     res.render("plaza", {
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail
+    });
+  });
+});
+
+app.get("/game", (req, res) => {
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
+    console.log(response);
+    user = response.data;
+    console.log(user);
+    res.render("gameScene", {
+      userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail
@@ -80,9 +120,9 @@ app.get("/home", (req, res) => {
       token: req.cookies["cookieToken"]
     }
   }).then(function(response) {
-    console.log(response);
+    // console.log(response);
     user = response.data;
-    console.log(user);
+    // console.log(user);
     res.render("mainPage", {
       userNameTest: "sdf",
       userName: user.userName,
@@ -93,7 +133,7 @@ app.get("/home", (req, res) => {
   });
   // console.log(user.user);
   setTimeout(() => {
-    console.log("token이다" + req.cookies["cookieToken"]);
+    // console.log("token이다" + req.cookies["cookieToken"]);
   }, 100);
 });
 
@@ -105,9 +145,32 @@ var sockets = {}; //// to storage sockets
 io.on("connection", function(socket) {
   //print a log in node.js command prompt
   console.log("A user ready for connection!");
-
+  // io.on('connection', socket => {
+  //   socket.on('message', msg =>{
+  //         console.log(msg);
+  //         socket.emit('Mmessage', msg);
+  //         socket.emit('Omessage', msg);
+  //     });
+  // });
   //to store current client connection
   var currentUser;
+  socket.on("newUserConnect", function(name) {
+    socket.name = name;
+    io.sockets.emit("updateMessage", {
+      name: "SERVER",
+      message: name + "님이 접속했습니다."
+    });
+  });
+  socket.on("userDisconnect", function() {
+    io.sockets.emit("updateMessage", {
+      name: "SERVER",
+      message: socket.name + "님이 퇴장했습니다."
+    });
+  });
+  socket.on("sendMessage", function(data) {
+    data.name = socket.name;
+    io.sockets.emit("updateMessage", data);
+  });
 
   //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
   socket.on("PING", function(_pack) {
