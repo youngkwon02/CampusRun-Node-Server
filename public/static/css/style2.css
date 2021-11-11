@@ -100,6 +100,10 @@ a {
   letter-spacing: 2px;
 }
 
+.content-title img {
+  width: 50%;
+}
+
 .content {
   color: #c1a744;
   position: absolute;
