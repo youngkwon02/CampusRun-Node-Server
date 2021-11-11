@@ -90,11 +90,15 @@ const applyNavColor = () => {
     nav.style.backgroundColor = "rgba(255, 255, 255, .45)";
     for (let i = 0; i < navElem.length; i++) {
       navElem[i].style.color = "#101010";
+      document.querySelector("#nav-title").style.backgroundImage =
+        'url("../Assets/image/logo-long-black.png")';
     }
   } else {
     nav.style.backgroundColor = "rgba(0, 0, 0, 85)";
     for (let i = 0; i < navElem.length; i++) {
       navElem[i].style.color = "#efefef";
+      document.querySelector("#nav-title").style.backgroundImage =
+        'url("../Assets/image/logo-long-white.png")';
     }
   }
 };
@@ -104,4 +108,16 @@ window.onload = () => {
   window.addEventListener("scroll", function (e) {
     applyNavColor();
   });
+};
+
+const timeoutSec01 = (t) => {
+  setTimeout(() => {
+    drawSection1();
+  }, t);
+};
+
+const timeoutSec03 = (t) => {
+  setTimeout(() => {
+    drawSection3();
+  }, t);
 };
