@@ -1,0 +1,9 @@
+.box1 {
+  position: relative;
+}
+
+#my-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
