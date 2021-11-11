@@ -24,7 +24,11 @@
     <link rel="stylesheet" href="../static/css/owl.css" />
     <link rel="stylesheet" href="../static/css/lightbox.css" />
     <link rel="stylesheet" href="../static/css/style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div id="page-wraper">
@@ -43,7 +47,7 @@
             </div>
             <div class="author-content">
               <h4><%= userName %></h4>
-              <h6 style="color:white"></h6>
+              <h6 style="color: white"></h6>
               <span><%= kakaoEmail %></span>
             </div>
             <nav class="main-nav" role="navigation">
@@ -62,13 +66,13 @@
           </div>
         </div>
       </div>
-      <span id="idToken" style="display: none;"><%= idToken %></span>
+      <span id="idToken" style="display: none"><%= idToken %></span>
       <section class="section about-me" data-section="section1">
         <div class="container">
           <div class="section-heading">
             <h2>Campus Run</h2>
             <div class="line-dec"></div>
-            <span style="font-size: 20px;"
+            <span style="font-size: 20px"
               >지금까지 한번도 경험하지 못한 레이싱 게임을 만나보세요!</span
             >
           </div>
@@ -114,12 +118,8 @@
               <div class="col-md-8">
                 <div class="right-text">
                   <h4>Campus Plaza</h4>
-                  <p>
-                    Campus Plaza에서 다양한 사람들과 소통하고 경쟁하세요.
-                  </p>
-                  <p>
-                    Campus Plaza에는 사적모임 인원제한이 없습니다! ^^
-                  </p>
+                  <p>Campus Plaza에서 다양한 사람들과 소통하고 경쟁하세요.</p>
+                  <p>Campus Plaza에는 사적모임 인원제한이 없습니다! ^^</p>
                   <div class="white-button">
                     <a href="/plaza">Campus Plaza로 이동하기</a>
                   </div>
@@ -135,7 +135,7 @@
           <div class="section-heading">
             <h2>Ranking</h2>
             <div class="line-dec"></div>
-            <span style="font-size: 20px;"
+            <span style="font-size: 20px"
               >캠퍼스런의 영광의 실력자들은 누구인지, 지금 확인해보세요!</span
             >
           </div>
@@ -144,27 +144,21 @@
               <div class="service-item">
                 <i class="fa fa-area-chart"></i>
                 <h4>Speedy Player</h4>
-                <p>
-                  캠퍼스런의 가장 빠른 플레이어를 확인해보세요!
-                </p>
+                <p>캠퍼스런의 가장 빠른 플레이어를 확인해보세요!</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="service-item">
                 <i class="fa fa-university"></i>
                 <h4>Best University</h4>
-                <p>
-                  캠퍼스런 최고의 대학은 어느 학교일지 확인해보세요!
-                </p>
+                <p>캠퍼스런 최고의 대학은 어느 학교일지 확인해보세요!</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="service-item">
                 <i class="fa fa-university"></i>
                 <h4>Most Played</h4>
-                <p>
-                  캠퍼스런을 가장 많이 즐긴 플레이어를 확인해보세요!
-                </p>
+                <p>캠퍼스런을 가장 많이 즐긴 플레이어를 확인해보세요!</p>
               </div>
             </div>
           </div>
@@ -176,7 +170,7 @@
           <div class="section-heading">
             <h2>Event</h2>
             <div class="line-dec"></div>
-            <span style="font-size: 20px;"
+            <span style="font-size: 20px"
               >캠퍼스런의 최신 소식을 확인해보세요!</span
             >
           </div>
@@ -322,22 +316,58 @@
         </div>
       </section>
 
-      <div class="verify-modal" style="display: none;">
-        <div style="background-color: #e663a4; border-radius: 16px; width: 400px; height: 300px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-          <br><br>
-          <h5 style="text-align: center;">대학교 메일주소를 입력하세요</h5>
-          <input type="text" class="email-address" style="position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); width: 70%; height: 30px;">
-          <div style="text-align: center; position: absolute; left: 50%; bottom: 14px; transform: translate(-50%, -50%); width: 100%;">
-            <div class="white-button" style="display: inline-block; margin: 0 10px; border-radius: 10px;">
+      <div class="verify-modal" style="display: none">
+        <div
+          style="
+            background-color: #e663a4;
+            border-radius: 16px;
+            width: 400px;
+            height: 300px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          <br /><br />
+          <h5 style="text-align: center">대학교 메일주소를 입력하세요</h5>
+          <input
+            type="text"
+            class="email-address"
+            style="
+              position: absolute;
+              top: 48%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              width: 70%;
+              height: 30px;
+            "
+          />
+          <div
+            style="
+              text-align: center;
+              position: absolute;
+              left: 50%;
+              bottom: 14px;
+              transform: translate(-50%, -50%);
+              width: 100%;
+            "
+          >
+            <div
+              class="white-button"
+              style="display: inline-block; margin: 0 10px; border-radius: 10px"
+            >
               <a href="javascript:univEmailVerify()">인증메일 전송</a>
             </div>
-            <div class="white-button" style="display: inline-block; margin: 0 10px; border-radius: 10px;">
+            <div
+              class="white-button"
+              style="display: inline-block; margin: 0 10px; border-radius: 10px"
+            >
               <a href="javascript:verifyModalOff()">닫기</a>
             </div>
           </div>
         </div>
       </div>
-     
     </div>
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
@@ -362,7 +392,7 @@
         if (isAnimate) {
           $("body, html").animate(
             {
-              scrollTop: reqSectionPos
+              scrollTop: reqSectionPos,
             },
             800
           );
@@ -372,7 +402,7 @@
       };
 
       var checkSection = function checkSection() {
-        $(".section").each(function() {
+        $(".section").each(function () {
           var $this = $(this),
             topEdge = $this.offset().top - 80,
             bottomEdge = topEdge + $this.height(),
@@ -389,46 +419,48 @@
         });
       };
 
-      $(".main-menu").on("click", "a", function(e) {
+      $(".main-menu").on("click", "a", function (e) {
         e.preventDefault();
         showSection($(this).attr("href"), true);
       });
 
-      $(window).scroll(function() {
+      $(window).scroll(function () {
         checkSection();
       });
 
       const verifyModalOn = () => {
-        document.querySelector('.verify-modal').style.display = 'block';
-        document.querySelector('html').style.overflow = 'hidden';
-      }
+        document.querySelector(".verify-modal").style.display = "block";
+        document.querySelector("html").style.overflow = "hidden";
+      };
 
       const verifyModalOff = () => {
-        document.querySelector('.verify-modal').style.display = 'none';
-        document.querySelector('html').style.overflow = 'scrollY';
-      }
+        document.querySelector(".verify-modal").style.display = "none";
+        document.querySelector("html").style.overflow = "scrollY";
+      };
 
       const univEmailVerify = () => {
-      let address = document.querySelector('.email-address').value;
-      const IDTOKEN = document.querySelector('#idToken').innerHTML;
-      $.ajax({
-        url: 'http://localhost:8000/verifyUnivAction/',
-        type: 'GET',
-        async: false,
-        data: {
-          'token': IDTOKEN,
-          'email': address
-        },
-        success: function(data) {
-            console.log(data)
-            if(data === 'success') {
-              alert(`${address}로 전송된 이메일을 통해 대학 인증을 완료하세요!`);
+        let address = document.querySelector(".email-address").value;
+        const IDTOKEN = document.querySelector("#idToken").innerHTML;
+        $.ajax({
+          url: "http://localhost:8000/verifyUnivAction/",
+          type: "GET",
+          async: false,
+          data: {
+            token: IDTOKEN,
+            email: address,
+          },
+          success: function (data) {
+            console.log(data);
+            if (data === "success") {
+              alert(
+                `${address}로 전송된 이메일을 통해 대학 인증을 완료하세요!`
+              );
             } else {
               alert(`인증메일 전송에 실패하였습니다\n잠시후 다시 시도하세요.`);
             }
-        }
-      });
-      }
+          },
+        });
+      };
     </script>
   </body>
 </html>

@@ -182,6 +182,27 @@ a {
   font-family: "twayair";
 }
 
+.verify-modal {
+  position: absolute;
+  border: none;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+}
+
+.modal-board {
+  border-radius: 4px;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px solid #2fa9ba;
+  background-color: #efefef;
+}
+
 @font-face {
   font-family: "impact";
   src: url("../fonts/impact.ttf");
