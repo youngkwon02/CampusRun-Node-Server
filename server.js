@@ -137,31 +137,6 @@ app.get("/home", (req, res) => {
   }, 100);
 });
 
-app.get("/home2", (req, res) => {
-  user = axios({
-    method: "get",
-    url: "http://localhost:8000/user/",
-    headers: {
-      token: req.cookies["cookieToken"],
-    },
-  }).then(function (response) {
-    // console.log(response);
-    user = response.data;
-    // console.log(user);
-    res.render("mainPage2", {
-      userNameTest: "sdf",
-      userName: user.userName,
-      univName: user.univName,
-      kakaoEmail: user.kakaoEmail,
-      idToken: req.cookies["cookieToken"],
-    });
-  });
-  // console.log(user.user);
-  setTimeout(() => {
-    // console.log("token이다" + req.cookies["cookieToken"]);
-  }, 100);
-});
-
 var clients = []; // to storage clients
 var clientLookup = {}; // clients search engine
 var sockets = {}; //// to storage sockets
