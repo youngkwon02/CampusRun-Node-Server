@@ -103,13 +103,6 @@ const applyNavColor = () => {
   }
 };
 
-window.onload = () => {
-  applyNavColor();
-  window.addEventListener("scroll", function (e) {
-    applyNavColor();
-  });
-};
-
 const timeoutSec01 = (t) => {
   setTimeout(() => {
     drawSection1();
@@ -120,4 +113,14 @@ const timeoutSec03 = (t) => {
   setTimeout(() => {
     drawSection3();
   }, t);
+};
+
+window.onload = () => {
+  timeoutSec01(100);
+  timeoutSec03(10);
+  bodyRearrange();
+  applyNavColor();
+  window.addEventListener("scroll", function (e) {
+    applyNavColor();
+  });
 };
