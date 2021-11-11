@@ -11,7 +11,9 @@ const fs = require("fs");
 const axios = require("axios");
 var shortId = require("shortid"); //import shortid module
 const config = require("./public/config/secret");
+const csurf = require("csurf");
 var indexRouter = require("./routes/index");
+var request = require("request");
 // app.use('/', indexRouter);
 var session = require("express-session");
 app.use(
@@ -21,8 +23,19 @@ app.use(
     saveUninitialized: true,
   })
 );
+// app.use(function(req, res, next) {
+//   var token = req.csrfToken();
+//   res.cookie("XSRF-TOKEN", token);
+//   res.locals.csrfToken = token;
+//   next();
+// });
+
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
+// const csrfMiddleware = csurf({
+//   cookie: true
+// });
+// app.use(csrfMiddleware);
 app.get("/kakaoLogin", (req, res) => {
   console.log("Get request");
   console.log(`idToken in get kakao ${req.query.idToken}`);
@@ -32,6 +45,7 @@ app.get("/kakaoLogin", (req, res) => {
 });
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // bootstrap module
 app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js")); // redirect bootstrap JS
@@ -59,6 +73,40 @@ const kakaoConfig = {
   redirectUri: config.REDIRECT_URI,
 };
 
+// Action Method
+app.post("/room/add", function(req, res) {
+  // console.log(req);
+  // console.log(req.cookies.csrftoken);
+  // request.post({
+  //   method: "POST",
+  //   headers: { token: req.cookies["cookieToken"] },
+  //   url: "http://localhost:8000/feed/room",
+  //   data: {
+  //     title: req.body.title,
+  //     opponet_university: req.body.opponentUniversity
+  //   },
+  //   json: true,
+  //   function(error, response, body) {
+  //     res.json(body);
+  //   }
+  // });
+  room = axios({
+    method: "POST",
+    data: {
+      title: req.body.title,
+      opponent_university: req.body.opponentUniversity
+    },
+    url: "http://localhost:8000/feed/room",
+    headers: {
+      token: req.cookies["cookieToken"],
+      Cookie: "csrftoken=" + req.cookies.csrftoken
+    }
+  }).then(function(response) {
+    console.log(response);
+    res.redirect("http://localhost:3000/home");
+  });
+});
+
 // Page View
 
 app.get("/", (req, res) => {
@@ -76,13 +124,6 @@ app.get("/plaza", (req, res) => {
     console.log(response);
     user = response.data;
     console.log(user);
-    // fs.readFile("../views/plaza.html", (err, data) => {
-    //   if (err) throw err;
-    //   res
-    //     .writeHead(200, { "Content-Type": "text/html" })
-    //     .write(data)
-    //     .end();
-    // });
 
     res.render("plaza", {
       userName: user.userName,
