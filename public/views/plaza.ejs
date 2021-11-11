@@ -29,7 +29,7 @@
   </head>
   <body>
     <!-- for Chatting Section -->
-    <div class="app__wrap" style="float: right">
+    <div id="chatWrap" class="app__wrap" style="float: right; display:none">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
       <div class="app__input__wrap">
@@ -124,17 +124,37 @@
     </div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content" style=>
-      <div id="unityContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
+    <div class="webgl-content" style="margin: 0;">
+      <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
+      <!--<div class="footer">
         <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
       </div>
+    -->
     </div>
+
+ <!-- for Chatting Section -->
+ <div id="chatWrap" class="app__wrap" style="float:right; display:none">
+  <div id="info" class="app__info"></div>
+  <div id="chatWindow" class="app__window">
+  </div>
+  <div class="app__input__wrap">
+    <input
+      id="chatInput"
+      type="text"
+      class="app__input"
+      autofocus
+      placeholder="대화를 입력해주세요."
+    />
+    <button id="chatMessageSendBtn" class="app__button">전송</button>
+  </div>
+</div>
+
 
     <!-- EmitJoin for connecting socket -->
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
       GO TO PLAZA
     </button>
+
 
     <script src="../static/js/chat.js"></script>
   </body>
@@ -152,6 +172,7 @@
         })
       );
       document.getElementById("btn_id").style.display = "none";
+      document.getElementById("chatWrap").style.display = "block";
       timerInterv = timerStart();
     }
 
@@ -199,6 +220,7 @@
     });
 
     function drawChatMessage(data) {
+      
       var wrap = document.createElement("p");
       var message = document.createElement("span");
       var name = document.createElement("span");
