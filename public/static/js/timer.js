@@ -9,11 +9,10 @@ const millisToMinutesAndSeconds = (millis) => {
   return minutes + "분" + (seconds < 10 ? "0" : "") + seconds + "초" + remain;
 };
 
-const timer = () => {
-  let time = 0;
-  let timerInterv = setInterval(() => {
+const timerStart = () => {
+  time = 0;
+  return setInterval(() => {
     time += 10;
     console.log(`${millisToMinutesAndSeconds(time)} `);
   }, 10);
-  return timerInterv;
 };

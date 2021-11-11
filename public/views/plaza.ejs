@@ -134,6 +134,8 @@
   </body>
   <script src="../static/js/timer.js"></script>
   <script>
+    let timerInterv;
+
     function emitJoin() {
       socket.emit(
         "LOGIN",
@@ -144,7 +146,11 @@
         })
       );
       document.getElementById("btn_id").style.display = "none";
-      let timerInterv = timer();
+      timerInterv = timerStart();
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterv);
     }
   </script>
 
