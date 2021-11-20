@@ -90,10 +90,12 @@ app.post("/room/add", function(req, res) {
   //     res.json(body);
   //   }
   // });
+  console.log("제발");
   room = axios({
     method: "POST",
     data: {
       title: req.body.title,
+      owner: req.body.owner,
       opponent_university: req.body.opponentUniversity
     },
     url: "http://localhost:8000/feed/room",
@@ -102,7 +104,16 @@ app.post("/room/add", function(req, res) {
       Cookie: "csrftoken=" + req.cookies.csrftoken
     }
   }).then(function(response) {
+    console.log("안됨");
     console.log(response);
+    res.render("waitingroom", {
+      userNameTest: "sdf",
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail,
+      idToken: req.cookies["cookieToken"],
+    });
+
     res.redirect("http://localhost:3000/home");
   });
 });

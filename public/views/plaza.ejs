@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="TemplateDataPlaza/progressbar.css" />
     <link rel="stylesheet" href="TemplateDataPlaza/plaza_style.css" />
     <link rel="stylesheet" href="../static/css/chat.css" />
+    <link rel="stylesheet" href="../static/css/room.css" />
     <link rel="stylesheet" href="../static/css/modal.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
 
@@ -41,17 +42,25 @@
           placeholder="대화를 입력해주세요."
         />
         <button id="chatMessageSendBtn" class="app__button">전송</button>
+        <div id="roomWrap" class="room__wrap">
+        <button
+          class="createroom-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          data-bs-whatever="@mdo"
+        >
+          방만들기
+        </button>
+        </div>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-bs-toggle="modal"
-      data-bs-target="#exampleModal"
-      data-bs-whatever="@mdo"
-    >
-      방만들기
-    </button>
+
+    <!--로직: 방장이 팀원들을 최대 3인까지 해서 4:4로 초대를 진행
+      방생성 후 방장은 바로 대기실로 넘어가고
+      다른 참가자들은 home으로 redirect 되는데 home에 쪽지로 링크 전송
+      링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
+    -->
+    
     <div
       class="modal fade"
       id="exampleModal"
@@ -62,7 +71,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Create Room</h5>
             <button
               type="button"
               class="btn-close"
@@ -84,9 +93,9 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label"
-                  >학교 대전상대 선택</label
-                >
+                <label for="recipient-name" class="col-form-label">
+                  대전학교 선택
+                  </label>
                 <div class="mb-3">
                   <select
                     class="form-select"
@@ -99,6 +108,53 @@
                     <option value="3">한양대</option>
                   </select>
                 </div>
+                <label for="recipient-name" class="col-form-label">
+                  우리팀
+                  </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="opponent-name"
+                  name="opname"
+                  placeholder="팀원1"
+                  default=""
+                /><br>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="opponent-name"
+                  name="opname"
+                  placeholder="팀원2"
+                  default=""
+                />
+              
+                <label for="recipient-name" class="col-form-label">
+                  상대팀
+                  </label>
+                  <input
+                  type="text"
+                  class="form-control"
+                  id="opponent-name"
+                  name="opname"
+                  placeholder="팀원1"
+                  default=""
+                /><br>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="opponent-name"
+                  name="opname"
+                  placeholder="팀원2"
+                  default=""
+                /><br>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="opponent-name"
+                  name="opname"
+                  placeholder="팀원3"
+                  default=""
+                />
               </div>
               <button type="submit" class="btn btn-primary">만들기</button>
             </form>
@@ -132,22 +188,7 @@
     -->
     </div>
 
- <!-- for Chatting Section -->
- <div id="chatWrap" class="app__wrap" style="float:right; display:none">
-  <div id="info" class="app__info"></div>
-  <div id="chatWindow" class="app__window">
-  </div>
-  <div class="app__input__wrap">
-    <input
-      id="chatInput"
-      type="text"
-      class="app__input"
-      autofocus
-      placeholder="대화를 입력해주세요."
-    />
-    <button id="chatMessageSendBtn" class="app__button">전송</button>
-  </div>
-</div>
+
 
 
     <!-- EmitJoin for connecting socket -->
@@ -173,11 +214,7 @@
       );
       document.getElementById("btn_id").style.display = "none";
       document.getElementById("chatWrap").style.display = "block";
-      timerInterv = timerStart();
-    }
-
-    function stopTimer() {
-      clearInterval(timerInterv);
+      document.getElementById("roomWrap").style.display = "block";
     }
   </script>
 
