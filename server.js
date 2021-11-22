@@ -213,6 +213,8 @@ app.get("/ranking/:part", async (req, res) => {
     univName: user.univName,
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
+    part,
+
     // data: rankData,
   });
 });

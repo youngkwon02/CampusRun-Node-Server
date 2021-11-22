@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Playfair+Display:wght@600&family=Secular+One&family=Yellowtail&display=swap");
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: url("../../Assets/image/ranking-bg.jpeg");
+}
+
+.ranking-title {
+  display: inline-block;
+  width: 40%;
+  height: 40px;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.ranking-body {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  top: 190px;
+  color: white;
+}
+
+.ranking-body table {
+  display: inline-block;
+  text-align: center;
+  font-family: "twayair";
+  height: 560px;
+  overflow: scroll;
+}
+
+.ranking-body table thead {
+  font-size: 22px;
+  height: 35px;
+  position: fixed;
+  background-color: #1d1d1d;
+}
+
+.ranking-body .spacer {
+  width: 100%;
+  height: 40px;
+}
+
+.ranking-body table td {
+  width: 160px;
+  text-align: center;
+}
+
+.ranking-body table tbody tr {
+  height: 26px;
+}
+
+@font-face {
+  font-family: "impact";
+  src: url("../fonts/impact.ttf");
+}
+
+@font-face {
+  font-family: "twayair";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

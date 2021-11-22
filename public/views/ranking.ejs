@@ -25,11 +25,49 @@
     />
     <link rel="stylesheet" href="../static/css/fontawesome.css" />
     <link rel="stylesheet" href="../static/css/tooplate-style.css" />
+    <link rel="stylesheet" href="../static/css/ranking.css" />
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
   </head>
-  <body></body>
+  <body>
+    <div class="ranking-title">
+      <img src="../Assets/image/speedy-ranker.png" />
+    </div>
+    <div class="ranking-body">
+      <table>
+        <thead>
+          <tr>
+            <td>순위</td>
+            <td>이름</td>
+            <td>대학교</td>
+            <% if (part === 'speedy' ) { %>
+            <td>랩타임</td>
+            <% } else {%>
+            <td>점수</td>
+            <% } %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="spacer">
+            <td>&nbsp;</td>
+          </tr>
+          <% for(let i=1; i<100; i++) { %>
+          <tr>
+            <td><%= i %></td>
+            <td>영권</td>
+            <td>중앙대학교</td>
+            <% if (part === 'speedy' ) { %>
+            <td>3분 23초 <%= i % 60 %></td>
+            <% } else {%>
+            <td><%= 1428 - i %></td>
+            <% } %>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
