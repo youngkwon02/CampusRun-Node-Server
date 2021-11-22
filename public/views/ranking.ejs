@@ -34,7 +34,11 @@
   </head>
   <body>
     <div class="ranking-title">
+      <% if (part === 'speedy' ) { %>
       <img src="../Assets/image/speedy-ranker.png" />
+      <% } else {%>
+      <img src="../Assets/image/score-collector.png" />
+      <% } %>
     </div>
     <div class="ranking-body">
       <table>
