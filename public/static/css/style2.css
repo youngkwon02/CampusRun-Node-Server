@@ -174,7 +174,7 @@ a {
 #sec-04 .content {
   color: #565d66;
   position: absolute;
-  top: 36%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
