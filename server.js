@@ -74,7 +74,7 @@ const kakaoConfig = {
 };
 
 // Action Method
-app.post("/room/add", function(req, res) {
+app.post("/room/add", function (req, res) {
   // console.log(req);
   // console.log(req.cookies.csrftoken);
   // request.post({
@@ -96,14 +96,14 @@ app.post("/room/add", function(req, res) {
     data: {
       title: req.body.title,
       owner: req.body.owner,
-      opponent_university: req.body.opponentUniversity
+      opponent_university: req.body.opponentUniversity,
     },
     url: "http://localhost:8000/feed/room",
     headers: {
       token: req.cookies["cookieToken"],
-      Cookie: "csrftoken=" + req.cookies.csrftoken
-    }
-  }).then(function(response) {
+      Cookie: "csrftoken=" + req.cookies.csrftoken,
+    },
+  }).then(function (response) {
     console.log("안됨");
     console.log(response);
     res.render("waitingroom", {
@@ -187,6 +187,23 @@ app.get("/home", (req, res) => {
   setTimeout(() => {
     // console.log("token이다" + req.cookies["cookieToken"]);
   }, 100);
+});
+
+app.get("/ranking/:part", (req, res) => {
+  const { part } = req.params;
+  const URL = "http://localhost:8000/user/" + part;
+  let rankData = await axios({
+    method: "get",
+    url: URL,
+  });
+
+  res.render("ranking", {
+    userName: user.userName,
+    univName: user.univName,
+    kakaoEmail: user.kakaoEmail,
+    idToken: req.cookies["cookieToken"],
+    data: rankData,
+  });
 });
 
 var clients = []; // to storage clients
