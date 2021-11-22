@@ -189,20 +189,31 @@ app.get("/home", (req, res) => {
   }, 100);
 });
 
-app.get("/ranking/:part", (req, res) => {
+app.get("/ranking/:part", async (req, res) => {
   const { part } = req.params;
-  const URL = "http://localhost:8000/user/" + part;
-  let rankData = await axios({
+
+  const user = await axios({
     method: "get",
-    url: URL,
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"],
+    },
   });
+
+  const URL = "http://localhost:8000/ranking/" + part;
+
+  console.log("URL: ${URL}");
+  // let rankData = await axios({
+  //   method: "get",
+  //   url: URL,
+  // });
 
   res.render("ranking", {
     userName: user.userName,
     univName: user.univName,
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
-    data: rankData,
+    // data: rankData,
   });
 });
 
