@@ -1,4 +1,6 @@
 window.onload = () => {
+  // User-search Keyup Ajax request
+  // document.addEventListener("keydown", KeyCheck); //or however you are calling your method
   document
     .querySelector(".user-search")
     .addEventListener("keyup", async function (e) {
@@ -40,6 +42,10 @@ window.onload = () => {
         location.href = "/plaza";
       }
     });
+
+  // Home-Entry univ name set
+  const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
+  document.querySelector(".home-entry .entry-univ").innerHTML = KAKAOID;
 };
 
 const ajaxRequest = (type, url, data) => {
@@ -64,3 +70,17 @@ const ajaxRequest = (type, url, data) => {
 const addUserEntry = (kakaoId) => {
   alert(kakaoId);
 };
+
+// function KeyCheck(event) {
+//   var KeyID = event.keyCode;
+//   switch (KeyID) {
+//     case 8:
+//       document.querySelector(".user-search").value = "";
+//       break;
+//     case 46:
+//       document.querySelector(".user-search").value = "";
+//       break;
+//     default:
+//       break;
+//   }
+// }

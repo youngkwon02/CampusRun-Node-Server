@@ -140,6 +140,7 @@ app.get("/plaza", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
+      kakaoId: user.kakaoId,
     });
   });
 });

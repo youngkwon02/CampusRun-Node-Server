@@ -20,8 +20,8 @@
   font-family: "twayair";
 }
 
-.search-result-row:nth-child(2n-1) {
-  margin-right: 8%;
+.search-result-row div {
+  margin: 4px 0;
 }
 
 .add-user-entry {
@@ -30,9 +30,31 @@
   text-align: center;
   transition: all 0.2s ease-in;
   cursor: pointer;
-  margin: 2px 0;
 }
 
 .add-user-entry:hover {
   color: cornflowerblue;
+}
+
+.entry-board {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: 300px;
+}
+
+.home-entry {
+  display: inline-block;
+  width: 40%;
+  margin: 0 4%;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.away-entry {
+  display: inline-block;
+  width: 40%;
+  margin: 0 4%;
+  height: 200px;
+  background-color: rgba(0, 0, 0, 0.2);
 }
