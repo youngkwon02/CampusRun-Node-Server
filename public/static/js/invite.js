@@ -1,4 +1,4 @@
-window.onload = () => {
+window.onload = async () => {
   // User-search Keyup Ajax request
   // document.addEventListener("keydown", KeyCheck); //or however you are calling your method
   document
@@ -45,7 +45,31 @@ window.onload = () => {
 
   // Home-Entry univ name set
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
-  document.querySelector(".home-entry .entry-univ").innerHTML = KAKAOID;
+  let univName = "";
+  let userName = "";
+  let userEmail = "";
+  let univResponse = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/api/user-by-kakaoid",
+    { kakaoId: KAKAOID }
+  );
+  if (univResponse) {
+    data = univResponse.message.data[0];
+    univName = data["univ_name"];
+    userName = data["name"];
+    userEmail = data["email"];
+  } else {
+    alert("다시 시도하세요.");
+    location.href = "/plaza";
+  }
+  if (univName === null) {
+    document.querySelector(".room-create-action").style.display = "none";
+    document.querySelector(
+      ".modal-body-tail"
+    ).innerHTML = `<div class="modal-notice">대학 인증을 완료한 후 방을 생성할 수 있습니다!</div>`;
+  } else {
+    document.querySelector(".home-entry .entry-univ-span").innerHTML = univName;
+  }
 };
 
 const ajaxRequest = (type, url, data) => {
