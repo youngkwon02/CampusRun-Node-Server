@@ -1,6 +1,6 @@
 window.onload = async () => {
   // User-search Keyup Ajax request
-  // document.addEventListener("keydown", KeyCheck); //or however you are calling your method
+  document.addEventListener("keydown", KeyCheck); //or however you are calling your method
   document
     .querySelector(".user-search")
     .addEventListener("keyup", async function (e) {
@@ -45,30 +45,17 @@ window.onload = async () => {
 
   // Home-Entry univ name set
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
-  let univName = "";
-  let userName = "";
-  let userEmail = "";
-  let univResponse = await ajaxRequest(
-    "GET",
-    "http://localhost:8000/api/user-by-kakaoid",
-    { kakaoId: KAKAOID }
-  );
-  if (univResponse) {
-    data = univResponse.message.data[0];
-    univName = data["univ_name"];
-    userName = data["name"];
-    userEmail = data["email"];
-  } else {
-    alert("다시 시도하세요.");
-    location.href = "/plaza";
-  }
-  if (univName === null) {
+  let univName = document.querySelector(".userUniv").innerHTML;
+  let userName = document.querySelector(".userName").innerHTML;
+  let userEmail = document.querySelector(".userEmail").innerHTML;
+  if (univName === "") {
     document.querySelector(".room-create-action").style.display = "none";
     document.querySelector(
       ".modal-body-tail"
     ).innerHTML = `<div class="modal-notice">대학 인증을 완료한 후 방을 생성할 수 있습니다!</div>`;
   } else {
     document.querySelector(".home-entry .entry-univ-span").innerHTML = univName;
+    addUserEntry(KAKAOID);
   }
 };
 
@@ -91,20 +78,84 @@ const ajaxRequest = (type, url, data) => {
   });
 };
 
-const addUserEntry = (kakaoId) => {
-  alert(kakaoId);
+const addUserEntry = async (kakaoId) => {
+  let ownerUniv = document.querySelector(".userUniv").innerHTML;
+
+  let univName = "";
+  let userName = "";
+  let userEmail = "";
+  let userResponse = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/api/user-by-kakaoid",
+    { kakaoId: kakaoId }
+  );
+  if (userResponse) {
+    data = userResponse.message.data[0];
+    univName = data["univ_name"];
+    userName = data["name"];
+    userEmail = data["email"];
+  } else {
+    alert("다시 시도하세요.");
+    location.href = "/plaza";
+  }
+  if (univName !== ownerUniv) {
+    // Away
+    if (univName === null) {
+      univName = "미소속";
+    }
+    let modifyAway = false;
+    let currentAway = document.querySelector(
+      ".away-entry .entry-univ .entry-univ-span"
+    ).innerHTML;
+    if (univName === "미소속") {
+      // 용병
+      document.querySelector(
+        ".away-entry-body"
+      ).innerHTML += `<div class="entry-body-row">[${univName}] ${userName}</div>`;
+    } else if (currentAway !== "" && currentAway !== univName) {
+      // 상대학교 변경
+      modifyAway = confirm("상대 대학을 재설정하시겠습니까?");
+    } else if (currentAway === univName) {
+      // 기존 상대학교 멤버 추가
+      document.querySelector(
+        ".away-entry-body"
+      ).innerHTML += `<div class="entry-body-row">[${univName}] ${userName}</div>`;
+    } else if (currentAway === "") {
+      // initial away select
+      document.querySelector(
+        ".away-entry .entry-univ .entry-univ-span"
+      ).innerHTML = univName;
+      document.querySelector(".away-entry-body").innerHTML = "";
+      document.querySelector(
+        ".away-entry-body"
+      ).innerHTML += `<div class="entry-body-row">[${univName}] ${userName}</div>`;
+    }
+    if (modifyAway) {
+      document.querySelector(
+        ".away-entry .entry-univ .entry-univ-span"
+      ).innerHTML = univName;
+      document.querySelector(".away-entry-body").innerHTML = "";
+      document.querySelector(
+        ".away-entry-body"
+      ).innerHTML += `<div class="entry-body-row">[${univName}] ${userName}</div>`;
+    }
+  } else {
+    document.querySelector(
+      ".home-entry-body"
+    ).innerHTML += `<div class="entry-body-row">[${univName}] ${userName}</div>`;
+  }
 };
 
-// function KeyCheck(event) {
-//   var KeyID = event.keyCode;
-//   switch (KeyID) {
-//     case 8:
-//       document.querySelector(".user-search").value = "";
-//       break;
-//     case 46:
-//       document.querySelector(".user-search").value = "";
-//       break;
-//     default:
-//       break;
-//   }
-// }
+function KeyCheck(event) {
+  var KeyID = event.keyCode;
+  switch (KeyID) {
+    case 8:
+      document.querySelector(".user-search").value = "";
+      break;
+    case 46:
+      document.querySelector(".user-search").value = "";
+      break;
+    default:
+      break;
+  }
+}
