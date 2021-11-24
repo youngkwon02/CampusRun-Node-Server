@@ -18,6 +18,7 @@
   padding: 10px 20px;
   background-color: rgba(0, 0, 0, 0.7);
   font-family: "twayair";
+  font-weight: bold;
 }
 
 .search-result-row div {
@@ -84,4 +85,5 @@
   font-size: 16px;
   margin: 10px 0;
   text-align: left;
+  cursor: pointer;
 }
