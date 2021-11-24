@@ -137,6 +137,7 @@ app.get("/home", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
+      kakaoId: user.kakaoId,
     });
   });
   // console.log(user.user);

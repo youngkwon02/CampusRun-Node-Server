@@ -58,7 +58,7 @@
         <div><a href="#sec-03">RANKING</a></div>
         <div><a href="#sec-04">EVENT</a></div>
         <div id="mail-verify-btn" onclick="verifyModalOn()">대학메일 인증</div>
-        <div><i class="fa fa-envelope"></i></div>
+        <div><i class="fa fa-envelope invitation"></i></div>
         <div></div>
       </div>
     </nav>
@@ -112,6 +112,8 @@
         <div>Campus Run 최신 소식을 학인해보세요!</div>
       </div>
     </div>
+
+    <div class="KAKAOID" style="display: none"><%= kakaoId %></div>
 
     <div class="verify-modal" style="display: none">
       <span id="idToken" style="display: none"><%= idToken %></span>

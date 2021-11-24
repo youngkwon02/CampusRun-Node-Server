@@ -115,7 +115,46 @@ const timeoutSec03 = (t) => {
   }, t);
 };
 
+const ajaxRequest = (type, url, data) => {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: url,
+      type: type,
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        resolve(response);
+      },
+      error: function () {
+        console.log("error");
+        return "사용자를 찾을 수 없습니다.";
+      },
+    });
+  });
+};
+
+const applyInvitationAnimation = () => {
+  document.querySelector(".invitation").style.animationName = "rainbow";
+};
+
+const invitationManager = async (kakaoId) => {
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/invitation-by-id",
+    { kakaoId: kakaoId }
+  );
+  let invList = res.data;
+  for (let i = 0; i < invList.length; i++) {
+    if (!invList[i].isRead) {
+      applyInvitationAnimation();
+      break;
+    }
+  }
+};
+
 window.onload = () => {
+  const KAKAOID = document.querySelector(".KAKAOID").innerHTML;
   timeoutSec01(100);
   timeoutSec03(10);
   bodyRearrange();
@@ -125,4 +164,5 @@ window.onload = () => {
   });
 
   verifyBtnAct();
+  invitationManager(KAKAOID);
 };
