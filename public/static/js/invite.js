@@ -297,5 +297,61 @@ const createRoomAction = async () => {
     "http://localhost:8000/game/api/create-room",
     reqData
   );
-  if (createRoomRes["status"] !== 200) alert("방 생성에 실패하였습니다.");
+  if (createRoomRes["status"] !== 200) {
+    alert("방 생성에 실패하였습니다.");
+  } else {
+    url = createRoomRes["url"];
+    sendInvite(
+      roomTitle,
+      maxJoin,
+      createrKakaoId,
+      homeUnivName,
+      awayUnivName,
+      url
+    );
+    alert("성공적으로 방을 생성하였습니다.\n대기실로 이동합니다.");
+    // window.location.href = "http://localhost:3000/game/";
+  }
+};
+
+const sendInvite = async (
+  title,
+  max,
+  creater,
+  owner_univ,
+  opponent_univ,
+  url
+) => {
+  // Home
+  let homeRows = document.querySelectorAll(".home-entry-body .entry-body-row");
+  let homeIdList = "";
+  for (let i = 0; i < homeRows.length; i++) {
+    homeIdList += homeRows[i].classList[1].split("-")[3];
+    if (i === homeRows.length - 1) break;
+    homeIdList += ",";
+  }
+
+  // Away
+  let awayRows = document.querySelectorAll(".away-entry-body .entry-body-row");
+  let awayIdList = "";
+  for (let i = 0; i < awayRows.length; i++) {
+    awayIdList += awayRows[i].classList[1].split("-")[3];
+    if (i === awayRows.length - 1) break;
+    awayIdList += ",";
+  }
+
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/send-invite",
+    {
+      title,
+      max,
+      creater,
+      owner_univ,
+      opponent_univ,
+      homeIdList,
+      awayIdList,
+      url,
+    }
+  );
 };
