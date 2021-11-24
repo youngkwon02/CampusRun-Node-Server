@@ -102,14 +102,14 @@ const addUserEntry = async (kakaoId) => {
     location.href = "/plaza";
   }
 
-  if (KAKAOID !== kakaoId) {
-    // 추가하기 버튼 눌렀을 때, 검색 결과에서 삭제
-    document.querySelector(`.search-result-row-${kakaoId}`).style.display =
-      "none";
-  }
-
   if (univName !== ownerUniv) {
-    // Away
+    // Away Add
+    if (!isAwayAddPossible()) {
+      alert(
+        "Away Univ 명단에 여석이 없습니다.\n참가 인원을 변경하거나, 명단의 이름을 클릭하여 삭제하세요 !"
+      );
+      return;
+    }
     if (univName === null) {
       univName = "미소속";
     }
@@ -150,9 +150,22 @@ const addUserEntry = async (kakaoId) => {
       ).innerHTML += `<div class="entry-body-row entry-body-row-${kakaoId}" onclick="popUserEntry(${kakaoId})">[${univName}] ${userName}</div>`;
     }
   } else {
+    // Home Add
+    if (!isHomeAddPossible()) {
+      alert(
+        "Home Univ 명단에 여석이 없습니다.\n참가 인원을 변경하거나, 명단의 이름을 클릭하여 삭제하세요 !"
+      );
+      return;
+    }
     document.querySelector(
       ".home-entry-body"
     ).innerHTML += `<div class="entry-body-row entry-body-row-${kakaoId}" onclick="popUserEntry(${kakaoId})">[${univName}] ${userName}</div>`;
+  }
+
+  if (KAKAOID !== kakaoId) {
+    // 추가하기 버튼 눌렀을 때, 검색 결과에서 삭제
+    document.querySelector(`.search-result-row-${kakaoId}`).style.display =
+      "none";
   }
 };
 
@@ -224,3 +237,38 @@ function KeyCheck(event) {
       break;
   }
 }
+
+const getNumberOfParty = () => {
+  let mode = document.querySelector(".numOfParty").value;
+  return parseInt(mode[0]);
+};
+
+const getNumberOfHome = () => {
+  let homeRows = document.querySelectorAll(".home-entry-body .entry-body-row");
+  return homeRows.length;
+};
+
+const getNumberOfAway = () => {
+  let awayRows = document.querySelectorAll(".away-entry-body .entry-body-row");
+  return awayRows.length;
+};
+
+const isHomeAddPossible = () => {
+  let numOfParty = getNumberOfParty();
+  let currentHome = getNumberOfHome();
+  console.log(`HomeAddPossibleFunc: ${currentHome} / ${numOfParty}`);
+  if (currentHome + 1 <= numOfParty) {
+    return true;
+  }
+  return false;
+};
+
+const isAwayAddPossible = () => {
+  let numOfParty = getNumberOfParty();
+  let currentAway = getNumberOfAway();
+  console.log(`AwayeAddPossibleFunc: ${currentAway} / ${numOfParty}`);
+  if (currentAway + 1 <= numOfParty) {
+    return true;
+  }
+  return false;
+};

@@ -98,6 +98,15 @@
                   id="recipient-name"
                   name="title"
                 />
+                <label for="recipient-name" class="col-form-label"
+                  >참가인원</label
+                >
+                <select class="numOfParty" name="numOfParty">
+                  <option value="1:1">1 : 1</option>
+                  <option value="2:2">2 : 2</option>
+                  <option value="3:3">3 : 3</option>
+                  <option value="4:4">4 : 4</option>
+                </select>
               </div>
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label"
@@ -128,17 +137,13 @@
                   <div class="entry-body away-entry-body"></div>
                 </div>
               </div>
-              <div class="modal-body-tail">
-                <button
-                  type="submit"
-                  class="btn btn-primary room-create-action"
-                >
-                  만들기
-                </button>
-              </div>
+              <div class="modal-body-tail"></div>
             </form>
           </div>
           <div class="modal-footer">
+            <button type="submit" class="btn btn-primary room-create-action">
+              만들기
+            </button>
             <button
               type="button"
               class="btn btn-secondary"
