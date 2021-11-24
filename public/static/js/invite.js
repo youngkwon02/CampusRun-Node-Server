@@ -272,3 +272,30 @@ const isAwayAddPossible = () => {
   }
   return false;
 };
+
+const createRoomAction = async () => {
+  const roomTitle = document.querySelector("#recipient-name").value;
+  const maxJoin = getNumberOfParty() * 2;
+  const createrKakaoId = document.querySelector(".userKakaoId").innerHTML;
+  const homeUnivName = document.querySelector(
+    ".home-entry .entry-univ-span"
+  ).innerHTML;
+  const awayUnivName = document.querySelector(
+    ".away-entry .entry-univ-span"
+  ).innerHTML;
+
+  const reqData = {
+    title: roomTitle,
+    max_join: maxJoin,
+    creater: createrKakaoId,
+    owner_univ: homeUnivName,
+    opponent_univ: awayUnivName,
+  };
+
+  let createRoomRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/create-room",
+    reqData
+  );
+  if (createRoomRes["status"] !== 200) alert("방 생성에 실패하였습니다.");
+};

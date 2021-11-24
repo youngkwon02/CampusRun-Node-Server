@@ -73,51 +73,6 @@ const kakaoConfig = {
   redirectUri: config.REDIRECT_URI,
 };
 
-// Action Method
-app.post("/room/add", function (req, res) {
-  // console.log(req);
-  // console.log(req.cookies.csrftoken);
-  // request.post({
-  //   method: "POST",
-  //   headers: { token: req.cookies["cookieToken"] },
-  //   url: "http://localhost:8000/feed/room",
-  //   data: {
-  //     title: req.body.title,
-  //     opponet_university: req.body.opponentUniversity
-  //   },
-  //   json: true,
-  //   function(error, response, body) {
-  //     res.json(body);
-  //   }
-  // });
-  console.log("제발");
-  room = axios({
-    method: "POST",
-    data: {
-      title: req.body.title,
-      owner: req.body.owner,
-      opponent_university: req.body.opponentUniversity,
-    },
-    url: "http://localhost:8000/feed/room",
-    headers: {
-      token: req.cookies["cookieToken"],
-      Cookie: "csrftoken=" + req.cookies.csrftoken,
-    },
-  }).then(function (response) {
-    console.log("안됨");
-    console.log(response);
-    res.render("waitingroom", {
-      userNameTest: "sdf",
-      userName: user.userName,
-      univName: user.univName,
-      kakaoEmail: user.kakaoEmail,
-      idToken: req.cookies["cookieToken"],
-    });
-
-    res.redirect("http://localhost:3000/home");
-  });
-});
-
 // Page View
 
 app.get("/", (req, res) => {

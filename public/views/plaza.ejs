@@ -87,7 +87,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form method="POST" name="roomMake" action="/room/add">
+            <form method="POST" name="roomMake">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label"
                   >게임방 제목</label
@@ -141,7 +141,10 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary room-create-action">
+            <button
+              class="btn btn-primary room-create-action"
+              onclick="createRoomAction()"
+            >
               만들기
             </button>
             <button
