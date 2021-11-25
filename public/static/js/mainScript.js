@@ -192,7 +192,9 @@ const invitationManager = async (kakaoId) => {
       inv.creater = "익명의 사용자";
     }
     let row = `<div class="invitation-row">
-      <div class="inv-univ">${inv.homeUniv}(Home) vs ${inv.awayUniv}(Away)</div>
+      <div class="inv-univ">${inv.homeUniv}(Home) vs ${inv.awayUniv}(Away) [ ${
+      inv.maxJoin / 2
+    }:${inv.maxJoin / 2} ]</div>
       <div class="inv-title">방 제목: ${
         inv.title === "" ? "제목 없음" : inv.title
       }</div>
