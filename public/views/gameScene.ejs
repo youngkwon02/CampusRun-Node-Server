@@ -18,12 +18,16 @@
     <title>CampusRun</title>
     <link rel="shortcut icon" href="TemplateDataGameView/favicon.ico" />
     <link rel="stylesheet" href="TemplateDataGameView/style.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/plaza_style.css" />
+    <!-- <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" /> -->
     <script src="TemplateDataGameView/UnityProgress.js"></script>
     <script src="BuildGameView/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script>
     <!-- <script src="test.js"></script> -->
 
     <script>
@@ -50,17 +54,5 @@
       GO TO PLAZA
     </button>
   </body>
-  <script>
-    function emitJoin() {
-      socket.emit(
-        "LOGIN",
-        JSON.stringify({
-          name: `<%= kakaoEmail %>`,
-          position: "-50:124.633828:2",
-          avatar: "1"
-        })
-      );
-      document.getElementById("btn_id").style.display = "none";
-    }
-  </script>
+  <script src="../static/js/gameManager.js"></script>
 </html>

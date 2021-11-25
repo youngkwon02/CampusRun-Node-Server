@@ -190,12 +190,22 @@
     let timerInterv;
 
     function emitJoin() {
+      const currentURL = location.href;
+      splittedURL = currentURL.split("/");
+      url = "";
+      for (let i = 3; i < splittedURL.length; i++) {
+        url += splittedURL[i];
+        if (i !== splittedURL.length - 1) {
+          url += "/";
+        }
+      }
       socket.emit(
         "LOGIN",
         JSON.stringify({
           name: `<%= userName %>`,
           position: "3.3:2.633828:0",
           avatar: "1",
+          url: url,
         })
       );
       document.getElementById("btn_id").style.display = "none";

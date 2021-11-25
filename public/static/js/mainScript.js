@@ -154,6 +154,12 @@ const applyInvitationAnimation = () => {
 };
 
 const acceptInvitation = async (invId, url) => {
+  let kakaoId = document.querySelector(".KAKAOID").innerHTML;
+  let roomUrl = url;
+  await ajaxRequest("GET", "http://localhost:8000/game/api/room-enter", {
+    roomUrl,
+    kakaoId,
+  });
   let res = await ajaxRequest(
     "GET",
     "http://localhost:8000/game/api/invitation-read",

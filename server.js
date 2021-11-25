@@ -101,6 +101,8 @@ app.get("/plaza", (req, res) => {
 });
 
 app.get("/game", (req, res) => {
+  const hashPart = req.query.hash;
+  console.log(`Hash part: ${hashPart}`);
   user = axios({
     method: "get",
     url: "http://localhost:8000/user/",
@@ -108,9 +110,9 @@ app.get("/game", (req, res) => {
       token: req.cookies["cookieToken"],
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     user = response.data;
-    console.log(user);
+    // console.log(user);
     res.render("gameScene", {
       userNameTest: "sdf",
       userName: user.userName,
@@ -176,7 +178,7 @@ app.get("/ranking/:part", async (req, res) => {
   });
 });
 
-var clients = []; // to storage clients
+var clients = {}; // to storage clients
 var clientLookup = {}; // clients search engine
 var sockets = {}; //// to storage sockets
 
@@ -224,12 +226,14 @@ io.on("connection", function (socket) {
 
   //create a callback fuction to listening EmitJoin() method in NetworkMannager.cs unity script
   socket.on("LOGIN", function (_data) {
-    console.log("[INFO] JOIN received !!! ");
+    console.log("[INFO] LOGIN received !!! ");
 
     var data = JSON.parse(_data);
-    console.log(data);
 
     // fills out with the information emitted by the player in the unity
+    let currentURL = data.url;
+    // let room = "";
+    // let maxJoin = 1;
     currentUser = {
       name: data.name,
       avatar: data.avatar,
@@ -244,17 +248,34 @@ io.on("connection", function (socket) {
       timeOut: 0,
       isDead: false,
     }; //new user  in clients list
+    // if (currentURL.includes("game?hash")) {
+    //   axios({
+    //     method: "get",
+    //     url: "http://localhost:8000/game/api/room-by-url",
+    //     headers: {
+    //       url: currentURL,
+    //     },
+    //   }).then(function (response) {
+    //     room = response.data;
+    //     console.log(room);
+    //     maxJoin = room.maxJoin;
+    //     console.log(`[INFO ${currentURL}]-Maximum accesor: ${maxJoin}`);
+    //   });
+    // }
+
     console.log("[INFO] socket" + currentUser.socketID);
     console.log("[INFO] player " + currentUser.name + ": logged!");
     console.log("[INFO] currentUser.position " + currentUser.position);
 
     //add currentUser in clients list
-    clients.push(currentUser);
+    if (!(currentURL in clients)) clients[currentURL] = [];
+    clients[currentURL].push(currentUser);
 
     //add client in search engine
     clientLookup[currentUser.id] = currentUser;
-
-    console.log("[INFO] Total players: " + clients.length);
+    console.log(
+      `[INFO ${currentURL}]-Total accesor: ${clients[currentURL].length}`
+    );
 
     /*********************************************************************************************/
 
@@ -268,7 +289,7 @@ io.on("connection", function (socket) {
     );
 
     //spawn all connected clients for currentUser client
-    clients.forEach(function (i) {
+    clients[currentURL].forEach(function (i) {
       if (i.id != currentUser.id) {
         //send to the client.js script
         socket.emit("SPAWN_PLAYER", i.id, i.name, i.avatar, i.position);
