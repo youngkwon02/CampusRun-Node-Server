@@ -223,7 +223,7 @@ a {
   right: 0;
   overflow: scroll;
   width: 500px;
-  height: 300px;
+  max-height: 300px;
   background-color: black;
   z-index: 9;
 }

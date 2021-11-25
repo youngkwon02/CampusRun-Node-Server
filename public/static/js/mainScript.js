@@ -153,7 +153,25 @@ const applyInvitationAnimation = () => {
   document.querySelector(".invitation").style.animationName = "rainbow";
 };
 
-const rejectInvitation = (invId) => {};
+const acceptInvitation = async (invId, url) => {
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/invitation-read",
+    { invId: invId }
+  );
+  location.href = url;
+};
+
+const rejectInvitation = async (invId) => {
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/invitation-reject",
+    { invId: invId }
+  );
+  if (res.status !== 200)
+    alert("초대 거절에 실패하였습니다\n잠시후 다시 시도하세요.");
+  else alert("초대를 거절하였습니다.");
+};
 
 const invitationManager = async (kakaoId) => {
   const invBoard = document.querySelector(".invitation-board");
@@ -181,9 +199,11 @@ const invitationManager = async (kakaoId) => {
       <div class="inv-content">${
         inv.creater
       }님이 귀하에게 초대장을 전송하였습니다.</div>
-      <div class="inv-selection"><a href="${
-        inv.url
-      }">수락</a> | <a href="rejectInvitation(${inv.invId})">거절</a></div>
+      <div class="inv-selection"><a href="javascript:acceptInvitation(${
+        inv.invId
+      },'${inv.url}')">수락</a> | <a href="javascript:rejectInvitation(${
+      inv.invId
+    })">거절</a></div>
     </div>`;
     invBoard.innerHTML += row;
   }
