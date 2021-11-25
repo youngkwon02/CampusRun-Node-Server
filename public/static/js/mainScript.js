@@ -86,8 +86,11 @@ const bodyRearrange = () => {
 const applyNavColor = () => {
   const nav = document.querySelector("nav");
   const navElem = document.querySelectorAll("nav *");
+  const invitationBoard = document.querySelector(".invitation-board");
   if (window.scrollY > 50) {
     nav.style.backgroundColor = "rgba(255, 255, 255, .45)";
+    invitationBoard.style.backgroundColor = "rgba(255, 255, 255, .45)";
+    invitationBoard.style.color = "#101010";
     for (let i = 0; i < navElem.length; i++) {
       navElem[i].style.color = "#101010";
       document.querySelector("#nav-title").style.backgroundImage =
@@ -95,6 +98,8 @@ const applyNavColor = () => {
     }
   } else {
     nav.style.backgroundColor = "rgba(0, 0, 0, 85)";
+    invitationBoard.style.backgroundColor = "rgba(0, 0, 0, 85)";
+    invitationBoard.style.color = "#efefef";
     for (let i = 0; i < navElem.length; i++) {
       navElem[i].style.color = "#efefef";
       document.querySelector("#nav-title").style.backgroundImage =
@@ -134,22 +139,53 @@ const ajaxRequest = (type, url, data) => {
   });
 };
 
+const invitationToggle = () => {
+  const invBoard = document.querySelector(".invitation-board");
+  if (invBoard.style.display === "none" || invBoard.style.display === "") {
+    invBoard.style.display = "block";
+    return true;
+  }
+  invBoard.style.display = "none";
+  return true;
+};
+
 const applyInvitationAnimation = () => {
   document.querySelector(".invitation").style.animationName = "rainbow";
 };
 
+const rejectInvitation = (invId) => {};
+
 const invitationManager = async (kakaoId) => {
+  const invBoard = document.querySelector(".invitation-board");
   let res = await ajaxRequest(
     "GET",
     "http://localhost:8000/game/api/invitation-by-id",
     { kakaoId: kakaoId }
   );
+  let isThereNew = false;
   let invList = res.data;
   for (let i = 0; i < invList.length; i++) {
-    if (!invList[i].isRead) {
+    let inv = invList[i];
+    if (!inv.isRead && !isThereNew) {
       applyInvitationAnimation();
-      break;
+      isThereNew = true;
     }
+    if (inv.creater === null) {
+      inv.creater = "익명의 사용자";
+    }
+    let row = `<div class="invitation-row">
+      <div class="inv-univ">${inv.homeUniv}(Home) vs ${inv.awayUniv}(Away)</div>
+      <div class="inv-title">방 제목: ${
+        inv.title === "" ? "제목 없음" : inv.title
+      }</div>
+      <div class="inv-content">${
+        inv.creater
+      }님이 귀하에게 초대장을 전송하였습니다.</div>
+      <div class="inv-selection"><a href="${
+        inv.url
+      }">수락</a> | <a href="rejectInvitation(${inv.invId})">거절</a></div>
+    </div>`;
+    invBoard.innerHTML += row;
   }
 };
 

@@ -1,5 +1,11 @@
 html {
   scroll-behavior: smooth;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -208,6 +214,39 @@ a {
   animation-iteration-count: infinite;
   animation-duration: 3s;
   animation-timing-function: ease-in;
+}
+
+.invitation-board {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  overflow: scroll;
+  width: 500px;
+  height: 300px;
+  background-color: black;
+  z-index: 9;
+}
+
+.invitation-board .invitation-row {
+  border-bottom: 1px solid red;
+  font-family: "twayair";
+  text-align: center;
+  padding: 20px;
+}
+
+.invitation-board .invitation-row .inv-homeAway {
+  text-align: center;
+  font-size: 14px;
+}
+
+.invitation-board .invitation-row .inv-title {
+  text-align: center;
+  font-size: 16px;
+}
+
+.invitation-board .invitation-row a {
+  color: rgb(187, 70, 216);
 }
 
 @font-face {
