@@ -200,7 +200,7 @@ app.get("/ranking/:part", async (req, res) => {
       token: req.cookies["cookieToken"],
     },
   });
-
+  
   const URL = "http://localhost:8000/ranking/" + part;
 
   console.log("URL: ${URL}");
@@ -215,7 +215,6 @@ app.get("/ranking/:part", async (req, res) => {
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
     part,
-
     // data: rankData,
   });
 });
