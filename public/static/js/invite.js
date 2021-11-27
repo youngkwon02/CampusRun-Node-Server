@@ -309,8 +309,9 @@ const createRoomAction = async () => {
       awayUnivName,
       url
     );
-    alert("성공적으로 방을 생성하였습니다.\n대기실로 이동합니다.");
-    // window.location.href = "http://localhost:3000/game/";
+    alert(
+      "성공적으로 방을 생성하였습니다.\n메인 페이지의 편지함을 확인하세요!"
+    );
   }
 };
 

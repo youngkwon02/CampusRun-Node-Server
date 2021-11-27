@@ -118,6 +118,7 @@ app.get("/game", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
+      kakaoId: user.kakaoId,
     });
   });
 });
@@ -213,17 +214,6 @@ io.on("connection", function (socket) {
     io.sockets.emit("updateMessage", data);
   });
 
-  //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
-  socket.on("PING", function (_pack) {
-    //console.log('_pack# '+_pack);
-    var pack = JSON.parse(_pack);
-
-    console.log("message from user# " + socket.id + ": " + pack.msg);
-
-    //emit back to NetworkManager in Unity by client.js script
-    socket.emit("PONG", socket.id, pack.msg);
-  });
-
   //create a callback fuction to listening EmitJoin() method in NetworkMannager.cs unity script
   socket.on("LOGIN", function (_data) {
     console.log("[INFO] LOGIN received !!! ");
@@ -235,7 +225,7 @@ io.on("connection", function (socket) {
     // let room = "";
     // let maxJoin = 1;
     currentUser = {
-      name: data.name,
+      kakaoId: data.name,
       avatar: data.avatar,
       position: data.position,
       rotation: "0",
@@ -247,6 +237,7 @@ io.on("connection", function (socket) {
       kills: 0,
       timeOut: 0,
       isDead: false,
+      playingURL: currentURL,
     }; //new user  in clients list
     // if (currentURL.includes("game?hash")) {
     //   axios({
@@ -264,7 +255,7 @@ io.on("connection", function (socket) {
     // }
 
     console.log("[INFO] socket" + currentUser.socketID);
-    console.log("[INFO] player " + currentUser.name + ": logged!");
+    console.log("[INFO] player kakaoId " + currentUser.kakaoId + ": logged!");
     console.log("[INFO] currentUser.position " + currentUser.position);
 
     //add currentUser in clients list
@@ -305,6 +296,32 @@ io.on("connection", function (socket) {
       currentUser.position
     );
   }); //END_SOCKET_ON
+
+  //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
+  socket.on("PING", function (_pack) {
+    //console.log('_pack# '+_pack);
+    var pack = JSON.parse(_pack);
+
+    console.log("message from user# " + socket.id + ": " + pack.msg);
+    console.log(`User arrived at the track: ${currentUser.kakaoId}`);
+    // timer.stopTimer(timerInterv);
+    let endTime = new Date().getTime();
+    console.log("-->", endTime);
+    axios({
+      method: "get",
+      url: "http://localhost:8000/game/api/update-record",
+      headers: {
+        kakaoId: currentUser.kakaoId,
+        currentURL: currentUser.playingURL,
+        endTime: parseInt(endTime),
+      },
+    }).then(function (response) {
+      console.log(`게임 종료 !\n${response}`);
+    });
+
+    //emit back to NetworkManager in Unity by client.js script
+    socket.emit("PONG", socket.id, pack.msg);
+  });
 
   //create a callback fuction to listening method in NetworkMannager.cs unity script
   socket.on("RESPAWN", function (_info) {

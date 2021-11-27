@@ -17,23 +17,35 @@ const ajaxRequest = (type, url, data) => {
   });
 };
 
-const emitJoin = () => {
+const emitJoin = async () => {
+  const KAKAOID = document.querySelector(".KAKAOID").innerHTML;
   const currentURL = location.href;
   splittedURL = currentURL.split("/");
   url = splittedURL[3];
   socket.emit(
     "LOGIN",
     JSON.stringify({
-      name: `<%= kakaoEmail %>`,
+      name: KAKAOID,
       position: "-50:124.633828:2",
       avatar: "1",
       url: url,
     })
   );
-  document.getElementById("btn_id").style.display = "none";
+
+  // Record insert
+  let now = new Date().getTime() + 10000;
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/new-record",
+    {
+      kakaoId: KAKAOID,
+      currentURL: currentURL,
+      start: now,
+    }
+  );
 };
 
-const checkGameStart = async (currentURL, checkInterv) => {
+const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
     "http://localhost:8000/game/api/room-status-by-url",
@@ -45,7 +57,10 @@ const checkGameStart = async (currentURL, checkInterv) => {
   if (remainPlayer === 0) {
     console.log("TIMEOUT CALL");
     setTimeout(() => {
-      emitJoin();
+      if (!emitJoinCall[0]) {
+        emitJoinCall[0] = true;
+        emitJoin();
+      }
       clearInterval(checkInterv);
     }, 10000);
   } else {
@@ -55,8 +70,10 @@ const checkGameStart = async (currentURL, checkInterv) => {
 };
 
 window.onload = () => {
+  document.getElementById("btn_id").style.display = "none";
+  let emitJoinCall = [false];
   let currentURL = window.location.href;
   let checkInterv = setInterval(() => {
-    checkGameStart(currentURL, checkInterv);
+    checkGameStart(currentURL, checkInterv, emitJoinCall);
   }, 330);
 };
