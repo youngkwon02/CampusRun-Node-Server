@@ -53,11 +53,18 @@
           <button
             class="createroom-btn"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
+            data-bs-target="#privateRoomModal"
             data-bs-whatever="@mdo"
           >
             방만들기
           </button>
+          <button
+            class="createroom-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#publicRoomModal"
+            data-bs-whatever="@mdo"
+          >
+            방만들기
         </div>
       </div>
     </div>
@@ -68,9 +75,11 @@
       링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
     -->
 
+
+    <!-- Private Room Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="privateRoomModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -157,11 +166,75 @@
           </div>
         </div>
       </div>
-      <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
-      <div style="display: none" class="userUniv"><%= univName %></div>
-      <div style="display: none" class="userName"><%= userName %></div>
-      <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
     </div>
+
+
+    <!-- Public Room Modal -->
+    <div
+      class="modal fade"
+      id="publicRoomModal"
+      tabindex="-1"
+      aria-labelledby="publicRoomModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">방 만들기</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" name="roomMake">
+              <div class="mb-3">
+                <label for="public-recipient-name" class="col-form-label"
+                  >게임방 제목</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="public-recipient-name"
+                  name="title"
+                />
+                <label for="recipient-name" class="col-form-label"
+                  >참가인원</label
+                >
+                <select class="public-numOfParty" name="numOfParty">
+                  <option value="1:1">1 : 1</option>
+                  <option value="2:2">2 : 2</option>
+                  <option value="3:3">3 : 3</option>
+                  <option value="4:4">4 : 4</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary room-create-action"
+              onclick="createPublicRoomAction()"
+            >
+              만들기
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
+    <div style="display: none" class="userUniv"><%= univName %></div>
+    <div style="display: none" class="userName"><%= userName %></div>
+    <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
 
     <!-- ProgressBar for loading GameView -->
     <div class="progresscontent">

@@ -356,3 +356,21 @@ const sendInvite = async (
     }
   );
 };
+
+const createPublicRoomAction = async () => {
+  const roomTitle = document.querySelector("#public-recipient-name").value;
+  let maxJoin =
+    parseInt(document.querySelector(".public-numOfParty").value[0]) * 2;
+  const createrKakaoId = document.querySelector(".userKakaoId").innerHTML;
+
+  let createRoomRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/create-room-public",
+    { roomTitle, maxJoin, createrKakaoId }
+  );
+  if (createRoomRes["status"] !== 200) {
+    alert("방 생성에 실패하였습니다.");
+  } else {
+    alert("성공적으로 방을 생성하였습니다.");
+  }
+};
