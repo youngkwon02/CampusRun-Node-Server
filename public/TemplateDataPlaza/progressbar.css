@@ -11,6 +11,7 @@
     top:5px;
     width: 300px;
     height: 80px;
+    z-index:100;
 }
 
 .progresstext{
@@ -67,92 +68,3 @@
     0% {transform: ratate(0);}
     100% {transform: rotate(360deg);}
 }
-
-/*
-*{margin:0; padding:0;}
-.progressview{
-    width:100%;
-    height:742px;
-    position: relative;
-    overflow:hidden;
-}
-.backimg{
-    position: relative;
-    height: 100%;
-    background-image:url('../Assets/image/8.jpg');
-}
-
-.logo-left{
-    position:absolute;
-    left: 50px;
-    top:5px;
-    width: 300px;
-    height: 80px;
-}
-
-.progresstext{
-    position:absolute;
-    left:50%;
-    top:20%;
-    z-index: 1;
-    
-    text-align: center;
-    font-size: 100px;
-    min-width:11px;
-    white-space: nowrap;
-
-    font-family: 'Lobster', cursive;
-
-    color: transparent;
-    transform: translate(-50%, -50%);
-}
-
-
-.progresstext::before {
-    content: "READY TO RUN?!";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    color: black;
-    overflow: hidden;
-    border-right: 1px;
-    animation: typing 3s steps(31) 1;
-  }
-  
-  @keyframes typing{
-    0% {
-      width: 0%;
-    }
-
-    100% {
-      width: 100%;
-    }
-  }
-
-
-.tire01{
-    position:absolute;
-    left:25%;
-    top:68%;
-    width:18%;
-}
-.tire02{
-    position:absolute;
-    left:71%;
-    top:68%;
-    width:18%;
-}
-.tire-rotate {animation: tire-rotate 0.3s linear infinite;}
-
-@keyframes cursor{
-    0%{border-right: 1px solid #fff}
-    50%{border-right: 1px solid #000}
-    100%{border-right: 1px solid #fff}
-}
-@keyframes tire-rotate{
-    0% {transform: ratate(0);}
-    100% {transform: rotate(360deg);}
-}
-*/

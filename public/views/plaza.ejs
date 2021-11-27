@@ -49,25 +49,27 @@
           placeholder="대화를 입력해주세요."
         />
         <button id="chatMessageSendBtn" class="app__button">전송</button>
-        <div id="roomWrap" class="room__wrap">
-          <button
-            class="createroom-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-            data-bs-whatever="@mdo"
-          >
-            방만들기
-          </button>
-        </div>
       </div>
     </div>
 
-    <!--로직: 방장이 팀원들을 최대 3인까지 해서 4:4로 초대를 진행
-      방생성 후 방장은 바로 대기실로 넘어가고
-      다른 참가자들은 home으로 redirect 되는데 home에 쪽지로 링크 전송
-      링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
-    -->
-
+    <div id="roomWrap" class="room__wrap">
+      <button
+        class="createroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        data-bs-whatever="@mdo"
+      >
+        방만들기
+      </button>
+      <button
+        class="inviteroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        data-bs-whatever="@mdo"
+      >
+        초대하기
+      </button>
+    </div>
     <div
       class="modal fade"
       id="exampleModal"
@@ -160,21 +162,9 @@
       <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
     </div>
 
-    <!-- version1
     <div class="progressview">
-      <div class="backimg">
-        <img src="../Assets/image/logo-long-white.png" class="logo-left">
-        <div class="progresstext" >
-          READY TO RUN?!
-        </div>
-        <img src="../TemplateDataPlaza/wheel.png" class="tire01 tire-rotate">
-        <img src="../TemplateDataPlaza/wheel.png" class="tire02 tire-rotate">
-      </div>
-    </div>
-    -->
-
-    <div class="progressview">
-      <img src="../Assets/image/logo-long-black.png" class="logo-left">
+      
+      <img src="../Assets/image/logo-long-black.png" class="logo-left" onclick="location.href='/home'">
       <div class="progresstext">LOADING...</div>
       <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
     </div>

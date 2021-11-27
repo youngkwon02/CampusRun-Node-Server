@@ -1,5 +1,35 @@
 @charset "utf-8";
-.room__wrap{
-    background-color: black;
+.createroom-btn{
+    position:absolute;
     z-index: 10;
+    bottom:200px;
+    right: 5px;
+
+    margin:10px; 
+    width: 20%;
+    height: 25px;
+    border: 0;
+    outline:0;
+    border-left: 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color:tomato;
+    font-weight: bold;
+    cursor: pointer;
+}
+.inviteroom-btn{
+    position:absolute;
+    z-index: 10;
+    bottom:170px;
+    right: 5px;
+
+    margin:10px; 
+    width: 20%;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-weight: bold;
+    cursor: pointer;
 }
