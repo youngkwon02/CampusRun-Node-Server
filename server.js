@@ -100,9 +100,27 @@ app.get("/plaza", (req, res) => {
   });
 });
 
+app.get("/wait", (req, res) => {
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"],
+    },
+  }).then(function (response) {
+    // console.log(response);
+    user = response.data;
+    // console.log(user);
+    res.render("waitRoom", {
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail,
+      kakaoId: user.kakaoId,
+    });
+  });
+});
+
 app.get("/game", (req, res) => {
-  const hashPart = req.query.hash;
-  console.log(`Hash part: ${hashPart}`);
   user = axios({
     method: "get",
     url: "http://localhost:8000/user/",
