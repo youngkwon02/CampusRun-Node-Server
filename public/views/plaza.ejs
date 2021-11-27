@@ -160,20 +160,22 @@
       <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
     </div>
 
-    <!-- ProgressBar for loading GameView -->
-    <div class="progresscontent">
-      <div class="progressbar">
-        <div class="color"></div>
+
+    <div class="progressview">
+      <div class="backimg">
+        <img src="../Assets/image/logo-long-white.png" class="logo-left">
+        <div class="progresstext" >
+          READY TO RUN?!
+        </div>
+        <img src="../TemplateDataPlaza/wheel.png" class="tire01 tire-rotate">
+        <img src="../TemplateDataPlaza/wheel.png" class="tire02 tire-rotate">
       </div>
     </div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content" style="margin: 0">
+    <div class="webgl-content" style="margin: 0; z-index:100">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
-      <!--<div class="footer">
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      </div>
-    --></div>
+    </div>
 
     <!-- EmitJoin for connecting socket -->
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
