@@ -54,6 +54,34 @@
     animation-play-state: running;
 }
 
+.roomlist-btn{
+  position:absolute;
+  z-index: 10;
+  top: 130px;
+  right: 5px;
+  margin:10px; 
+  width: 15%;
+  height: 50px;
+  border:0;
+  outline:0;
+  box-sizing: border-box;
+  background-color: rgba(113, 227, 90, 0.7);
+  font-weight: bold;
+  font-size:30px;
+  color:whitesmoke;
+  font-family: 'Do Hyeon', sans-serif;
+  cursor: pointer;
+
+
+  animation-name: appear;
+  animation-duration: 0s;
+  animation-timing-function: linear;
+  animation-iteration-count: 2;
+  animation-fill-mode: backwards;
+  animation-play-state: running;
+}
+
+
 
 @keyframes appear {
     from {
@@ -118,5 +146,34 @@
 }
 
 .inviteroom-btn:disabled {
+  cursor: auto;
+}
+
+
+.roomlist-btn:after {
+  background-clip: padding-box;
+  background-color: rgba(113, 227, 90, 0.7);
+  border: solid transparent;
+
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.roomlist-btn:main,
+.roomlist-btn:focus {
+  user-select: auto;
+}
+
+.roomlist-btn:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+.roomlist-btn:disabled {
   cursor: auto;
 }

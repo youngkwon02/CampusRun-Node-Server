@@ -39,7 +39,7 @@
     color: whitesmoke;
     overflow: hidden;
     border-right: 1px;
-    animation: typing 3s steps(31) 1;
+    animation: typing 3s steps(30) 1;
   }
   
   @keyframes typing{
