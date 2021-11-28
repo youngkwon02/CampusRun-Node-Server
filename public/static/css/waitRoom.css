@@ -67,6 +67,23 @@ body {
   height: 34px;
 }
 
+.entry .profileImg {
+  display: inline-block;
+  width: 100%;
+  height: calc(100% - 68px);
+  animation: character-fade 4s ease-in infinite;
+}
+
+.home-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
+.away-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
 .chat-container {
   height: 50%;
 }
@@ -124,4 +141,16 @@ body {
 
 .btn-quit {
   background-color: rgba(114, 24, 24, 0.788);
+}
+
+@keyframes character-fade {
+  0% {
+    background-position-x: -20px;
+  }
+  50% {
+    background-position-x: -70px;
+  }
+  100% {
+    background-position-x: -20px;
+  }
 }
