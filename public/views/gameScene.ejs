@@ -1,15 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>CampusRun</title>
-  </head>
-  <body>
-    <h1>Campus Run</h1>
-    <p>Campus Run 사이트 입니다.</p>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -18,8 +6,8 @@
     <title>CampusRun</title>
     <link rel="shortcut icon" href="TemplateDataGameView/favicon.ico" />
     <link rel="stylesheet" href="TemplateDataGameView/style.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/plaza_style.css" />
+    <link rel="stylesheet" href="TemplateDataPlaza/progressbar.css" />
+    <link rel="stylesheet" href="TemplateDataGameView/game_style.css" />
     <script src="TemplateDataGameView/UnityProgress.js"></script>
     <script src="BuildGameView/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -35,19 +23,18 @@
     </script>
   </head>
   <body>
-    <div class="progresscontent">
-      <div class="progressbar">
-        <div class="color"></div>
-      </div>
+    <div class="progressview">
+      <img src="../Assets/image/logo-long-black.png" class="logo-left" onclick="location.href='/home'">
+      <div class="progresstext">LOADING...</div>
+      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
     </div>
-    <div class="webgl-content">
-      <div id="unityContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      </div>
+
+    <div class="webgl-content" style="margin: 0;">
+      <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
     </div>
+
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
-      GO TO PLAZA
+      START GAME
     </button>
   </body>
   <script>

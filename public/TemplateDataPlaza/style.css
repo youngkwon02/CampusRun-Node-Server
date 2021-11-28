@@ -12,7 +12,7 @@
   animation-name: test;
   animation-duration: 2s;
   animation-timing-function: linear;
-  animation-delay: 4s;
+  animation-delay: 5s;
   animation-iteration-count: 1;
   animation-fill-mode: backwards;
   animation-play-state: running;

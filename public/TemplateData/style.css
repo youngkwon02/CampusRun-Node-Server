@@ -68,21 +68,3 @@
 .webgl-content .progress.Dark .full {
   background-image: url("progressFull.Dark.png");
 }
-
-.webgl-content .footer {
-  margin-top: 5px;
-  height: 38px;
-  line-height: 38px;
-  font-family: Helvetica, Verdana, Arial, sans-serif;
-  font-size: 18px;
-}
-.webgl-content .footer .fullscreen {
-  height: 100%;
-  display: inline-block;
-  background: transparent center no-repeat;
-}
-.webgl-content .footer .fullscreen {
-  background-image: url("fullscreen.png");
-  width: 38px;
-  float: right;
-}
