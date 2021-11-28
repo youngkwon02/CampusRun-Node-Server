@@ -54,7 +54,29 @@ const updatePublicList = async () => {
     alert("다시 시도하세요.");
     location.href = "/plaza";
   }
-  console.log(roomList);
+
+  document.querySelector(".room-list").innerHTML = "";
+  for (let i = 0; i < roomList.length; i++) {
+    let room = roomList[i];
+    let htmlContent = `
+      <div class="public-room-elem" onclick="enterWaitRoom('${
+        room.waitingURL
+      }')">
+        <div class="public-room-title">${room.title}</div>
+        <div class="public-room-body">
+          <div class="public-room-info">${
+            room.opponentUniv === ""
+              ? `${room.homeUniv} 대기중..`
+              : `${room.homeUniv} VS ${room.opponentUniv}`
+          }</div>
+          <div class="public-room-player-num">참가인원: [${room.currJoin} / ${
+      room.maxJoin
+    }]</div>
+        </div>
+      </div>
+    `;
+    document.querySelector(".room-list").innerHTML += htmlContent;
+  }
 };
 
 const enterWaitRoom = async (waitingURL) => {

@@ -61,6 +61,12 @@ window.onload = async () => {
         "auto !important";
     });
   }
+
+  // Public Room List Update
+  updatePublicList();
+  const publicRoomUpdateInterval = setInterval(() => {
+    updatePublicList();
+  }, 5000);
 };
 
 const addUserEntry = async (kakaoId) => {
