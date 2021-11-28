@@ -56,29 +56,11 @@ window.onload = async () => {
     ).innerHTML = `<div class="modal-notice">대학 인증을 완료한 후 방을 생성할 수 있습니다!</div>`;
   } else {
     document.querySelector(".home-entry .entry-univ-span").innerHTML = univName;
-    addUserEntry(KAKAOID);
-    document.querySelector(`.entry-body-row-${KAKAOID}`).style.cursor =
-      "auto !important";
-  }
-};
-
-const ajaxRequest = (type, url, data) => {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: url,
-      type: type,
-      data: data,
-      dataType: "json",
-      success: function (response) {
-        console.log(response);
-        resolve(response);
-      },
-      error: function () {
-        console.log("error");
-        return "사용자를 찾을 수 없습니다.";
-      },
+    addUserEntry(KAKAOID).then(() => {
+      document.querySelector(`.entry-body-row-${KAKAOID}`).style.cursor =
+        "auto !important";
     });
-  });
+  }
 };
 
 const addUserEntry = async (kakaoId) => {
@@ -355,22 +337,4 @@ const sendInvite = async (
       url,
     }
   );
-};
-
-const createPublicRoomAction = async () => {
-  const roomTitle = document.querySelector("#public-recipient-name").value;
-  let maxJoin =
-    parseInt(document.querySelector(".public-numOfParty").value[0]) * 2;
-  const createrKakaoId = document.querySelector(".userKakaoId").innerHTML;
-
-  let createRoomRes = await ajaxRequest(
-    "GET",
-    "http://localhost:8000/game/api/create-room-public",
-    { roomTitle, maxJoin, createrKakaoId }
-  );
-  if (createRoomRes["status"] !== 200) {
-    alert("방 생성에 실패하였습니다.");
-  } else {
-    alert("성공적으로 방을 생성하였습니다.");
-  }
 };

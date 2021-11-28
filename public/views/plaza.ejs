@@ -24,7 +24,9 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="../static/js/ajaxRequest.js"></script>
     <script src="../static/js/invite.js"></script>
+    <script src="../static/js/publicRoom.js"></script>
 
     <!-- for UnityScene -->
     <script>
@@ -65,6 +67,15 @@
             data-bs-whatever="@mdo"
           >
             방만들기
+          </button>
+          <button
+            class="createroom-btn"
+            data-bs-toggle="modal"
+            data-bs-target="#publicRoomListModal"
+            data-bs-whatever="@mdo"
+          >
+            방 목록
+          </button>
         </div>
       </div>
     </div>
@@ -74,7 +85,6 @@
       다른 참가자들은 home으로 redirect 되는데 home에 쪽지로 링크 전송
       링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
     -->
-
 
     <!-- Private Room Modal -->
     <div
@@ -168,7 +178,6 @@
       </div>
     </div>
 
-
     <!-- Public Room Modal -->
     <div
       class="modal fade"
@@ -219,6 +228,42 @@
             >
               만들기
             </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Public Room List Modal -->
+    <div
+      class="modal fade"
+      id="publicRoomListModal"
+      tabindex="-1"
+      aria-labelledby="publicRoomModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">방 리스트</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- List body -->
+            <div class="room-list"></div>
+          </div>
+          <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
