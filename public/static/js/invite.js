@@ -66,7 +66,7 @@ window.onload = async () => {
   updatePublicList();
   const publicRoomUpdateInterval = setInterval(() => {
     updatePublicList();
-  }, 5000);
+  }, 4000);
 };
 
 const addUserEntry = async (kakaoId) => {
