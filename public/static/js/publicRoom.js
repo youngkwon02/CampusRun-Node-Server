@@ -9,10 +9,10 @@ const createPublicRoomAction = async () => {
     "http://localhost:8000/game/api/create-room-public",
     { roomTitle, maxJoin, createrKakaoId }
   );
-  if (createRoomRes["status"] !== 200) {
-    alert("방 생성에 실패하였습니다.");
+  if (createRoomRes["status"] === 200) {
+    enterWaitRoom(createRoomRes["url"]);
   } else {
-    alert("성공적으로 방을 생성하였습니다.");
+    alert("방 생성에 실패하였습니다.");
   }
 };
 
@@ -55,4 +55,21 @@ const updatePublicList = async () => {
     location.href = "/plaza";
   }
   console.log(roomList);
+};
+
+const enterWaitRoom = async (waitingURL) => {
+  const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
+  let enterWaitingRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/enter-wait-room",
+    {
+      kakaoId: KAKAOID,
+      waitingURL,
+    }
+  );
+  if (enterWaitingRes["status"] === 200) {
+    location.href = waitingURL;
+  } else {
+    alert(`${enterWaitingRes["message"]}`);
+  }
 };
