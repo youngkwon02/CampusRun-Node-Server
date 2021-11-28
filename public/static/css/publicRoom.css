@@ -34,3 +34,14 @@
   width: 28%;
   text-align: center;
 }
+
+.no-room {
+  text-align: center;
+  font-weight: bold;
+  font-family: "tawayair";
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

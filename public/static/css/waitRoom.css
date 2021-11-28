@@ -111,7 +111,8 @@ body {
   width: 100%;
   background: url("../../Assets/image/cau-map.jpeg");
   background-size: cover;
-  background-position-y: -30px;
+  /* background-position-y: -30px; */
+  background-repeat: no-repeat;
   height: calc(100% - 30px);
 }
 
@@ -136,11 +137,11 @@ body {
 }
 
 .btn-game-start {
-  background-color: rgba(17, 60, 117, 0.76);
+  background-color: royalblue;
 }
 
 .btn-quit {
-  background-color: rgba(114, 24, 24, 0.788);
+  background-color: lightcoral;
 }
 
 @keyframes character-fade {

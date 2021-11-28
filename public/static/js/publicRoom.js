@@ -55,7 +55,12 @@ const updatePublicList = async () => {
     location.href = "/plaza";
   }
 
-  document.querySelector(".room-list").innerHTML = "";
+  if (roomList.length === 0) {
+    document.querySelector(".room-list").innerHTML =
+      "<div class='no-room'>입장 가능한 방이 없습니다.<br>잠시후 다시 시도하세요!</div>";
+  } else {
+    document.querySelector(".room-list").innerHTML = "";
+  }
   for (let i = 0; i < roomList.length; i++) {
     let room = roomList[i];
     let htmlContent = `
