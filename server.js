@@ -159,6 +159,7 @@ app.get("/home", (req, res) => {
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
       kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
   // console.log(user.user);
