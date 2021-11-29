@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="TemplateDataGameView/game_style.css" />
     <link rel="stylesheet" href="../static/css/progressbar.css" />
     <link rel="stylesheet" href="../static/css/gameresult.css" />
+    <!-- <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" /> -->
     <script src="TemplateDataGameView/UnityProgress.js"></script>
     <script src="BuildGameView/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
-
-
     <script src="https://code.jquery.com/jquery-latest.js"></script>
-
-    <!-- <script src="test.js"></script> -->
-
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script>
     <script>
       var unityInstance = UnityLoader.instantiate(
         "unityContainer",
@@ -37,7 +38,6 @@
     <div class="webgl-content" style="margin: 0; display: none;">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
     </div>
-
     <button class="start-btn" id="btn_id" onclick="emitJoin()" style="display: none;">
       START GAME
     </button>
@@ -137,4 +137,8 @@
              $('#myModal').hide();
         };
   </script>
+    <button class="start-btn" id="btn_id" onclick="emitJoin()"></button>
+    <div class="KAKAOID" style="display: none"><%= kakaoId %></div>
+  </body>
+  <script src="../static/js/gameManager.js"></script>
 </html>

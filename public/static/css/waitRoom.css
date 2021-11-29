@@ -1,0 +1,157 @@
+html,
+body {
+  background-color: #7598c1;
+  padding: 0;
+  margin: 0;
+}
+
+.room-title {
+  text-align: center;
+  background-color: rgb(90, 88, 102);
+  padding: 16px 0;
+  font-size: 20px;
+  line-height: 16px;
+  margin-top: 16px;
+  color: #efefef;
+  font-family: "twayair";
+  font-weight: bold;
+}
+
+.main-board {
+  padding: 20px;
+  height: 90vh;
+}
+
+.left-side {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+}
+
+.right-side {
+  width: 26%;
+  height: 100%;
+  float: right;
+}
+
+.team-space {
+  height: 48%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.entry {
+  display: inline-block;
+  width: 24%;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-family: "impact";
+  font-size: 18px;
+  border: 3px solid black;
+  background-color: rgba(50, 55, 66, 0.4);
+  color: #eeeeee;
+  border-radius: 4px;
+  letter-spacing: 2px;
+}
+
+.entry .nickname {
+  line-height: 34px;
+  height: 34px;
+}
+
+.entry .univ {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  line-height: 26px;
+  height: 34px;
+}
+
+.entry .profileImg {
+  display: inline-block;
+  width: 100%;
+  height: calc(100% - 68px);
+  animation: character-fade 4s ease-in infinite;
+}
+
+.home-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
+.away-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
+.chat-container {
+  height: 50%;
+}
+
+.map-container {
+  height: 42%;
+  border: 3px solid black;
+  background-color: rgba(26, 22, 24, 0.4);
+  color: #efefef;
+  border-radius: 4px;
+}
+
+.map-container .map-name {
+  text-align: center;
+  font-family: "impact";
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 3px solid black;
+  letter-spacing: 2px;
+}
+
+.map-container .map-img {
+  display: inline-block;
+  width: 100%;
+  background: url("../../Assets/image/cau-map.jpeg");
+  background-size: cover;
+  /* background-position-y: -30px; */
+  background-repeat: no-repeat;
+  height: calc(100% - 30px);
+}
+
+.btn-container {
+  height: 10%;
+  text-align: center;
+}
+
+.btn-container .btn {
+  display: inline-block;
+  color: #efefef;
+  width: 34%;
+  height: 70px;
+  font-size: 26px;
+  line-height: 70px;
+  text-align: center;
+  border-radius: 4px;
+  font-family: "impact";
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 20px;
+}
+
+.btn-game-start {
+  background-color: royalblue;
+}
+
+.btn-quit {
+  background-color: lightcoral;
+}
+
+@keyframes character-fade {
+  0% {
+    background-position-x: -20px;
+  }
+  50% {
+    background-position-x: -70px;
+  }
+  100% {
+    background-position-x: -20px;
+  }
+}

@@ -56,29 +56,17 @@ window.onload = async () => {
     ).innerHTML = `<div class="modal-notice">대학 인증을 완료한 후 방을 생성할 수 있습니다!</div>`;
   } else {
     document.querySelector(".home-entry .entry-univ-span").innerHTML = univName;
-    addUserEntry(KAKAOID);
-    document.querySelector(`.entry-body-row-${KAKAOID}`).style.cursor =
-      "auto !important";
-  }
-};
-
-const ajaxRequest = (type, url, data) => {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: url,
-      type: type,
-      data: data,
-      dataType: "json",
-      success: function (response) {
-        console.log(response);
-        resolve(response);
-      },
-      error: function () {
-        console.log("error");
-        return "사용자를 찾을 수 없습니다.";
-      },
+    addUserEntry(KAKAOID).then(() => {
+      document.querySelector(`.entry-body-row-${KAKAOID}`).style.cursor =
+        "auto !important";
     });
-  });
+  }
+
+  // Public Room List Update
+  updatePublicList();
+  const publicRoomUpdateInterval = setInterval(() => {
+    updatePublicList();
+  }, 4000);
 };
 
 const addUserEntry = async (kakaoId) => {
@@ -271,4 +259,88 @@ const isAwayAddPossible = () => {
     return true;
   }
   return false;
+};
+
+const createRoomAction = async () => {
+  const roomTitle = document.querySelector("#recipient-name").value;
+  const maxJoin = getNumberOfParty() * 2;
+  const createrKakaoId = document.querySelector(".userKakaoId").innerHTML;
+  const homeUnivName = document.querySelector(
+    ".home-entry .entry-univ-span"
+  ).innerHTML;
+  const awayUnivName = document.querySelector(
+    ".away-entry .entry-univ-span"
+  ).innerHTML;
+
+  const reqData = {
+    title: roomTitle,
+    max_join: maxJoin,
+    creater: createrKakaoId,
+    owner_univ: homeUnivName,
+    opponent_univ: awayUnivName,
+  };
+
+  let createRoomRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/create-room",
+    reqData
+  );
+  if (createRoomRes["status"] !== 200) {
+    alert("방 생성에 실패하였습니다.");
+  } else {
+    url = createRoomRes["url"];
+    sendInvite(
+      roomTitle,
+      maxJoin,
+      createrKakaoId,
+      homeUnivName,
+      awayUnivName,
+      url
+    );
+    alert(
+      "성공적으로 방을 생성하였습니다.\n메인 페이지의 편지함을 확인하세요!"
+    );
+  }
+};
+
+const sendInvite = async (
+  title,
+  max,
+  creater,
+  owner_univ,
+  opponent_univ,
+  url
+) => {
+  // Home
+  let homeRows = document.querySelectorAll(".home-entry-body .entry-body-row");
+  let homeIdList = "";
+  for (let i = 0; i < homeRows.length; i++) {
+    homeIdList += homeRows[i].classList[1].split("-")[3];
+    if (i === homeRows.length - 1) break;
+    homeIdList += ",";
+  }
+
+  // Away
+  let awayRows = document.querySelectorAll(".away-entry-body .entry-body-row");
+  let awayIdList = "";
+  for (let i = 0; i < awayRows.length; i++) {
+    awayIdList += awayRows[i].classList[1].split("-")[3];
+    if (i === awayRows.length - 1) break;
+    awayIdList += ",";
+  }
+
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/send-invite",
+    {
+      title,
+      max,
+      creater,
+      owner_univ,
+      opponent_univ,
+      homeIdList,
+      awayIdList,
+      url,
+    }
+  );
 };

@@ -73,51 +73,6 @@ const kakaoConfig = {
   redirectUri: config.REDIRECT_URI,
 };
 
-// Action Method
-app.post("/room/add", function (req, res) {
-  // console.log(req);
-  // console.log(req.cookies.csrftoken);
-  // request.post({
-  //   method: "POST",
-  //   headers: { token: req.cookies["cookieToken"] },
-  //   url: "http://localhost:8000/feed/room",
-  //   data: {
-  //     title: req.body.title,
-  //     opponet_university: req.body.opponentUniversity
-  //   },
-  //   json: true,
-  //   function(error, response, body) {
-  //     res.json(body);
-  //   }
-  // });
-  console.log("제발");
-  room = axios({
-    method: "POST",
-    data: {
-      title: req.body.title,
-      owner: req.body.owner,
-      opponent_university: req.body.opponentUniversity,
-    },
-    url: "http://localhost:8000/feed/room",
-    headers: {
-      token: req.cookies["cookieToken"],
-      Cookie: "csrftoken=" + req.cookies.csrftoken,
-    },
-  }).then(function (response) {
-    console.log("안됨");
-    console.log(response);
-    res.render("waitingroom", {
-      userNameTest: "sdf",
-      userName: user.userName,
-      univName: user.univName,
-      kakaoEmail: user.kakaoEmail,
-      idToken: req.cookies["cookieToken"],
-    });
-
-    res.redirect("http://localhost:3000/home");
-  });
-});
-
 // Page View
 
 app.get("/", (req, res) => {
@@ -145,6 +100,26 @@ app.get("/plaza", (req, res) => {
   });
 });
 
+app.get("/wait", (req, res) => {
+  user = axios({
+    method: "get",
+    url: "http://localhost:8000/user/",
+    headers: {
+      token: req.cookies["cookieToken"],
+    },
+  }).then(function (response) {
+    // console.log(response);
+    user = response.data;
+    // console.log(user);
+    res.render("waitRoom", {
+      userName: user.userName,
+      univName: user.univName,
+      kakaoEmail: user.kakaoEmail,
+      kakaoId: user.kakaoId,
+    });
+  });
+});
+
 app.get("/game", (req, res) => {
   user = axios({
     method: "get",
@@ -153,14 +128,15 @@ app.get("/game", (req, res) => {
       token: req.cookies["cookieToken"],
     },
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
     user = response.data;
-    console.log(user);
+    // console.log(user);
     res.render("gameScene", {
       userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
+      kakaoId: user.kakaoId,
     });
   });
 });
@@ -182,6 +158,7 @@ app.get("/home", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
+      kakaoId: user.kakaoId,
     });
   });
   // console.log(user.user);
@@ -219,7 +196,7 @@ app.get("/ranking/:part", async (req, res) => {
   });
 });
 
-var clients = []; // to storage clients
+var clients = {}; // to storage clients
 var clientLookup = {}; // clients search engine
 var sockets = {}; //// to storage sockets
 
@@ -254,27 +231,18 @@ io.on("connection", function (socket) {
     io.sockets.emit("updateMessage", data);
   });
 
-  //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
-  socket.on("PING", function (_pack) {
-    //console.log('_pack# '+_pack);
-    var pack = JSON.parse(_pack);
-
-    console.log("message from user# " + socket.id + ": " + pack.msg);
-
-    //emit back to NetworkManager in Unity by client.js script
-    socket.emit("PONG", socket.id, pack.msg);
-  });
-
   //create a callback fuction to listening EmitJoin() method in NetworkMannager.cs unity script
   socket.on("LOGIN", function (_data) {
-    console.log("[INFO] JOIN received !!! ");
+    console.log("[INFO] LOGIN received !!! ");
 
     var data = JSON.parse(_data);
-    console.log(data);
 
     // fills out with the information emitted by the player in the unity
+    let currentURL = data.url;
+    // let room = "";
+    // let maxJoin = 1;
     currentUser = {
-      name: data.name,
+      kakaoId: data.name,
       avatar: data.avatar,
       position: data.position,
       rotation: "0",
@@ -286,18 +254,36 @@ io.on("connection", function (socket) {
       kills: 0,
       timeOut: 0,
       isDead: false,
+      playingURL: currentURL,
     }; //new user  in clients list
+    // if (currentURL.includes("game?hash")) {
+    //   axios({
+    //     method: "get",
+    //     url: "http://localhost:8000/game/api/room-by-url",
+    //     headers: {
+    //       url: currentURL,
+    //     },
+    //   }).then(function (response) {
+    //     room = response.data;
+    //     console.log(room);
+    //     maxJoin = room.maxJoin;
+    //     console.log(`[INFO ${currentURL}]-Maximum accesor: ${maxJoin}`);
+    //   });
+    // }
+
     console.log("[INFO] socket" + currentUser.socketID);
-    console.log("[INFO] player " + currentUser.name + ": logged!");
+    console.log("[INFO] player kakaoId " + currentUser.kakaoId + ": logged!");
     console.log("[INFO] currentUser.position " + currentUser.position);
 
     //add currentUser in clients list
-    clients.push(currentUser);
+    if (!(currentURL in clients)) clients[currentURL] = [];
+    clients[currentURL].push(currentUser);
 
     //add client in search engine
     clientLookup[currentUser.id] = currentUser;
-
-    console.log("[INFO] Total players: " + clients.length);
+    console.log(
+      `[INFO ${currentURL}]-Total accesor: ${clients[currentURL].length}`
+    );
 
     /*********************************************************************************************/
 
@@ -311,7 +297,7 @@ io.on("connection", function (socket) {
     );
 
     //spawn all connected clients for currentUser client
-    clients.forEach(function (i) {
+    clients[currentURL].forEach(function (i) {
       if (i.id != currentUser.id) {
         //send to the client.js script
         socket.emit("SPAWN_PLAYER", i.id, i.name, i.avatar, i.position);
@@ -327,6 +313,32 @@ io.on("connection", function (socket) {
       currentUser.position
     );
   }); //END_SOCKET_ON
+
+  //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
+  socket.on("PING", function (_pack) {
+    //console.log('_pack# '+_pack);
+    var pack = JSON.parse(_pack);
+
+    console.log("message from user# " + socket.id + ": " + pack.msg);
+    console.log(`User arrived at the track: ${currentUser.kakaoId}`);
+    // timer.stopTimer(timerInterv);
+    let endTime = new Date().getTime();
+    console.log("-->", endTime);
+    axios({
+      method: "get",
+      url: "http://localhost:8000/game/api/update-record",
+      headers: {
+        kakaoId: currentUser.kakaoId,
+        currentURL: currentUser.playingURL,
+        endTime: parseInt(endTime),
+      },
+    }).then(function (response) {
+      console.log(`게임 종료 !\n${response}`);
+    });
+
+    //emit back to NetworkManager in Unity by client.js script
+    socket.emit("PONG", socket.id, pack.msg);
+  });
 
   //create a callback fuction to listening method in NetworkMannager.cs unity script
   socket.on("RESPAWN", function (_info) {
