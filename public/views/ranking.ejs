@@ -31,11 +31,14 @@
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"
     ></script>
+    <script src="../static/js/ranking.js"></script>
   </head>
   <body>
     <div class="ranking-title">
       <% if (part === 'speedy' ) { %>
       <img src="../Assets/image/speedy-ranker.png" />
+      <% } else if (part === 'univscore'){ %>
+      <img src="../Assets/image/univ-score.png" />
       <% } else {%>
       <img src="../Assets/image/score-collector.png" />
       <% } %>
@@ -56,13 +59,13 @@
         </thead>
         <tbody>
           <tr class="spacer">
-            <td>&nbsp;</td>
+            <td>dfdfdf&nbsp;</td>
           </tr>
           <% for(let i=1; i<100; i++) { %>
           <tr>
             <td><%= i %></td>
-            <td>영권</td>
-            <td>중앙대학교</td>
+            <td><%=  %> </td>
+            <td><%= univName %></td>
             <% if (part === 'speedy' ) { %>
             <td>3분 23초 <%= i % 60 %></td>
             <% } else {%>

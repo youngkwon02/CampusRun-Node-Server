@@ -6,12 +6,12 @@
     <title>CampusRun</title>
     <link rel="shortcut icon" href="TemplateDataPlaza/favicon.ico" />
     <link rel="stylesheet" href="TemplateDataPlaza/style.css" />
-    <link rel="stylesheet" href="TemplateDataPlaza/progressbar.css" />
     <link rel="stylesheet" href="TemplateDataPlaza/plaza_style.css" />
     <link rel="stylesheet" href="../static/css/chat.css" />
     <link rel="stylesheet" href="../static/css/room.css" />
     <link rel="stylesheet" href="../static/css/modal.css" />
     <link rel="stylesheet" href="../static/css/invite.css" />
+    <link rel="stylesheet" href="../static/css/progressbar.css" />
     <link rel="stylesheet" href="../static/css/publicRoom.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
 
@@ -40,6 +40,7 @@
   </head>
   <body>
     <!-- for Chatting Section -->
+    
     <div id="chatWrap" class="app__wrap" style="float: right; display: none">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
@@ -52,41 +53,36 @@
           placeholder="대화를 입력해주세요."
         />
         <button id="chatMessageSendBtn" class="app__button">전송</button>
-        <div id="roomWrap" class="room__wrap">
-          <button
-            class="createroom-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#privateRoomModal"
-            data-bs-whatever="@mdo"
-          >
-            방만들기
-          </button>
-          <button
-            class="createroom-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#publicRoomModal"
-            data-bs-whatever="@mdo"
-          >
-            방만들기
-          </button>
-          <button
-            class="createroom-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#publicRoomListModal"
-            data-bs-whatever="@mdo"
-          >
-            방 목록
-          </button>
-        </div>
       </div>
     </div>
 
-    <!--로직: 방장이 팀원들을 최대 3인까지 해서 4:4로 초대를 진행
-      방생성 후 방장은 바로 대기실로 넘어가고
-      다른 참가자들은 home으로 redirect 되는데 home에 쪽지로 링크 전송
-      링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
-    -->
-
+    <div id="roomWrap" class="room__wrap" style="display: none">
+      <button
+        class="createroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#publicRoomModal"
+        data-bs-whatever="@mdo"
+      >
+        방만들기
+      </button>
+      <button
+        class="inviteroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#privateRoomModal"
+        data-bs-whatever="@mdo"
+      >
+        초대하기
+      </button>
+      <button
+        class="roomlist-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#publicRoomListModal"
+        data-bs-whatever="@mdo"
+      >
+        방리스트
+      </button>
+    </div>
+    
     <!-- Private Room Modal -->
     <div
       class="modal fade"
@@ -240,7 +236,7 @@
         </div>
       </div>
     </div>
-
+    
     <!-- Public Room List Modal -->
     <div
       class="modal fade"
@@ -277,25 +273,23 @@
       </div>
     </div>
 
-    <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
-    <div style="display: none" class="userUniv"><%= univName %></div>
-    <div style="display: none" class="userName"><%= userName %></div>
-    <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
-
-    <!-- ProgressBar for loading GameView -->
-    <div class="progresscontent">
-      <div class="progressbar">
-        <div class="color"></div>
-      </div>
+    <div class="progressview">
+      <img src="../Assets/image/logo-long-black.png" class="logo-left" onclick="location.href='/home'">
+      <div class="progresstext">LOADING...</div>
+      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
     </div>
+     
+    <div style="display: none;">
+      <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
+      <div style="display: none" class="userUniv"><%= univName %></div>
+      <div style="display: none" class="userName"><%= userName %></div>
+      <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
+    <div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content" style="margin: 0">
+    <div class="webgl-content" style="margin: 0;">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
-      <!--<div class="footer">
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      </div>
-    --></div>
+    </div>
 
     <!-- EmitJoin for connecting socket -->
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
