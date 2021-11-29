@@ -21,53 +21,11 @@
     <script src="../static/js/waitingRoom.js"></script>
   </head>
   <body>
-    <div class="room-title">방 제목: [ 아무나 이겨줄게 !! ]</div>
+    <div class="room-title">방 제목:&nbsp;</div>
     <div class="main-board">
       <div class="left-side">
-        <div class="team-space home-space">
-          <div class="entry">
-            <div class="nickname">코딩꿈나무영권</div>
-            <div class="univ">중앙대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">코딩꿈나무영권</div>
-            <div class="univ">중앙대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">코딩꿈나무영권</div>
-            <div class="univ">중앙대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">코딩꿈나무영권</div>
-            <div class="univ">중앙대</div>
-            <div class="profileImg"></div>
-          </div>
-        </div>
-        <div class="team-space away-space">
-          <div class="entry">
-            <div class="nickname">한국대 폭주족</div>
-            <div class="univ">한국대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">한국대 폭주족</div>
-            <div class="univ">한국대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">한국대 폭주족</div>
-            <div class="univ">한국대</div>
-            <div class="profileImg"></div>
-          </div>
-          <div class="entry">
-            <div class="nickname">한국대 폭주족</div>
-            <div class="univ">한국대</div>
-            <div class="profileImg"></div>
-          </div>
-        </div>
+        <div class="team-space home-space"></div>
+        <div class="team-space away-space"></div>
       </div>
       <div class="right-side">
         <div class="map-container">
@@ -81,6 +39,9 @@
         </div>
       </div>
     </div>
-    <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
+    <div style="display: none">
+      <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
+      <div style="display: none" class="idList"></div>
+    </div>
   </body>
 </html>

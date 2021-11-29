@@ -54,6 +54,10 @@ body {
   letter-spacing: 2px;
 }
 
+.creater-entry {
+  border: 3px solid rgb(216, 155, 22) !important;
+}
+
 .home-space .entry {
   background-color: rgb(207, 123, 148);
 }
