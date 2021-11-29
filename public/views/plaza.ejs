@@ -40,7 +40,7 @@
   </head>
   <body>
     <!-- for Chatting Section -->
-    
+
     <div id="chatWrap" class="app__wrap" style="float: right; display: none">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
@@ -82,7 +82,7 @@
         방리스트
       </button>
     </div>
-    
+
     <!-- Private Room Modal -->
     <div
       class="modal fade"
@@ -236,7 +236,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Public Room List Modal -->
     <div
       class="modal fade"
@@ -274,20 +274,24 @@
     </div>
 
     <div class="progressview">
-      <img src="../Assets/image/logo-long-black.png" class="logo-left" onclick="location.href='/home'">
+      <img
+        src="../Assets/image/logo-long-black.png"
+        class="logo-left"
+        onclick="location.href='/home'"
+      />
       <div class="progresstext">LOADING...</div>
-      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
+      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate" />
     </div>
-     
-    <div style="display: none;">
+
+    <div style="display: none">
       <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
       <div style="display: none" class="userUniv"><%= univName %></div>
       <div style="display: none" class="userName"><%= userName %></div>
       <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
-    <div>
+    </div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content" style="margin: 0;">
+    <div class="webgl-content" style="margin: 0">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
     </div>
 
