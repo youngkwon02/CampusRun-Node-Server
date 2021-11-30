@@ -37,13 +37,14 @@
     <script src="../static/js/univVerify.js"></script>
     <script src="../static/js/mainScript.js"></script>
     <script src="../static/js/scrollHandler.js"></script>
+
   </head>
   <body>
     
     <div id="nicknameModal" class="modal">
       <div class="modal-content">
         <div class="nicknameText">닉네임 설정</div>
-        <input class="nicknameField" type="text">
+        <input class="nickName" type="text">
       </div>
       <button class="save-btn" onClick="close_pop();">저장하기</button>
     </div>
@@ -53,6 +54,7 @@
             });
             //팝업 Close 기능
             function close_pop(flag) {
+              $()
                  $('#nicknameModal').hide();
             };
       </script>

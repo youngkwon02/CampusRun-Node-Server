@@ -49,10 +49,21 @@ body {
   font-family: "impact";
   font-size: 18px;
   border: 3px solid black;
-  background-color: rgba(50, 55, 66, 0.4);
-  color: #eeeeee;
+  color: #010101;
   border-radius: 4px;
   letter-spacing: 2px;
+}
+
+.creater-entry {
+  border: 3px solid rgb(216, 155, 22) !important;
+}
+
+.home-space .entry {
+  background-color: rgb(207, 123, 148);
+}
+
+.away-space .entry {
+  background-color: rgb(114, 186, 204);
 }
 
 .entry .nickname {

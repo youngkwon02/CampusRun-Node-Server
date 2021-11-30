@@ -6,7 +6,6 @@
     <title>CampusRun</title>
     <link rel="shortcut icon" href="TemplateDataGameView/favicon.ico" />
     <link rel="stylesheet" href="TemplateDataGameView/style.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/game_style.css" />
     <link rel="stylesheet" href="../static/css/progressbar.css" />
     <link rel="stylesheet" href="../static/css/gameresult.css" />
     <!-- <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" /> -->
@@ -35,7 +34,7 @@
       <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
     </div>
 
-    <div class="webgl-content" style="margin: 0; display: none;">
+    <div class="webgl-content" style="margin: 0;">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
     </div>
 
@@ -101,40 +100,6 @@
     </div>
 
   </body>
-  <script>
-    function emitJoin() {
-      socket.emit(
-        "LOGIN",
-        JSON.stringify({
-          name: `<%= kakaoEmail %>`,
-          position: "-50:124.633828:2",
-          avatar: "1"
-        })
-      );
-      document.getElementById("btn_id").style.display = "none";
-    }
-
-    
-    function show () {
-      document.querySelector(".background").className = "background show";
-    }
-
-    function close () { 
-      document.querySelector(".background").className = "background";
-    }
-
-    document.querySelector("#show").addEventListener('click', show);
-    document.querySelector("#close").addEventListener('click', close);
-  </script>
-  <script type="text/javascript">
-  jQuery(document).ready(function() {
-                $('#myModal').show();
-        });
-        //팝업 Close 기능
-        function close_pop(flag) {
-             $('#myModal').hide();
-        };
-  </script>
     <div class="KAKAOID" style="display: none"><%= kakaoId %></div>
   </body>
   <script src="../static/js/gameManager.js"></script>

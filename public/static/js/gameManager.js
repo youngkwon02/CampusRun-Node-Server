@@ -69,6 +69,18 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   return remainPlayer;
 };
 
+function show() {
+  document.querySelector(".background").className = "background show";
+}
+
+function close() {
+  document.querySelector(".background").className = "background";
+}
+
+//팝업 Close 기능
+function close_pop(flag) {
+  $("#myModal").hide();
+}
 window.onload = () => {
   document.getElementById("btn_id").style.display = "none";
   let emitJoinCall = [false];
@@ -76,4 +88,8 @@ window.onload = () => {
   let checkInterv = setInterval(() => {
     checkGameStart(currentURL, checkInterv, emitJoinCall);
   }, 330);
+
+  // document.querySelector("#show").addEventListener("click", show);
+  // document.querySelector("#close").addEventListener("click", close);
+  // $('#myModal').show();
 };
