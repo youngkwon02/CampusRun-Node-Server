@@ -306,6 +306,10 @@
   <script>
     let timerInterv;
 
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
     function emitJoin() {
       const currentURL = location.href;
       splittedURL = currentURL.split("/");
@@ -316,11 +320,16 @@
           url += "/";
         }
       }
+
+      plazaPosX = getRandomArbitrary(-10, 9);
+      plazaPosY = 2;
+      plazaPosZ = getRandomArbitrary(-14, 10);
+
       socket.emit(
         "LOGIN",
         JSON.stringify({
           name: `<%= userName %>`,
-          position: "3.3:2.633828:0",
+          position: `${plazaPosX}:${plazaPosY}:${plazaPosZ}`,
           avatar: "1",
           url: url,
         })

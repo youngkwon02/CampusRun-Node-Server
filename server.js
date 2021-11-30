@@ -177,7 +177,7 @@ app.get("/ranking/:part", async (req, res) => {
       token: req.cookies["cookieToken"],
     },
   });
-  
+
   const URL = "http://localhost:8000/ranking/" + part;
 
   console.log("URL: ${URL}");
@@ -255,21 +255,7 @@ io.on("connection", function (socket) {
       timeOut: 0,
       isDead: false,
       playingURL: currentURL,
-    }; //new user  in clients list
-    // if (currentURL.includes("game?hash")) {
-    //   axios({
-    //     method: "get",
-    //     url: "http://localhost:8000/game/api/room-by-url",
-    //     headers: {
-    //       url: currentURL,
-    //     },
-    //   }).then(function (response) {
-    //     room = response.data;
-    //     console.log(room);
-    //     maxJoin = room.maxJoin;
-    //     console.log(`[INFO ${currentURL}]-Maximum accesor: ${maxJoin}`);
-    //   });
-    // }
+    };
 
     console.log("[INFO] socket" + currentUser.socketID);
     console.log("[INFO] player kakaoId " + currentUser.kakaoId + ": logged!");
