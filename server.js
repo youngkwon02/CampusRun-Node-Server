@@ -255,7 +255,7 @@ io.on("connection", function(socket) {
       timeOut: 0,
       isDead: false,
       playingURL: currentURL,
-      kakaoUniqueId: data.kakaoId
+      kakaoUniqueId: data.name
     };
 
     console.log("[INFO] socket" + currentUser.socketID);
@@ -281,14 +281,21 @@ io.on("connection", function(socket) {
       currentUser.name,
       currentUser.avatar,
       currentUser.position,
-      currentUser.kakaoId
+      currentUser.kakaoUniqueId
     );
 
     //spawn all connected clients for currentUser client
     clients[currentURL].forEach(function(i) {
       if (i.id != currentUser.id) {
         //send to the client.js script
-        socket.emit("SPAWN_PLAYER", i.id, i.name, i.avatar, i.position);
+        socket.emit(
+          "SPAWN_PLAYER",
+          i.id,
+          i.name,
+          i.avatar,
+          i.position,
+          i.kakaoUniqueId
+        );
       } //END_IF
     }); //end_forEach
 
@@ -299,7 +306,7 @@ io.on("connection", function(socket) {
       currentUser.name,
       currentUser.avatar,
       currentUser.position,
-      currentUser.kakaoId
+      currentUser.kakaoUniqueId
     );
   }); //END_SOCKET_ON
 
@@ -307,6 +314,7 @@ io.on("connection", function(socket) {
   socket.on("PING", function(_pack) {
     //console.log('_pack# '+_pack);
     var pack = JSON.parse(_pack);
+    console.log(pack);
 
     console.log("message from user# " + socket.id + ": " + pack.msg);
     console.log(`User arrived at the track: ${currentUser.kakaoId}`);
@@ -344,7 +352,7 @@ io.on("connection", function(socket) {
         currentUser.name,
         currentUser.avatar,
         currentUser.position,
-        currentUser.kakaoId
+        currentUser.kakaoUniqueId
       );
 
       socket.broadcast.emit(
@@ -353,7 +361,7 @@ io.on("connection", function(socket) {
         currentUser.name,
         currentUser.avatar,
         currentUser.position,
-        currentUser.kakaoId
+        currentUser.kakaoUniqueId
       );
 
       console.log("[INFO] User " + currentUser.name + " respawned!");
