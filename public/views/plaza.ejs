@@ -273,7 +273,7 @@
       </div>
     </div>
 
-    <div class="progressview" style="display: none;">
+    <div class="progressview">
       <img
         src="../Assets/image/logo-long-black.png"
         class="logo-left"
@@ -332,7 +332,7 @@
           kakaoId: "<%= kakaoId %>",
           position: `${plazaPosX}:${plazaPosY}:${plazaPosZ}`,
           avatar: "1",
-          url: url
+          url: url,
         })
       );
       document.getElementById("btn_id").style.display = "none";
@@ -347,11 +347,11 @@
     var sendButton = document.getElementById("chatMessageSendBtn");
     var chatInput = document.getElementById("chatInput");
 
-    socket.on("connect", function() {
+    socket.on("connect", function () {
       socket.emit("newUserConnect", `<%= userName %>`);
     });
 
-    socket.on("updateMessage", function(data) {
+    socket.on("updateMessage", function (data) {
       if (data.name === "SERVER") {
         var info = document.getElementById("info");
         info.innerHTML = data.message;
@@ -367,13 +367,13 @@
       }
     });
 
-    sendButton.addEventListener("click", function() {
+    sendButton.addEventListener("click", function () {
       var message = chatInput.value;
 
       if (!message) return false;
 
       socket.emit("sendMessage", {
-        message
+        message,
       });
 
       chatInput.value = "";
