@@ -54,13 +54,10 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
     }
   );
   let remainPlayer = res["data"];
-
   if (remainPlayer === 0) {
-    console.log("TIMEOUT CALL");
     setTimeout(() => {
       if (!emitJoinCall[0]) {
         emitJoinCall[0] = true;
-        document.getElementById("webglContent").style.display = "block";
         emitJoin();
       }
       clearInterval(checkInterv);
