@@ -26,16 +26,30 @@ window.addEventListener("load", function() {
     }
   }); //END_SOCKET.ON
 
-  socket.on("LOGIN_SUCCESS", function(id, name, avatar, position) {
-    var currentUserAtr = id + ":" + name + ":" + avatar + ":" + position;
+  socket.on("LOGIN_SUCCESS", function(
+    id,
+    name,
+    avatar,
+    position,
+    kakaoUniqueId
+  ) {
+    var currentUserAtr =
+      id + ":" + name + ":" + avatar + ":" + position + ":" + kakaoUniqueId;
 
     if (unityInstance != null) {
       unityInstance.SendMessage("NetworkManager", "OnJoinGame", currentUserAtr);
     }
   }); //END_SOCKET.ON
 
-  socket.on("SPAWN_PLAYER", function(id, name, avatar, position) {
-    var currentUserAtr = id + ":" + name + ":" + avatar + ":" + position;
+  socket.on("SPAWN_PLAYER", function(
+    id,
+    name,
+    avatar,
+    position,
+    kakaoUniqueId
+  ) {
+    var currentUserAtr =
+      id + ":" + name + ":" + avatar + ":" + position + ":" + kakaoUniqueId;
 
     if (unityInstance != null) {
       // sends the package currentUserAtr to the method OnSpawnPlayer in the NetworkManager class on Unity
@@ -47,8 +61,15 @@ window.addEventListener("load", function() {
     }
   }); //END_SOCKET.ON
 
-  socket.on("RESPAWN_PLAYER", function(id, name, avatar, position) {
-    var currentUserAtr = id + ":" + name + ":" + avatar + ":" + position;
+  socket.on("RESPAWN_PLAYER", function(
+    id,
+    name,
+    avatar,
+    position,
+    kakaoUniqueId
+  ) {
+    var currentUserAtr =
+      id + ":" + name + ":" + avatar + ":" + position + ":" + kakaoUniqueId;
 
     if (unityInstance != null) {
       unityInstance.SendMessage(
