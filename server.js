@@ -96,6 +96,7 @@ app.get("/plaza", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -116,6 +117,7 @@ app.get("/wait", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -137,6 +139,7 @@ app.get("/game", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -149,9 +152,10 @@ app.get("/home", (req, res) => {
       token: req.cookies["cookieToken"],
     },
   }).then(function (response) {
-    // console.log(response);
+    console.log("hlllllllllllllll", response);
+    console.log("")
     user = response.data;
-    // console.log(user);
+    console.log("유저유저유저유정",user);
     res.render("mainPage2", {
       userNameTest: "sdf",
       userName: user.userName,
@@ -159,6 +163,7 @@ app.get("/home", (req, res) => {
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
       kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
   // console.log(user.user);
@@ -191,6 +196,7 @@ app.get("/ranking/:part", async (req, res) => {
     univName: user.univName,
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
+    nickName: user.nickName,
     part,
     // data: rankData,
   });
