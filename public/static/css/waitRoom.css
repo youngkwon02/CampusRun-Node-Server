@@ -52,10 +52,21 @@ body {
   color: #010101;
   border-radius: 4px;
   letter-spacing: 2px;
+  margin: 0 2px;
+  position: relative;
 }
 
 .creater-entry {
   border: 3px solid rgb(216, 155, 22) !important;
+}
+
+.creater-entry .creater-icon {
+  position: absolute;
+  top: -45px;
+  left: -30px;
+  width: 35%;
+  height: 84px;
+  transform: rotate(-20deg);
 }
 
 .home-space .entry {
@@ -153,6 +164,14 @@ body {
 
 .btn-quit {
   background-color: lightcoral;
+}
+
+.home-space .entry:nth-child(1) {
+  margin-right: -2px;
+}
+
+.away-space .entry:nth-child(1) {
+  margin-right: -2px;
 }
 
 @keyframes character-fade {

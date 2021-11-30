@@ -53,6 +53,7 @@ const syncData = async (waitURL) => {
       if (syncRes.data.creater.kakaoId === homeEnt[i].kakaoId) {
         entry = `
           <div class="entry creater-entry">
+            <img class="creater-icon" src="../../Assets/image/creater.png">
             <div class="nickname">${homeEnt[i].name}</div>
             <div class="univ">${homeEnt[i].univ}</div>
             <div class="profileImg"></div>
