@@ -20,7 +20,7 @@ app.use(
   session({
     secret: "@#@$MYSIGN#@$#$",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: true
   })
 );
 // app.use(function(req, res, next) {
@@ -70,7 +70,7 @@ app.use(express.static(__dirname + "/public"));
 
 const kakaoConfig = {
   clientID: config.REST_API_KEY,
-  redirectUri: config.REDIRECT_URI,
+  redirectUri: config.REDIRECT_URI
 };
 
 // Page View
@@ -84,9 +84,9 @@ app.get("/plaza", (req, res) => {
     method: "get",
     url: "http://localhost:8000/user/",
     headers: {
-      token: req.cookies["cookieToken"],
-    },
-  }).then(function (response) {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
     console.log(response);
     user = response.data;
     console.log(user);
@@ -95,7 +95,7 @@ app.get("/plaza", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId,
+      kakaoId: user.kakaoId
     });
   });
 });
@@ -105,9 +105,9 @@ app.get("/wait", (req, res) => {
     method: "get",
     url: "http://localhost:8000/user/",
     headers: {
-      token: req.cookies["cookieToken"],
-    },
-  }).then(function (response) {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
     // console.log(response);
     user = response.data;
     // console.log(user);
@@ -115,7 +115,7 @@ app.get("/wait", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId,
+      kakaoId: user.kakaoId
     });
   });
 });
@@ -125,9 +125,9 @@ app.get("/game", (req, res) => {
     method: "get",
     url: "http://localhost:8000/user/",
     headers: {
-      token: req.cookies["cookieToken"],
-    },
-  }).then(function (response) {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
     // console.log(response);
     user = response.data;
     // console.log(user);
@@ -136,7 +136,7 @@ app.get("/game", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId,
+      kakaoId: user.kakaoId
     });
   });
 });
@@ -146,9 +146,9 @@ app.get("/home", (req, res) => {
     method: "get",
     url: "http://localhost:8000/user/",
     headers: {
-      token: req.cookies["cookieToken"],
-    },
-  }).then(function (response) {
+      token: req.cookies["cookieToken"]
+    }
+  }).then(function(response) {
     // console.log(response);
     user = response.data;
     // console.log(user);
@@ -158,7 +158,7 @@ app.get("/home", (req, res) => {
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
-      kakaoId: user.kakaoId,
+      kakaoId: user.kakaoId
     });
   });
   // console.log(user.user);
@@ -174,8 +174,8 @@ app.get("/ranking/:part", async (req, res) => {
     method: "get",
     url: "http://localhost:8000/user/",
     headers: {
-      token: req.cookies["cookieToken"],
-    },
+      token: req.cookies["cookieToken"]
+    }
   });
 
   const URL = "http://localhost:8000/ranking/" + part;
@@ -191,7 +191,7 @@ app.get("/ranking/:part", async (req, res) => {
     univName: user.univName,
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
-    part,
+    part
     // data: rankData,
   });
 });
@@ -201,7 +201,7 @@ var clientLookup = {}; // clients search engine
 var sockets = {}; //// to storage sockets
 
 //open a connection with the specific client
-io.on("connection", function (socket) {
+io.on("connection", function(socket) {
   //print a log in node.js command prompt
   console.log("A user ready for connection!");
   // io.on('connection', socket => {
@@ -213,26 +213,26 @@ io.on("connection", function (socket) {
   // });
   //to store current client connection
   var currentUser;
-  socket.on("newUserConnect", function (name) {
+  socket.on("newUserConnect", function(name) {
     socket.name = name;
     io.sockets.emit("updateMessage", {
       name: "SERVER",
-      message: name + "님이 접속했습니다.",
+      message: name + "님이 접속했습니다."
     });
   });
-  socket.on("userDisconnect", function () {
+  socket.on("userDisconnect", function() {
     io.sockets.emit("updateMessage", {
       name: "SERVER",
-      message: socket.name + "님이 퇴장했습니다.",
+      message: socket.name + "님이 퇴장했습니다."
     });
   });
-  socket.on("sendMessage", function (data) {
+  socket.on("sendMessage", function(data) {
     data.name = socket.name;
     io.sockets.emit("updateMessage", data);
   });
 
   //create a callback fuction to listening EmitJoin() method in NetworkMannager.cs unity script
-  socket.on("LOGIN", function (_data) {
+  socket.on("LOGIN", function(_data) {
     console.log("[INFO] LOGIN received !!! ");
 
     var data = JSON.parse(_data);
@@ -255,6 +255,7 @@ io.on("connection", function (socket) {
       timeOut: 0,
       isDead: false,
       playingURL: currentURL,
+      kakaoUniqueId: data.kakaoId
     };
 
     console.log("[INFO] socket" + currentUser.socketID);
@@ -279,11 +280,12 @@ io.on("connection", function (socket) {
       currentUser.id,
       currentUser.name,
       currentUser.avatar,
-      currentUser.position
+      currentUser.position,
+      currentUser.kakaoId
     );
 
     //spawn all connected clients for currentUser client
-    clients[currentURL].forEach(function (i) {
+    clients[currentURL].forEach(function(i) {
       if (i.id != currentUser.id) {
         //send to the client.js script
         socket.emit("SPAWN_PLAYER", i.id, i.name, i.avatar, i.position);
@@ -296,12 +298,13 @@ io.on("connection", function (socket) {
       currentUser.id,
       currentUser.name,
       currentUser.avatar,
-      currentUser.position
+      currentUser.position,
+      currentUser.kakaoId
     );
   }); //END_SOCKET_ON
 
   //create a callback fuction to listening EmitPing() method in NetworkMannager.cs unity script
-  socket.on("PING", function (_pack) {
+  socket.on("PING", function(_pack) {
     //console.log('_pack# '+_pack);
     var pack = JSON.parse(_pack);
 
@@ -316,9 +319,9 @@ io.on("connection", function (socket) {
       headers: {
         kakaoId: currentUser.kakaoId,
         currentURL: currentUser.playingURL,
-        endTime: parseInt(endTime),
-      },
-    }).then(function (response) {
+        endTime: parseInt(endTime)
+      }
+    }).then(function(response) {
       console.log(`게임 종료 !\n${response}`);
     });
 
@@ -327,7 +330,7 @@ io.on("connection", function (socket) {
   });
 
   //create a callback fuction to listening method in NetworkMannager.cs unity script
-  socket.on("RESPAWN", function (_info) {
+  socket.on("RESPAWN", function(_info) {
     var info = JSON.parse(_info);
 
     if (currentUser) {
@@ -340,7 +343,8 @@ io.on("connection", function (socket) {
         currentUser.id,
         currentUser.name,
         currentUser.avatar,
-        currentUser.position
+        currentUser.position,
+        currentUser.kakaoId
       );
 
       socket.broadcast.emit(
@@ -348,7 +352,8 @@ io.on("connection", function (socket) {
         currentUser.id,
         currentUser.name,
         currentUser.avatar,
-        currentUser.position
+        currentUser.position,
+        currentUser.kakaoId
       );
 
       console.log("[INFO] User " + currentUser.name + " respawned!");
@@ -356,7 +361,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 
   //create a callback fuction to listening EmitMoveAndRotate() method in NetworkMannager.cs unity script
-  socket.on("MOVE_AND_ROTATE", function (_data) {
+  socket.on("MOVE_AND_ROTATE", function(_data) {
     var data = JSON.parse(_data);
 
     if (currentUser) {
@@ -375,7 +380,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 
   //create a callback fuction to listening EmitAnimation() method in NetworkMannager.cs unity script
-  socket.on("ANIMATION", function (_data) {
+  socket.on("ANIMATION", function(_data) {
     var data = JSON.parse(_data);
 
     if (currentUser) {
@@ -392,7 +397,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 
   //create a callback fuction to listening EmitAnimation() method in NetworkMannager.cs unity script
-  socket.on("ATTACK", function () {
+  socket.on("ATTACK", function() {
     if (currentUser) {
       // console.log("attack received");
       socket.broadcast.emit("UPDATE_ATTACK", currentUser.id);
@@ -400,7 +405,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 
   //create a callback fuction to listening EmitPhisicstDamage method in NetworkMannager.cs unity script
-  socket.on("PHISICS_DAMAGE", function (_data) {
+  socket.on("PHISICS_DAMAGE", function(_data) {
     var data = JSON.parse(_data);
     if (currentUser) {
       var target = clientLookup[data.targetId];
@@ -425,7 +430,7 @@ io.on("connection", function (socket) {
           currentUser.kills += 1;
 
           jo_pack = {
-            targetId: data.targetId,
+            targetId: data.targetId
           };
 
           //emit only for the currentUser
@@ -438,7 +443,7 @@ io.on("connection", function (socket) {
 
       damage_pack = {
         targetId: data.targetId,
-        targetHealth: target.health,
+        targetHealth: target.health
       };
 
       socket.emit(
@@ -455,7 +460,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 
   // called when the user desconnect
-  socket.on("disconnect", function () {
+  socket.on("disconnect", function() {
     if (currentUser) {
       currentUser.isDead = true;
 
@@ -476,7 +481,7 @@ io.on("connection", function (socket) {
   }); //END_SOCKET_ON
 }); //END_IO.ON
 
-http.listen(process.env.PORT || 3000, function () {
+http.listen(process.env.PORT || 3000, function() {
   console.log("listening on *:3000");
 });
 console.log("------- server is running -------");
