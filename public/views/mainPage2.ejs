@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../static/css/owl.css" />
     <link rel="stylesheet" href="../static/css/lightbox.css" />
     <link rel="stylesheet" href="../static/css/style2.css" />
+    <link rel="stylesheet" href="../static/css/nickname.css" />
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -36,8 +37,28 @@
     <script src="../static/js/univVerify.js"></script>
     <script src="../static/js/mainScript.js"></script>
     <script src="../static/js/scrollHandler.js"></script>
+
   </head>
   <body>
+    
+    <div id="nicknameModal" class="modal">
+      <div class="modal-content">
+        <div class="nicknameText">닉네임 설정</div>
+        <input class="nickName" type="text">
+      </div>
+      <button class="save-btn" onClick="close_pop();">저장하기</button>
+    </div>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+                    $('#nicknameModal').show();
+            });
+            //팝업 Close 기능
+            function close_pop(flag) {
+              $()
+                 $('#nicknameModal').hide();
+            };
+      </script>
+
     <div>
       <img
         id="first-img"

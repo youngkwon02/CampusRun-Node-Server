@@ -95,7 +95,8 @@ app.get("/plaza", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId
+      kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -115,7 +116,8 @@ app.get("/wait", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId
+      kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -136,7 +138,8 @@ app.get("/game", (req, res) => {
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
-      kakaoId: user.kakaoId
+      kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
 });
@@ -149,16 +152,16 @@ app.get("/home", (req, res) => {
       token: req.cookies["cookieToken"]
     }
   }).then(function(response) {
-    // console.log(response);
     user = response.data;
-    // console.log(user);
+    console.log("유저유저유저유정",user);
     res.render("mainPage2", {
       userNameTest: "sdf",
       userName: user.userName,
       univName: user.univName,
       kakaoEmail: user.kakaoEmail,
       idToken: req.cookies["cookieToken"],
-      kakaoId: user.kakaoId
+      kakaoId: user.kakaoId,
+      nickName: user.nickName,
     });
   });
   // console.log(user.user);
@@ -181,18 +184,14 @@ app.get("/ranking/:part", async (req, res) => {
   const URL = "http://localhost:8000/ranking/" + part;
 
   console.log("URL: ${URL}");
-  // let rankData = await axios({
-  //   method: "get",
-  //   url: URL,
-  // });
 
   res.render("ranking", {
     userName: user.userName,
     univName: user.univName,
     kakaoEmail: user.kakaoEmail,
     idToken: req.cookies["cookieToken"],
-    part
-    // data: rankData,
+    nickName: user.nickName,
+    part,
   });
 });
 
@@ -204,13 +203,6 @@ var sockets = {}; //// to storage sockets
 io.on("connection", function(socket) {
   //print a log in node.js command prompt
   console.log("A user ready for connection!");
-  // io.on('connection', socket => {
-  //   socket.on('message', msg =>{
-  //         console.log(msg);
-  //         socket.emit('Mmessage', msg);
-  //         socket.emit('Omessage', msg);
-  //     });
-  // });
   //to store current client connection
   var currentUser;
   socket.on("newUserConnect", function(name) {
@@ -239,8 +231,6 @@ io.on("connection", function(socket) {
 
     // fills out with the information emitted by the player in the unity
     let currentURL = data.url;
-    // let room = "";
-    // let maxJoin = 1;
     currentUser = {
       kakaoId: data.name,
       avatar: data.avatar,
