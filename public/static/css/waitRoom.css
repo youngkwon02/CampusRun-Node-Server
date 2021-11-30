@@ -144,7 +144,6 @@ body {
 }
 
 .btn-container .btn {
-  display: inline-block;
   color: #efefef;
   width: 34%;
   height: 70px;
@@ -159,10 +158,12 @@ body {
 }
 
 .btn-game-start {
-  background-color: royalblue;
+  background-color: gray;
+  display: none;
 }
 
 .btn-quit {
+  display: inline-block;
   background-color: lightcoral;
 }
 
@@ -172,6 +173,44 @@ body {
 
 .away-space .entry:nth-child(1) {
   margin-right: -2px;
+}
+
+.starting-modal {
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  background-color: floralwhite;
+  border: 3px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  font-family: "twayair";
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.starting-modal img {
+  width: 70%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.starting-modal .modal-room-title {
+  margin-bottom: 20px;
+  font-family: "impact";
+  font-size: 30px;
+}
+
+.starting-modal .time-count {
+  font-size: 30px;
+  font-family: "impact";
+  font-weight: bold;
 }
 
 @keyframes character-fade {

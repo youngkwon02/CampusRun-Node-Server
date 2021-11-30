@@ -62,7 +62,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
         emitJoin();
       }
       clearInterval(checkInterv);
-    }, 10000);
+    }, 18000);
   } else {
     console.log("Not yet..");
   }

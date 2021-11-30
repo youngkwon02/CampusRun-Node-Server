@@ -2,8 +2,8 @@ window.onload = () => {
   const currentURL = window.location.href;
   entranceArrangement(currentURL);
   syncData(currentURL);
-  setInterval(() => {
-    syncData(currentURL);
+  let syncInterv = setInterval(() => {
+    syncData(currentURL, syncInterv);
   }, 400);
   const quitBtn = document.querySelector(".btn-quit");
   quitBtn.addEventListener("click", () => {
@@ -30,7 +30,8 @@ const entranceArrangement = async (waitURL) => {
   }
 };
 
-const syncData = async (waitURL) => {
+const syncData = async (waitURL, syncInterv) => {
+  const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
   let currentIdList = "";
   currentIdList = document.querySelector(".idList").innerHTML;
 
@@ -83,11 +84,52 @@ const syncData = async (waitURL) => {
       document.querySelector(".away-space").innerHTML += entry;
     }
 
-    console.log(syncRes.message);
+    if (syncRes.data.creater.kakaoId === KAKAOID && syncRes.data.isFull) {
+      const startBtn = document.querySelector(".btn-game-start");
+      startBtn.style.backgroundColor = "royalblue";
+      startBtn.addEventListener("click", (e) => {
+        requestGameStart(waitURL);
+      });
+    }
+    if (syncRes.data.isFull) {
+      let startCheckingProm = startChecking(waitURL, syncRes.data.roomTitle);
+      startCheckingProm.then((result) => {
+        if (result) {
+          clearInterval(syncInterv);
+        }
+      });
+    }
+    if (syncRes.data.creater.kakaoId === KAKAOID) {
+      document.querySelector(
+        "body > div.main-board > div.right-side > div.btn-container > div.btn.btn-game-start"
+      ).style.display = "inline-block";
+    } else {
+      document.querySelector(
+        "body > div.main-board > div.right-side > div.btn-container > div.btn.btn-game-start"
+      ).style.display = "none";
+    }
   } else if (
     syncRes.status === 200 &&
     syncRes.message === "Nothing to sync.."
   ) {
+    if (syncRes.data.isFull) {
+      let startCheckingProm = startChecking(waitURL, syncRes.data.roomTitle);
+      startCheckingProm.then((result) => {
+        if (result) {
+          clearInterval(syncInterv);
+        }
+      });
+    }
+    console.log(`${syncRes.data.creater.kakaoId === KAKAOID}`);
+    if (syncRes.data.creater.kakaoId === KAKAOID) {
+      document.querySelector(
+        "body > div.main-board > div.right-side > div.btn-container > div.btn.btn-game-start"
+      ).style.display = "inline-block";
+    } else {
+      document.querySelector(
+        "body > div.main-board > div.right-side > div.btn-container > div.btn.btn-game-start"
+      ).style.display = "none";
+    }
   } else {
     let confirmRes = confirm("네트워크 에러가 발생하였습니다.\n재접속합니다.");
     location.href = waitURL;
@@ -105,5 +147,70 @@ const quitWaitRoom = async (waitURL) => {
     location.href = "http://localhost:3000/plaza";
   } else {
     alert("잠시후 다시 시도하세요.");
+  }
+};
+
+const requestGameStart = async (waitURL) => {
+  const startRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/room-to-start-status",
+    { waitURL }
+  );
+
+  if (startRes.status === 200) {
+    if (startRes.data.roomStatus === "playing") {
+      console.log(startRes.message);
+    } else {
+      alert(startRes.message);
+    }
+  } else {
+    alert("잠시후 다시 시도하세요.");
+    location.href = "/plaza";
+  }
+};
+
+const startChecking = async (waitURL, roomTitle) => {
+  let checkingRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/room-status",
+    { waitURL }
+  );
+
+  if (checkingRes.status === 200) {
+    if (checkingRes.data.roomStatus === "playing") {
+      document.querySelector(".starting-modal").style.opacity = 1;
+      let timeCount = 5;
+      let startModalInterv = setInterval(() => {
+        document.querySelector(".modal-room-title").innerHTML = roomTitle;
+        document.querySelector(".starting-modal .time-count").innerHTML =
+          timeCount;
+        timeCount--;
+        if (timeCount <= 0) {
+          clearInterval(startModalInterv);
+          enterGame(checkingRes.data.gameURL);
+        }
+      }, 1000);
+      return true;
+    }
+  } else {
+    alert("잠시후 다시 시도하세요.");
+    location.href = "/plaza";
+  }
+  return false;
+};
+
+const enterGame = async (gameURL) => {
+  const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
+  let entRes = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/game-enter",
+    {
+      gameURL,
+      kakaoId: KAKAOID,
+    }
+  );
+
+  if (entRes.message === "방에 입장합니다!") {
+    location.href = gameURL;
   }
 };
