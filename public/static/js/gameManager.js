@@ -58,6 +58,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
     setTimeout(() => {
       if (!emitJoinCall[0]) {
         emitJoinCall[0] = true;
+        document.getElementById("webgl-id").style.display = "block";
         emitJoin();
       }
       clearInterval(checkInterv);
