@@ -81,7 +81,6 @@ function close_pop(flag) {
   $("#myModal").hide();
 }
 window.onload = () => {
-  document.getElementById("btn_id").style.display = "none";
   let emitJoinCall = [false];
   let currentURL = window.location.href;
   let checkInterv = setInterval(() => {
