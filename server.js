@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
 app.get("/plaza", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://3.35.114.72:8000/user/",
+    url: "http://10.210.60.80:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -104,7 +104,7 @@ app.get("/plaza", (req, res) => {
 app.get("/wait", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://3.35.114.72:8000/user/",
+    url: "http://10.210.60.80:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -125,7 +125,7 @@ app.get("/wait", (req, res) => {
 app.get("/game", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://3.35.114.72:8000/user/",
+    url: "http://10.210.60.80:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -147,7 +147,7 @@ app.get("/game", (req, res) => {
 app.get("/home", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://3.35.114.72:8000/user/",
+    url: "http://10.210.60.80:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -174,13 +174,13 @@ app.get("/ranking/:part", async (req, res) => {
 
   const user = await axios({
     method: "get",
-    url: "http://3.35.114.72:8000/user/",
+    url: "http://10.210.60.80:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
   });
 
-  const URL = "http://3.35.114.72:8000/ranking/" + part;
+  const URL = "http://10.210.60.80:8000/ranking/" + part;
 
   console.log("URL: ${URL}");
 
@@ -330,7 +330,7 @@ io.on("connection", function (socket) {
       console.log(`-> Axios: ping: ${pack.kakaoUniqueId}`);
       axios({
         method: "get",
-        url: "http://3.35.114.72:8000/game/api/update-record",
+        url: "http://10.210.60.80:8000/game/api/update-record",
         headers: {
           kakaoId: currentUser.kakaoId,
           currentURL: currentUser.playingURL,

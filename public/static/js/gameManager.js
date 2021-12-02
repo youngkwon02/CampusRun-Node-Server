@@ -37,7 +37,7 @@ const emitJoin = async () => {
   let now = new Date().getTime() + 10000;
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/game/api/new-record",
+    "http://10.210.60.80:8000/game/api/new-record",
     {
       kakaoId: KAKAOID,
       currentURL: currentURL,
@@ -49,7 +49,7 @@ const emitJoin = async () => {
 const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/game/api/room-status-by-url",
+    "http://10.210.60.80:8000/game/api/room-status-by-url",
     {
       currentURL: currentURL,
     }
@@ -59,7 +59,9 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
     setTimeout(() => {
       if (!emitJoinCall[0]) {
         emitJoinCall[0] = true;
-        document.getElementById("webgl-id").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("webgl-id").style.display = "block";
+        }, 10000);
         emitJoin();
       }
       clearInterval(checkInterv);

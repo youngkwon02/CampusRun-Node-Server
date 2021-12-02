@@ -156,13 +156,13 @@ const applyInvitationAnimation = () => {
 const acceptInvitation = async (invId, url) => {
   let kakaoId = document.querySelector(".KAKAOID").innerHTML;
   let roomUrl = url;
-  await ajaxRequest("GET", "http://3.35.114.72:8000/game/api/room-enter", {
+  await ajaxRequest("GET", "http://10.210.60.80:8000/game/api/room-enter", {
     roomUrl,
     kakaoId,
   });
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/game/api/invitation-read",
+    "http://10.210.60.80:8000/game/api/invitation-read",
     { invId: invId }
   );
   location.href = url;
@@ -171,7 +171,7 @@ const acceptInvitation = async (invId, url) => {
 const rejectInvitation = async (invId) => {
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/game/api/invitation-reject",
+    "http://10.210.60.80:8000/game/api/invitation-reject",
     { invId: invId }
   );
   if (res.status !== 200)
@@ -183,7 +183,7 @@ const invitationManager = async (kakaoId) => {
   const invBoard = document.querySelector(".invitation-board");
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/game/api/invitation-by-id",
+    "http://10.210.60.80:8000/game/api/invitation-by-id",
     { kakaoId: kakaoId }
   );
   let isThereNew = false;
@@ -217,54 +217,55 @@ const invitationManager = async (kakaoId) => {
   }
 };
 
-const nicknameCreate = async(kakaoId) => {
-  const nickname = document.getElementById('nickname').value;
-  isSuccess = false
+const nicknameCreate = async (kakaoId) => {
+  const nickname = document.getElementById("nickname").value;
+  isSuccess = false;
   let createNickName = await ajaxRequest(
     "GET",
     "http://localhost:8000/api/create-nickname",
-    { kakaoId: kakaoId, 
-      nickname }
+    { kakaoId: kakaoId, nickname }
   );
-  if (createNickName.status === 200){
-    if (createNickName["data"]["nicknamestatus"] === 'none'){
-      isSuccess = true
-      $()
-      $('#nicknameModal').hide();
+  if (createNickName.status === 200) {
+    if (createNickName["data"]["nicknamestatus"] === "none") {
+      isSuccess = true;
+      $();
+      $("#nicknameModal").hide();
     }
-    if (createNickName["data"]["nicknamestatus"] === 'exist' || createNickName["data"]["nicknamestatus"] === 'condition'){
-      console.log(createNickName["message"])
+    if (
+      createNickName["data"]["nicknamestatus"] === "exist" ||
+      createNickName["data"]["nicknamestatus"] === "condition"
+    ) {
+      console.log(createNickName["message"]);
       const errorMessage = document.querySelector(".errorMessage");
       errorMessage.innerText = createNickName["message"];
     }
   }
-}
+};
 
-
-const nicknameCheck = async(kakaoId) => {
-  console.log("닉네임 확인")
+const nicknameCheck = async (kakaoId) => {
+  console.log("닉네임 확인");
   let verifyNickName = await ajaxRequest(
     "GET",
     "http://localhost:8000/api/check-nickname",
     { kakaoId }
   );
-  isExist = verifyNickName["data"]["nicknamestatus"]
-  if (verifyNickName["status"] === 200){
-    if (isExist === "none"){
-    // 없으면 모달 띄움
+  isExist = verifyNickName["data"]["nicknamestatus"];
+  if (verifyNickName["status"] === 200) {
+    if (isExist === "none") {
+      // 없으면 모달 띄움
       document.getElementById("nicknameModal").style.display = "block";
       const saveBtn = document.querySelector(".save-btn");
       saveBtn.addEventListener("click", () => {
         nicknameCreate(kakaoId);
       });
-    } else{
+    } else {
       // 있으면 모달 안띄움
       document.getElementById("nicknameModal").style.display = "none";
     }
-  }else{
+  } else {
     alert("잘못된 데이터를 입력하셨습니다.");
   }
-}
+};
 
 window.onload = () => {
   const KAKAOID = document.querySelector(".KAKAOID").innerHTML;

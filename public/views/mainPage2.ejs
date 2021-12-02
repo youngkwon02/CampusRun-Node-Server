@@ -37,28 +37,26 @@
     <script src="../static/js/univVerify.js"></script>
     <script src="../static/js/mainScript.js"></script>
     <script src="../static/js/scrollHandler.js"></script>
-
   </head>
   <body>
-    
-    <div id="nicknameModal" class="modal" style="display:none;">
+    <div id="nicknameModal" class="modal" style="display: none !important">
       <div class="modal-content">
         <div class="nicknameText">닉네임 설정</div>
-        <input class="nickName" id="nickname" type="text">
+        <input class="nickName" id="nickname" type="text" />
         <div class="errorMessage"></div>
       </div>
       <button class="save-btn">저장하기</button>
     </div>
     <script type="text/javascript">
-      jQuery(document).ready(function() {
-                    $('#nicknameModal').show();
-            });
-            //팝업 Close 기능
-            function close_pop(flag) {
-              $()
-                 $('#nicknameModal').hide();
-            };
-      </script>
+      jQuery(document).ready(function () {
+        $("#nicknameModal").show();
+      });
+      //팝업 Close 기능
+      function close_pop(flag) {
+        $();
+        $("#nicknameModal").hide();
+      }
+    </script>
 
     <div>
       <img
@@ -117,16 +115,16 @@
         <div>Campus Run 최고의 실력자는 누구일지 확인해보세요!</div>
         <br /><br /><br /><br />
         <a href="/ranking/speedy">
-        <div class="ranking-icon">
-          <i class="fa fa-area-chart"></i><br />
-          <span>Speedy Player</span>
-        </div>
+          <div class="ranking-icon">
+            <i class="fa fa-area-chart"></i><br />
+            <span>Speedy Player</span>
+          </div>
         </a>
         <a href="/ranking/univscore">
-        <div class="ranking-icon">
-          <i class="fa fa-university"></i><br />
-          <span>Best University</span>
-        </div>
+          <div class="ranking-icon">
+            <i class="fa fa-university"></i><br />
+            <span>Best University</span>
+          </div>
         </a>
       </div>
       <canvas id="my-canvas-03"></canvas>

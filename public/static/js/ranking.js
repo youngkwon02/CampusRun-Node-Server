@@ -20,7 +20,7 @@ const ajaxRequest = (type, url, data) => {
 const speedyRanking = async () => {
   let res = await ajaxRequest(
     "GET",
-    "http://3.35.114.72:8000/feed/api/speedy-ranking/2",
+    "http://10.210.60.80:8000/feed/api/speedy-ranking/2",
     { nothing: "" }
   );
   let speedyRanking = res["ranking_data"];
