@@ -250,6 +250,7 @@ io.on("connection", function (socket) {
     currentUser = {
       kakaoId: data.name,
       avatar: data.avatar,
+      name: data.userName,
       position: posData,
       rotation: "0",
       id: socket.id, //alternatively we could use socket.id
