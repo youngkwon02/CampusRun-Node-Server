@@ -8,7 +8,7 @@ window.onload = async () => {
       let resultBoard = document.querySelector(".user-search-result");
       let result = await ajaxRequest(
         "GET",
-        "http://10.210.60.80:8000/api/user-search",
+        "http://10.210.96.89:8000/api/user-search",
         { keyword: text }
       );
       if (result) {
@@ -77,7 +77,7 @@ const addUserEntry = async (kakaoId) => {
   let userEmail = "";
   let userResponse = await ajaxRequest(
     "GET",
-    "http://10.210.60.80:8000/api/user-by-kakaoid",
+    "http://10.210.96.89:8000/api/user-by-kakaoid",
     { kakaoId: kakaoId }
   );
   if (userResponse) {
@@ -282,7 +282,7 @@ const createRoomAction = async () => {
 
   let createRoomRes = await ajaxRequest(
     "GET",
-    "http://10.210.60.80:8000/game/api/create-room",
+    "http://10.210.96.89:8000/game/api/create-room",
     reqData
   );
   if (createRoomRes["status"] !== 200) {
@@ -331,7 +331,7 @@ const sendInvite = async (
 
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.60.80:8000/game/api/send-invite",
+    "http://10.210.96.89:8000/game/api/send-invite",
     {
       title,
       max,
