@@ -243,8 +243,10 @@ io.on("connection", function (socket) {
     ];
 
     let posData = data.position;
+    let rotationAngle = "0";
     if (currentURL.includes("game")) {
       posData = spawnPos[clients[currentURL].length];
+      rotationAngle = "180";
     }
 
     currentUser = {
@@ -252,7 +254,7 @@ io.on("connection", function (socket) {
       avatar: data.avatar,
       name: data.userName,
       position: posData,
-      rotation: "0",
+      rotation: rotationAngle,
       id: socket.id, //alternatively we could use socket.id
       socketID: socket.id, //fills out with the id of the socket that was open
       animation: "",

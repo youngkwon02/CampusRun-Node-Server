@@ -19,6 +19,7 @@ const ajaxRequest = (type, url, data) => {
 
 const emitJoin = async () => {
   const KAKAOID = document.querySelector(".KAKAOID").innerHTML;
+  const USERNAME = document.querySelector(".username").innerHTML;
   const currentURL = location.href;
   splittedURL = currentURL.split("/");
   url = splittedURL[3];
@@ -26,6 +27,7 @@ const emitJoin = async () => {
   socket.emit(
     "LOGIN",
     JSON.stringify({
+      userName: USERNAME,
       name: KAKAOID,
       position: "-110:10.633828:2", // Not used coordinate
       avatar: "1",
