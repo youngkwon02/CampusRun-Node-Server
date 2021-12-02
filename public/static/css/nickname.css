@@ -39,7 +39,12 @@
     outline: none;
     height:50px;
 }
-
+.errorMessage{
+    text-align: center;
+    font-size: 15px;
+    margin-top:7px;
+    font-weight: bold;
+}
 .save-btn{
     display: inline-block;
     background-color: #fff;
