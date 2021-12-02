@@ -26,7 +26,7 @@ const emitJoin = async () => {
     "LOGIN",
     JSON.stringify({
       name: KAKAOID,
-      position: "-50:124.633828:2",
+      position: "-110:10.633828:2",
       avatar: "1",
       url: url,
     })
