@@ -20,8 +20,7 @@ const ajaxRequest = (type, url, data) => {
 const speedyRanking = async () => {
     let res = await ajaxRequest(
         "GET",
-        'http://localhost:8000/feed/api/speedy-ranking/2',
-        {'nothing': ""}
+        'http://localhost:8000/api/speedy-ranking/2'
     )
     let speedyRanking = res['ranking_data'];
     for(let i = 0; i < speedyRanking.length; i++) {

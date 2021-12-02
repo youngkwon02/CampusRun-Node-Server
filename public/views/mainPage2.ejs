@@ -41,12 +41,13 @@
   </head>
   <body>
     
-    <div id="nicknameModal" class="modal">
+    <div id="nicknameModal" class="modal" style="display:none;">
       <div class="modal-content">
         <div class="nicknameText">닉네임 설정</div>
-        <input class="nickName" type="text">
+        <input class="nickName" id="nickname" type="text">
+        <div class="errorMessage"></div>
       </div>
-      <button class="save-btn" onClick="close_pop();">저장하기</button>
+      <button class="save-btn">저장하기</button>
     </div>
     <script type="text/javascript">
       jQuery(document).ready(function() {

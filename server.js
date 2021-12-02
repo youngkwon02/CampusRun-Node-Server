@@ -153,7 +153,6 @@ app.get("/home", (req, res) => {
     }
   }).then(function(response) {
     user = response.data;
-    console.log("유저유저유저유정",user);
     res.render("mainPage2", {
       userNameTest: "sdf",
       userName: user.userName,
