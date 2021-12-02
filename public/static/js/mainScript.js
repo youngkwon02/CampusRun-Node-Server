@@ -156,13 +156,13 @@ const applyInvitationAnimation = () => {
 const acceptInvitation = async (invId, url) => {
   let kakaoId = document.querySelector(".KAKAOID").innerHTML;
   let roomUrl = url;
-  await ajaxRequest("GET", "http://localhost:8000/game/api/room-enter", {
+  await ajaxRequest("GET", "http://3.35.114.72:8000/game/api/room-enter", {
     roomUrl,
     kakaoId,
   });
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-read",
+    "http://3.35.114.72:8000/game/api/invitation-read",
     { invId: invId }
   );
   location.href = url;
@@ -171,7 +171,7 @@ const acceptInvitation = async (invId, url) => {
 const rejectInvitation = async (invId) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-reject",
+    "http://3.35.114.72:8000/game/api/invitation-reject",
     { invId: invId }
   );
   if (res.status !== 200)
@@ -183,7 +183,7 @@ const invitationManager = async (kakaoId) => {
   const invBoard = document.querySelector(".invitation-board");
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-by-id",
+    "http://3.35.114.72:8000/game/api/invitation-by-id",
     { kakaoId: kakaoId }
   );
   let isThereNew = false;

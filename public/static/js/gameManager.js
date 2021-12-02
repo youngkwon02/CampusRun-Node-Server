@@ -22,11 +22,12 @@ const emitJoin = async () => {
   const currentURL = location.href;
   splittedURL = currentURL.split("/");
   url = splittedURL[3];
+  // -65 , 122.63, 13.6
   socket.emit(
     "LOGIN",
     JSON.stringify({
       name: KAKAOID,
-      position: "-110:10.633828:2",
+      position: "-110:10.633828:2", // Not used coordinate
       avatar: "1",
       url: url,
     })
@@ -36,7 +37,7 @@ const emitJoin = async () => {
   let now = new Date().getTime() + 10000;
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/new-record",
+    "http://3.35.114.72:8000/game/api/new-record",
     {
       kakaoId: KAKAOID,
       currentURL: currentURL,
@@ -48,7 +49,7 @@ const emitJoin = async () => {
 const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/room-status-by-url",
+    "http://3.35.114.72:8000/game/api/room-status-by-url",
     {
       currentURL: currentURL,
     }
@@ -62,7 +63,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
         emitJoin();
       }
       clearInterval(checkInterv);
-    }, 12000);
+    }, 30000);
   } else {
     console.log("Not yet..");
   }

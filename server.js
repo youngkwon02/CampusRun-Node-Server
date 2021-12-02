@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
 app.get("/plaza", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://localhost:8000/user/",
+    url: "http://3.35.114.72:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -104,7 +104,7 @@ app.get("/plaza", (req, res) => {
 app.get("/wait", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://localhost:8000/user/",
+    url: "http://3.35.114.72:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -125,7 +125,7 @@ app.get("/wait", (req, res) => {
 app.get("/game", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://localhost:8000/user/",
+    url: "http://3.35.114.72:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -147,7 +147,7 @@ app.get("/game", (req, res) => {
 app.get("/home", (req, res) => {
   user = axios({
     method: "get",
-    url: "http://localhost:8000/user/",
+    url: "http://3.35.114.72:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
@@ -175,13 +175,13 @@ app.get("/ranking/:part", async (req, res) => {
 
   const user = await axios({
     method: "get",
-    url: "http://localhost:8000/user/",
+    url: "http://3.35.114.72:8000/user/",
     headers: {
       token: req.cookies["cookieToken"],
     },
   });
 
-  const URL = "http://localhost:8000/ranking/" + part;
+  const URL = "http://3.35.114.72:8000/ranking/" + part;
 
   console.log("URL: ${URL}");
 
@@ -231,10 +231,27 @@ io.on("connection", function (socket) {
 
     // fills out with the information emitted by the player in the unity
     let currentURL = data.url;
+
+    //add currentUser in clients list
+    if (!(currentURL in clients)) clients[currentURL] = [];
+
+    const spawnPos = [
+      "-85:122.63:13.6",
+      "-75:122.63:13.6",
+      "-65:122.63:13.6",
+      "-55:122.63:13.6",
+      "-45:122.63:13.6",
+    ];
+
+    let posData = data.position;
+    if (currentURL.includes("game")) {
+      posData = spawnPos[clients[currentURL].length];
+    }
+
     currentUser = {
       kakaoId: data.name,
       avatar: data.avatar,
-      position: data.position,
+      position: posData,
       rotation: "0",
       id: socket.id, //alternatively we could use socket.id
       socketID: socket.id, //fills out with the id of the socket that was open
@@ -252,8 +269,6 @@ io.on("connection", function (socket) {
     console.log("[INFO] player kakaoId " + currentUser.kakaoId + ": logged!");
     console.log("[INFO] currentUser.position " + currentUser.position);
 
-    //add currentUser in clients list
-    if (!(currentURL in clients)) clients[currentURL] = [];
     clients[currentURL].push(currentUser);
 
     //add client in search engine
@@ -316,7 +331,7 @@ io.on("connection", function (socket) {
       console.log(`-> Axios: ping: ${pack.kakaoUniqueId}`);
       axios({
         method: "get",
-        url: "http://localhost:8000/game/api/update-record",
+        url: "http://3.35.114.72:8000/game/api/update-record",
         headers: {
           kakaoId: currentUser.kakaoId,
           currentURL: currentUser.playingURL,
