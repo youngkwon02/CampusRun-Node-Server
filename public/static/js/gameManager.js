@@ -39,7 +39,7 @@ const emitJoin = async () => {
   let now = new Date().getTime() + 10000;
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.60.80:8000/game/api/new-record",
+    "http://10.210.96.89:8000/game/api/new-record",
     {
       kakaoId: KAKAOID,
       currentURL: currentURL,
@@ -51,7 +51,7 @@ const emitJoin = async () => {
 const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.60.80:8000/game/api/room-status-by-url",
+    "http://10.210.96.89:8000/game/api/room-status-by-url",
     {
       currentURL: currentURL,
     }

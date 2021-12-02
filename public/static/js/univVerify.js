@@ -14,7 +14,7 @@ const univEmailVerify = () => {
   let address = document.querySelector(".email-address").value;
   const IDTOKEN = document.querySelector("#idToken").innerHTML;
   $.ajax({
-    url: "http://10.210.60.80:8000/verifyUnivAction/",
+    url: "http://10.210.96.89:8000/verifyUnivAction/",
     type: "GET",
     async: false,
     data: {
