@@ -63,16 +63,41 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
         emitJoinCall[0] = true;
         setTimeout(() => {
           document.getElementById("webgl-id").style.display = "block";
-        }, 10000);
+        }, 100); // Sync때문에 처리한건데 의미없어보임..
         emitJoin();
       }
       clearInterval(checkInterv);
-    }, 30000);
+    }, 16000);
   } else {
     console.log("Not yet..");
   }
   return remainPlayer;
 };
+
+const checkGameEnd = async (currentURL, checkInterv) => {
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/end-check",
+    {
+      gameURL: currentURL,
+    }
+  );
+  console.log(res)
+  
+  if(res.status !== 200) {
+    alert("비정상적인 접근입니다!\n메인화면으로 이동합니다.");
+    location.href = "/home";
+  }
+
+  if(res.gameStatus === 'end') {
+    winnerPopUp(res.winner);
+    endCountDown();
+    clearInterval(checkInterv);
+  }
+};
+
+const winnerPopUp = (winnerName) => {}
+const endCountDown = () => {}
 
 function show() {
   document.querySelector(".background").className = "background show";
@@ -89,9 +114,16 @@ function close_pop(flag) {
 window.onload = () => {
   let emitJoinCall = [false];
   let currentURL = window.location.href;
-  let checkInterv = setInterval(() => {
-    checkGameStart(currentURL, checkInterv, emitJoinCall);
-  }, 330);
+  let startCheckingInterv = setInterval(() => {
+    checkGameStart(currentURL, startCheckingInterv, emitJoinCall);
+  }, 200);
+
+  setTimeout(() => {
+    let endCheckingInterv = setInterval(() => {
+      checkGameEnd(currentURL, endCheckingInterv);
+      console.log("Game End Checking!!!");
+    }, 200);
+  }, 50000);
 
   // document.querySelector("#show").addEventListener("click", show);
   // document.querySelector("#close").addEventListener("click", close);

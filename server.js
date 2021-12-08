@@ -235,8 +235,8 @@ io.on("connection", function (socket) {
     if (!(currentURL in clients)) clients[currentURL] = [];
 
     const spawnPos = [
-      "-85:122.63:13.6",
-      "-75:122.63:13.6",
+      "-85:5:13.6",
+      "-75:10:13.6",
       "-65:122.63:13.6",
       "-55:122.63:13.6",
       "-45:122.63:13.6",
