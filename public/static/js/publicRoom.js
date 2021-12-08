@@ -6,7 +6,7 @@ const createPublicRoomAction = async () => {
 
   let createRoomRes = await ajaxRequest(
     "GET",
-    "http://10.210.96.89:8000/game/api/create-room-public",
+    "http://localhost:8000/game/api/create-room-public",
     { roomTitle, maxJoin, createrKakaoId }
   );
   if (createRoomRes["status"] === 200) {
@@ -23,7 +23,7 @@ const updatePublicList = async () => {
   let userEmail = "";
   let userResponse = await ajaxRequest(
     "GET",
-    "http://10.210.96.89:8000/api/user-by-kakaoid",
+    "http://localhost:8000/api/user-by-kakaoid",
     { kakaoId: KAKAOID }
   );
   if (userResponse) {
@@ -44,7 +44,7 @@ const updatePublicList = async () => {
 
   let publicRoomRes = await ajaxRequest(
     "GET",
-    "http://10.210.96.89:8000/game/api/public-room-list",
+    "http://localhost:8000/game/api/public-room-list",
     { kakaoId: KAKAOID, univName: univName }
   );
   let roomList;
@@ -88,7 +88,7 @@ const enterWaitRoom = async (waitingURL) => {
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
   let enterWaitingRes = await ajaxRequest(
     "GET",
-    "http://10.210.96.89:8000/game/api/enter-wait-room",
+    "http://localhost:8000/game/api/enter-wait-room",
     {
       kakaoId: KAKAOID,
       waitingURL,

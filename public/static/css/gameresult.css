@@ -80,30 +80,13 @@
 }
 
 .winner{
-    position:fixed;
-    left:40%;
-    top:32%;
-    z-index: 1000;
-    font-size: 90px;
-    min-width:11px;
-    font-family: 'Barlow Condensed', sans-serif;
-    color: transparent;
-    transform: translate(-50%, -50%);
+  animation-name: appear;
+  animation-delay:6s;
+  animation-duration: 0s;
+  animation-timing-function: linear;
+  animation-fill-mode: backwards;
+  animation-play-state: running;
 }
-
-.winner::before {
-    opacity: 0;
-    content: "WINNER";
-    position: fixed;
-    top: 30%;
-    left: 58%;
-    width: 100%;
-    height: 100%;
-    color: whitesmoke;
-    border-right: 1px;
-    animation: typing 3s steps(31) 1;
-    animation-delay:4s;
-  }
 
   @keyframes typing{
     0% {
@@ -122,14 +105,16 @@
     top:30%;
     width:100%;
     height:40%;
-    background-color: rgba(100, 149, 237, 0.9);
-
+    background-color: #db8fc7;
+    text-align: center;
     animation-name: slidein;
-    animation-delay:3s;
-    animation-duration: 3s;
+    animation-delay:5s;
+    animation-duration: 1s;
     animation-timing-function: linear;
     animation-fill-mode: backwards;
     animation-play-state: running;
+    font-family: 'impact';
+    padding: 30px 0;
 }
 
 
@@ -144,9 +129,7 @@
   }
 
   .univ-logo img{
-    position:fixed;
-    left:33%;
-    top:45%;
+    max-height: 95%;
     animation-name: appear;
     animation-delay:6s;
     animation-duration: 0s;

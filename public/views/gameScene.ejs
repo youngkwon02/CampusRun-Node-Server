@@ -44,7 +44,7 @@
       <!-- Modal content -->
       <div class="modal-content">
         <div class="ranking-title">
-          WIN
+          <img src="../Assets/image/WIN.png">
         </div>
         <div class="ranking-body">
           <table>
@@ -61,39 +61,24 @@
                 <td>&nbsp;</td>
               </tr>
                 <tr>
-                  <td style="color: yellow;">1</td>
-                  <td style="color: yellow;">오지영</td>
-                  <td style="color: yellow;"><%= univName %></td>
-                  <td style="color: yellow;">3분 23초</td>
+                  <td style="color: rgb(230, 179, 14);">1</td>
+                  <td style="color: rgb(230, 179, 14);">인세훈</td>
+                  <td style="color: rgb(230, 179, 14);">중앙대</td>
+                  <td style="color: rgb(230, 179, 14);">3분 23초</td>
                 </tr>
                 <tr>
-                  <td style="color: rgb(255, 255, 110);">2</td>
-                  <td style="color: rgb(255, 255, 110);">오지영</td>
-                  <td style="color: rgb(255, 255, 110);"><%= univName %></td>
-                  <td style="color: rgb(255, 255, 110);">3분 23초</td>
+                  <td style="color: rgb(204, 204, 185);">2</td>
+                  <td style="color: rgb(204, 204, 185);">Hankook</td>
+                  <td style="color: rgb(204, 204, 185);">한국대</td>
+                  <td style="color: rgb(204, 204, 185);">3분 38초</td>
                 </tr>
-                <tr>
-                  <td style="color: rgb(255, 255, 168);">3</td>
-                  <td style="color: rgb(255, 255, 168);">오지영</td>
-                  <td style="color: rgb(255, 255, 168);"><%= univName %></td>
-                  <td style="color: rgb(255, 255, 168);">3분 23초</td>
-                </tr>
-                <% for(let i=4; i<9; i++) { %>
-              <tr>
-                <td><%= i %></td>
-                <td>오지영</td>
-                <td><%= univName %></td>
-                <td>3분 23초</td>
-              </tr>
-              <% } %>
+                
             </tbody>
           </table>
         </div>
-        <div class="winner">
-          WINNER
-        </div>
         <div class="univ-logo">
-          <img src="../TemplateDataGameView/cau.png">
+          <div class='winner' style="font-family: 'impact'; font-size: 30px; font-weight: bold; letter-spacing: 4px;">WINNER</div>
+          <img src="../Assets/image/caulogo.png">
         </div>
         <button class="close-btn" onClick="close_pop();">CLOSE</button>
       </div>
