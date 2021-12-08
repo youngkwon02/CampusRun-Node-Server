@@ -31,7 +31,7 @@ body {
   text-align: center;
   font-family: "twayair";
   height: 560px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .ranking-body table thead {
@@ -66,4 +66,9 @@ body {
     format("woff");
   font-weight: normal;
   font-style: normal;
+}
+
+::-webkit-scrollbar {
+	width: 0;
+	background: transparent;
 }
