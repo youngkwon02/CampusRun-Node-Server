@@ -82,15 +82,15 @@ const checkGameEnd = async (currentURL, checkInterv) => {
       gameURL: currentURL,
     }
   );
+  console.log(res)
   
   if(res.status !== 200) {
     alert("비정상적인 접근입니다!\n메인화면으로 이동합니다.");
     location.href = "/home";
   }
 
-  let resData = res.data;
-  if(resData.status === 'end') {
-    winnerPopUp(resData.winner);
+  if(res.gameStatus === 'end') {
+    winnerPopUp(res.winner);
     endCountDown();
     clearInterval(checkInterv);
   }
