@@ -100,7 +100,20 @@ const winnerPopUp = (winnerName) => {
   document.querySelector('.winnerName').innerHTML = winnerName;
   document.querySelector('.winnerPopUp').style.top = '0';
 }
-const endCountDown = () => {}
+
+const endCountDown = () => {
+  document.querySelector('.endCountDown').style.opacity = 1;
+  let count = 10;
+  let countDownInterv = setInterval(() => {
+    document.querySelector('.endCountDown').innerHTML = count;
+    count --;
+    if(count === 0) {
+      clearInterval(countDownInterv);
+      // 경기종료
+    }
+  }, 1000);
+
+}
 
 function show() {
   document.querySelector(".background").className = "background show";
