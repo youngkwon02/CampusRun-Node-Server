@@ -1,0 +1,45 @@
+
+.winnerPopUp {
+  z-index: 1000;
+  width: 100%;
+  height: 40px;
+  padding: 15px 0;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  top: -70px;
+  line-height: 20px;
+  transition: all 0.5s linear;
+  font-family: 'ROKABold';
+  background-color: #5bbbcc;
+  font-size: 17px;
+}
+
+.endCountDown {
+  opacity: 0;
+  width: 200px;
+  height: 200px;
+  font-size: 200px;
+  color: #fd4b2fd4;
+  line-height: 200px;
+  z-index: 1001;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 200px;
+  font-family: 'Carre';
+}
+
+@font-face {
+  font-family: 'ROKABold';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.1/ROKABold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Carre';
+  src: url('../fonts/Carre-JWja.ttf');
+}

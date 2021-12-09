@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="TemplateDataNewGameView/style.css" />
     <link rel="stylesheet" href="../static/css/progressbar.css" />
     <link rel="stylesheet" href="../static/css/gameresult.css" />
-    <!-- <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" /> -->
+    <link rel="stylesheet" href="../static/css/gameScene.css" />
     <script src="TemplateDataNewGameView/UnityProgress.js"></script>
     <script src="BuildNewGameView/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
@@ -37,6 +37,15 @@
 
     <div class="webgl-content" id ="webgl-id" style="margin: 0; display:none;">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
+    </div>
+
+    <div class="winnerPopUp">
+      <span class="winnerName"></span>님이 1등으로 결승선을 통과하였습니다!<br>
+      잠시 후 경기가 종료됩니다.
+    </div>
+
+    <div class="endCountDown">
+      10
     </div>
 
 
@@ -77,7 +86,7 @@
           </table>
         </div>
         <div class="univ-logo">
-          <div class='winner' style="font-family: 'impact'; font-size: 30px; font-weight: bold; letter-spacing: 4px;">WINNER</div>
+          <div class='winner' style="font-family: 'impact'; font-size: 30px; font-weight: bold; letter-spacing: 4px;">우승 학교</div>
           <img src="../Assets/image/caulogo.png">
         </div>
         <button class="close-btn" onClick="close_pop();">CLOSE</button>
