@@ -91,7 +91,7 @@ const checkGameEnd = async (currentURL, checkInterv) => {
 
   if (res.gameStatus === "end") {
     winnerPopUp(res.winner);
-    endCountDown();
+    endCountDown(currentURL);
     clearInterval(checkInterv);
   }
 };
@@ -101,12 +101,15 @@ const winnerPopUp = (winnerName) => {
   document.querySelector(".winnerPopUp").style.top = "0";
 };
 
-const endCountDown = () => {
+const endCountDown = (currentURL) => {
   document.querySelector(".endCountDown").style.opacity = 1;
   let count = 10;
   let countDownInterv = setInterval(() => {
     document.querySelector(".endCountDown").innerHTML = count;
     count--;
+    if (count === 0) {
+      updateResultBoard(currentURL);
+    }
     if (count === -1) {
       clearInterval(countDownInterv);
       document.querySelector(".winnerPopUp").style.top = "-200px";
@@ -114,6 +117,42 @@ const endCountDown = () => {
       $("#myModal").show();
     }
   }, 1000);
+};
+
+const updateResultBoard = async (currentURL) => {
+  let res = await ajaxRequest(
+    "GET",
+    "http://localhost:8000/game/api/result-board",
+    {
+      gameURL: currentURL,
+    }
+  );
+
+  let rankData = res.result;
+  let resBody = document.querySelector(".resultTableBody");
+  for (let i = 0; i < rankData.length; i++) {
+    let content = `
+      <tr>
+        <td>${resData[i].rank}</td>
+        <td>${resData[i].name}</td>
+        <td>${resData[i].univ}</td>
+        <td>${timeConvert(resData[i].time)}</td>
+      </tr>
+    `;
+    resBody.innerHTML += content;
+  }
+};
+
+const timeConvert = (nanaSeconds) => {
+  const minPart = nanaSeconds - (nanaSeconds % 60000);
+  const secPart = nanaSeconds - minPart - ((nanaSeconds - minPart) % 1000);
+  const remain = nanaSeconds % 1000;
+
+  const min = minPart / 60000;
+  const sec = secPart / 1000;
+  const rem = remain;
+
+  return `${min}분 ${sec}초 ${rem}`;
 };
 
 function show() {
