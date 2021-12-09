@@ -96,7 +96,10 @@ const checkGameEnd = async (currentURL, checkInterv) => {
   }
 };
 
-const winnerPopUp = (winnerName) => {}
+const winnerPopUp = (winnerName) => {
+  document.querySelector('.winnerName').innerHTML = winnerName;
+  document.querySelector('.winnerPopUp').style.top = '0';
+}
 const endCountDown = () => {}
 
 function show() {
