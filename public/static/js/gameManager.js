@@ -82,14 +82,14 @@ const checkGameEnd = async (currentURL, checkInterv) => {
       gameURL: currentURL,
     }
   );
-  console.log(res)
-  
-  if(res.status !== 200) {
+  console.log(res);
+
+  if (res.status !== 200) {
     alert("비정상적인 접근입니다!\n메인화면으로 이동합니다.");
     location.href = "/home";
   }
 
-  if(res.gameStatus === 'end') {
+  if (res.gameStatus === "end") {
     winnerPopUp(res.winner);
     endCountDown();
     clearInterval(checkInterv);
@@ -97,23 +97,24 @@ const checkGameEnd = async (currentURL, checkInterv) => {
 };
 
 const winnerPopUp = (winnerName) => {
-  document.querySelector('.winnerName').innerHTML = winnerName;
-  document.querySelector('.winnerPopUp').style.top = '0';
-}
+  document.querySelector(".winnerName").innerHTML = winnerName;
+  document.querySelector(".winnerPopUp").style.top = "0";
+};
 
 const endCountDown = () => {
-  document.querySelector('.endCountDown').style.opacity = 1;
+  document.querySelector(".endCountDown").style.opacity = 1;
   let count = 10;
   let countDownInterv = setInterval(() => {
-    document.querySelector('.endCountDown').innerHTML = count;
-    count --;
-    if(count === 0) {
+    document.querySelector(".endCountDown").innerHTML = count;
+    count--;
+    if (count === -1) {
       clearInterval(countDownInterv);
-      // 경기종료
+      document.querySelector(".winnerPopUp").style.top = "-200px";
+      document.querySelector(".endCountDown").style.opacity = 0;
+      $("#myModal").show();
     }
   }, 1000);
-
-}
+};
 
 function show() {
   document.querySelector(".background").className = "background show";
@@ -125,7 +126,11 @@ function close() {
 
 //팝업 Close 기능
 function close_pop(flag) {
-  $("#myModal").hide();
+  document.querySelector(".univ-logo").style.display = "none";
+  document.querySelector(".close-btn").innerHTML = "EXIT";
+  document.querySelector(".close-btn").addEventListener("click", () => {
+    location.href = "/plaza";
+  });
 }
 window.onload = () => {
   let emitJoinCall = [false];
