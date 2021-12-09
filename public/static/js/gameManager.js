@@ -39,7 +39,7 @@ const emitJoin = async () => {
   let now = new Date().getTime() + 10000;
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/new-record",
+    "http://10.210.96.142:8000/game/api/new-record",
     {
       kakaoId: KAKAOID,
       currentURL: currentURL,
@@ -51,7 +51,7 @@ const emitJoin = async () => {
 const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/room-status-by-url",
+    "http://10.210.96.142:8000/game/api/room-status-by-url",
     {
       currentURL: currentURL,
     }
@@ -67,7 +67,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
         emitJoin();
       }
       clearInterval(checkInterv);
-    }, 16000);
+    }, 28000);
   } else {
     console.log("Not yet..");
   }
@@ -77,7 +77,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
 const checkGameEnd = async (currentURL, checkInterv) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/end-check",
+    "http://10.210.96.142:8000/game/api/end-check",
     {
       gameURL: currentURL,
     }
@@ -122,7 +122,7 @@ const endCountDown = (currentURL) => {
 const updateResultBoard = async (currentURL) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/result-board",
+    "http://10.210.96.142:8000/game/api/result-board",
     {
       gameURL: currentURL,
     }
@@ -130,23 +130,27 @@ const updateResultBoard = async (currentURL) => {
 
   let rankData = res.result;
   let resBody = document.querySelector(".resultTableBody");
-  for (let i = 0; i < rankData.length; i++) {
+  for (let i = 0; i < rankData[rankData.length - 1].rank; i++) {
+    console.log("updateResultBoard FORLOOP!!!");
     let content = `
       <tr>
-        <td>${resData[i].rank}</td>
-        <td>${resData[i].name}</td>
-        <td>${resData[i].univ}</td>
-        <td>${timeConvert(resData[i].time)}</td>
+        <td>${rankData[i].rank}</td>
+        <td>${rankData[i].name}</td>
+        <td>${rankData[i].univ}</td>
+        <td>${timeConvert(rankData[i].time)}</td>
       </tr>
     `;
     resBody.innerHTML += content;
   }
 };
 
-const timeConvert = (nanaSeconds) => {
-  const minPart = nanaSeconds - (nanaSeconds % 60000);
-  const secPart = nanaSeconds - minPart - ((nanaSeconds - minPart) % 1000);
-  const remain = nanaSeconds % 1000;
+const timeConvert = (nanoSeconds) => {
+  if (nanoSeconds === "Retire") {
+    return "Retire";
+  }
+  const minPart = nanoSeconds - (nanoSeconds % 60000);
+  const secPart = nanoSeconds - minPart - ((nanoSeconds - minPart) % 1000);
+  const remain = nanoSeconds % 1000;
 
   const min = minPart / 60000;
   const sec = secPart / 1000;

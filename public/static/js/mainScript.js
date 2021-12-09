@@ -156,13 +156,13 @@ const applyInvitationAnimation = () => {
 const acceptInvitation = async (invId, url) => {
   let kakaoId = document.querySelector(".KAKAOID").innerHTML;
   let roomUrl = url;
-  await ajaxRequest("GET", "http://localhost:8000/game/api/room-enter", {
+  await ajaxRequest("GET", "http://10.210.96.142:8000/game/api/room-enter", {
     roomUrl,
     kakaoId,
   });
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-read",
+    "http://10.210.96.142:8000/game/api/invitation-read",
     { invId: invId }
   );
   location.href = url;
@@ -171,7 +171,7 @@ const acceptInvitation = async (invId, url) => {
 const rejectInvitation = async (invId) => {
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-reject",
+    "http://10.210.96.142:8000/game/api/invitation-reject",
     { invId: invId }
   );
   if (res.status !== 200)
@@ -183,7 +183,7 @@ const invitationManager = async (kakaoId) => {
   const invBoard = document.querySelector(".invitation-board");
   let res = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/invitation-by-id",
+    "http://10.210.96.142:8000/game/api/invitation-by-id",
     { kakaoId: kakaoId }
   );
   let isThereNew = false;
@@ -222,7 +222,7 @@ const nicknameCreate = async (kakaoId) => {
   isSuccess = false;
   let createNickName = await ajaxRequest(
     "GET",
-    "http://localhost:8000/api/create-nickname",
+    "http://10.210.96.142:8000/api/create-nickname",
     { kakaoId: kakaoId, nickname }
   );
   if (createNickName.status === 200) {
@@ -246,7 +246,7 @@ const nicknameCheck = async (kakaoId) => {
   console.log("닉네임 확인");
   let verifyNickName = await ajaxRequest(
     "GET",
-    "http://localhost:8000/api/check-nickname",
+    "http://10.210.96.142:8000/api/check-nickname",
     { kakaoId }
   );
   isExist = verifyNickName["data"]["nicknamestatus"];

@@ -20,13 +20,13 @@ const entranceArrangement = async (waitURL) => {
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
   let arranRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/ent-arrangement",
+    "http://10.210.96.142:8000/game/api/ent-arrangement",
     { kakaoId: KAKAOID, waitURL }
   );
   if (arranRes.status === 200) {
     console.log(arranRes.message);
   } else {
-    location.href = "http://localhost:3000/plaza";
+    location.href = "http://10.210.96.142:3000/plaza";
   }
 };
 
@@ -37,7 +37,7 @@ const syncData = async (waitURL, syncInterv) => {
 
   let syncRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/sync-wait-room-status",
+    "http://10.210.96.142:8000/game/api/sync-wait-room-status",
     { waitURL, currentIdList }
   );
   if (syncRes.status === 200 && syncRes.message === "Data sync complete..") {
@@ -140,11 +140,11 @@ const quitWaitRoom = async (waitURL) => {
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
   let quitRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/quit-wait-room",
+    "http://10.210.96.142:8000/game/api/quit-wait-room",
     { kakaoId: KAKAOID, waitURL }
   );
   if (quitRes.status === 200) {
-    location.href = "http://localhost:3000/plaza";
+    location.href = "http://10.210.96.142:3000/plaza";
   } else {
     alert("잠시후 다시 시도하세요.");
   }
@@ -153,7 +153,7 @@ const quitWaitRoom = async (waitURL) => {
 const requestGameStart = async (waitURL) => {
   const startRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/room-to-start-status",
+    "http://10.210.96.142:8000/game/api/room-to-start-status",
     { waitURL }
   );
 
@@ -172,7 +172,7 @@ const requestGameStart = async (waitURL) => {
 const startChecking = async (waitURL, roomTitle) => {
   let checkingRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/room-status",
+    "http://10.210.96.142:8000/game/api/room-status",
     { waitURL }
   );
 
@@ -203,7 +203,7 @@ const enterGame = async (gameURL) => {
   const KAKAOID = document.querySelector(".userKakaoId").innerHTML;
   let entRes = await ajaxRequest(
     "GET",
-    "http://localhost:8000/game/api/game-enter",
+    "http://10.210.96.142:8000/game/api/game-enter",
     {
       gameURL,
       kakaoId: KAKAOID,
