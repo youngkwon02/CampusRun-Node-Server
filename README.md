@@ -7,16 +7,17 @@
 <div align="center">
   
   <img src="https://user-images.githubusercontent.com/39653584/145571114-c7575006-488f-403b-baef-c3a617708308.jpeg" width="800px" height="500px">
-  <br />
+  <br />  <br />
   
   [🎖 **Capstone-Design Contest**🎖](http://www.swaicau.com/bbs/board.php?bo_table=program8&wr_id=38) <br />
-  [🎬 **DEMO Video**🎬](https://www.youtube.com/watch?v=cRBCqWESeLI&t=5s)<br />
+  [🎬 **DEMO Video**🎬](https://www.youtube.com/watch?v=cRBCqWESeLI&t=5s)<br />  <br />
   
 </div>
 
 ---
 
 # 🕹 Node-Server
+> You can check the django-server [here.](https://github.com/youngkwon02/CampusRun-django-server)<br/>
 > Mainly manage the Unity Build Date(WebGL Scripts) and socket connection. <br>
 > Send a request to django-server to get a data of the database. <br>
 ---
