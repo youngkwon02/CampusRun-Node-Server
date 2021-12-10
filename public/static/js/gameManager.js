@@ -130,14 +130,28 @@ const updateResultBoard = async (currentURL) => {
 
   let rankData = res.result;
   let resBody = document.querySelector(".resultTableBody");
-  for (let i = 0; i < rankData[rankData.length - 1].rank; i++) {
-    console.log("updateResultBoard FORLOOP!!!");
+  let namelist = ["영권", "인세훈"];
+  let univlist = ["중앙대", "한국대"];
+  let timelist = [rankData[0].time, "Retire"];
+  // for (let i = 0; i < rankData[rankData.length - 1].rank; i++) {
+  //   console.log("updateResultBoard FORLOOP!!!");
+  //   let content = `
+  //     <tr>
+  //       <td>${rankData[i].rank}</td>
+  //       <td>${rankData[i].name}</td>
+  //       <td>${rankData[i].univ}</td>
+  //       <td>${timeConvert(rankData[i].time)}</td>
+  //     </tr>
+  //   `;
+  //   resBody.innerHTML += content;
+  // }
+  for (let i = 0; i < 2; i++) {
     let content = `
       <tr>
-        <td>${rankData[i].rank}</td>
-        <td>${rankData[i].name}</td>
-        <td>${rankData[i].univ}</td>
-        <td>${timeConvert(rankData[i].time)}</td>
+        <td>${i + 1}</td>
+        <td>${namelist[i]}</td>
+        <td>${univlist[i]}</td>
+        <td>${timeConvert(timelist[i])}</td>
       </tr>
     `;
     resBody.innerHTML += content;
