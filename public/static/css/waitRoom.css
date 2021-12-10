@@ -1,0 +1,318 @@
+html,
+body {
+  background-color: #7598c1;
+  padding: 0;
+  margin: 0;
+}
+
+.room-title {
+  text-align: center;
+  background-color: rgb(90, 88, 102);
+  padding: 16px 0;
+  font-size: 20px;
+  line-height: 16px;
+  margin-top: 16px;
+  color: #efefef;
+  font-family: "twayair";
+  font-weight: bold;
+}
+
+.main-board {
+  padding: 20px;
+  height: 90vh;
+}
+
+.left-side {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+}
+
+.right-side {
+  width: 26%;
+  height: 100%;
+  float: right;
+}
+
+.team-space {
+  height: 48%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.entry {
+  display: inline-block;
+  width: 24%;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-family: "impact";
+  font-size: 18px;
+  border: 3px solid black;
+  color: #010101;
+  border-radius: 4px;
+  letter-spacing: 2px;
+  margin: 0 2px;
+  position: relative;
+}
+
+.creater-entry {
+  border: 3px solid rgb(216, 155, 22) !important;
+}
+
+.creater-entry .creater-icon {
+  position: absolute;
+  top: -45px;
+  left: -30px;
+  width: 35%;
+  height: 84px;
+  transform: rotate(-20deg);
+}
+
+.home-space .entry {
+  background-color: rgb(207, 123, 148);
+}
+
+.away-space .entry {
+  background-color: rgb(114, 186, 204);
+}
+
+.entry .nickname {
+  line-height: 34px;
+  height: 34px;
+}
+
+.entry .univ {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  line-height: 26px;
+  height: 34px;
+}
+
+.entry .profileImg {
+  display: inline-block;
+  width: 100%;
+  height: calc(100% - 68px);
+  animation: character-fade 4s ease-in infinite;
+}
+
+.home-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
+.away-space .entry .profileImg {
+  background: url("../../Assets/image/cau-character.png");
+  background-size: cover;
+}
+
+.chat-container {
+  width:26%;
+  height:10%;
+  margin-top:10px;
+}
+
+
+@charset "utf-8";
+.app__wrap {
+  right:21px;
+  margin: 0 auto;
+  padding: 50px 0 0;
+  position: absolute;
+  width: 100%;
+  max-width: 360px;
+  min-width: 200px;
+  font-size: 14px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.app__info {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  color: #010101;
+  font-weight: bold;
+  font-family: "impact";
+  background: rgba(225, 226, 255, 0.5);
+  border-bottom: 2px solid;
+}
+
+.app__window {
+  overflow-y: auto;
+  padding: 10px 20px;
+  height: 200px;
+  background: rgba(225, 226, 255, 0.5);
+}
+.output__user {
+  margin: 0;
+  margin-bottom: 10px;
+  color: #010101;
+}
+.output__user__name {
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.output__user__message {
+  margin: 5px;
+  padding: 5px;
+}
+
+.app__input__wrap {
+  background: #f5f5f6;
+}
+.app__input__wrap:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.app__input {
+  float: left;
+  display: block;
+  width: 80%;
+  height: 35px;
+  border: 0;
+  outline: 0;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+#chatInput {
+  outline: none;
+}
+.app__button {
+  float: left;
+  display: block;
+  width: 20%;
+  height: 35px;
+  border: 0;
+  outline: 0;
+  background: none;
+  box-sizing: border-box;
+  font-weight: bold;
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: rgba(34, 32, 33, 0.7);
+}
+
+
+
+.map-container {
+  height: 42%;
+  border: 3px solid black;
+  background-color: rgba(26, 22, 24, 0.4);
+  color: #efefef;
+  border-radius: 4px;
+}
+
+.map-container .map-name {
+  text-align: center;
+  font-family: "impact";
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 3px solid black;
+  letter-spacing: 2px;
+}
+
+.map-container .map-img {
+  display: inline-block;
+  width: 100%;
+  background: url("../../Assets/image/cau-map.jpeg");
+  background-size: cover;
+  /* background-position-y: -30px; */
+  background-repeat: no-repeat;
+  height: calc(100% - 30px);
+}
+
+.btn-container {
+  height: 10%;
+  text-align: center;
+}
+
+.btn-container .btn {
+  color: #efefef;
+  width: 34%;
+  height: 70px;
+  font-size: 26px;
+  line-height: 70px;
+  text-align: center;
+  border-radius: 4px;
+  font-family: "impact";
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 20px;
+  margin-top: 230px;
+}
+
+.btn-game-start {
+  background-color: gray;
+  display: none;
+}
+
+.btn-quit {
+  display: inline-block;
+  background-color: lightcoral;
+}
+
+.home-space .entry:nth-child(1) {
+  margin-right: -2px;
+}
+
+.away-space .entry:nth-child(1) {
+  margin-right: -2px;
+}
+
+.starting-modal {
+  opacity: 0;
+  transition: all 0.5s ease-out;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  background-color: floralwhite;
+  border: 3px solid black;
+  border-radius: 10px;
+  display: inline-block;
+  width: 500px;
+  height: 300px;
+  font-family: "twayair";
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.starting-modal img {
+  width: 70%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.starting-modal .modal-room-title {
+  margin-bottom: 20px;
+  font-family: "impact";
+  font-size: 30px;
+}
+
+.starting-modal .time-count {
+  font-size: 30px;
+  font-family: "impact";
+  font-weight: bold;
+}
+
+@keyframes character-fade {
+  0% {
+    background-position-x: -20px;
+  }
+  50% {
+    background-position-x: -70px;
+  }
+  100% {
+    background-position-x: -20px;
+  }
+}

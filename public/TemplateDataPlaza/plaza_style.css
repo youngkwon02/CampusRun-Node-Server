@@ -1,25 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap');
 .start-btn {
     position:fixed;
-    top: 500px;
-    left: 300px;
+    top: 450px;
+    left: 400px;
     appearance: button;
     background-color: #1899D6;
     border: solid transparent;
-    border-radius: 16px;
+
     border-width: 0 0 4px;
     box-sizing: border-box;
     color: #FFFFFF;
     cursor: pointer;
     display: inline-block;
-    font-family: din-round,sans-serif;
-    font-size: 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    /*font-family: din-round,sans-serif;*/
+    font-size: 30px;
     font-weight: 700;
     letter-spacing: .8px;
     line-height: 20px;
     margin: 0;
     outline: none;
     overflow: visible;
-    padding: 16px 16px;
+    padding: 20px 20px;
     text-align: center;
     text-transform: uppercase;
     touch-action: manipulation;
@@ -36,7 +38,7 @@
     animation-name: appear;
     animation-duration: 0s;
     animation-timing-function: linear;
-    animation-delay: 4s;
+    animation-delay: 5s;
     animation-iteration-count: 2;
     animation-fill-mode: backwards;
     animation-play-state: running;
@@ -55,7 +57,7 @@
   background-clip: padding-box;
   background-color: #1CB0F6;
   border: solid transparent;
-  border-radius: 16px;
+
   border-width: 0 0 4px;
   bottom: -4px;
   content: "";

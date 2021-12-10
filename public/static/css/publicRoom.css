@@ -1,0 +1,47 @@
+.room-list {
+  height: 490px;
+  overflow: scroll;
+}
+
+.public-room-elem {
+  height: 100px;
+  font-family: "twayair";
+  margin: 10px 10px;
+  padding: 16px;
+  border-radius: 4px;
+  border: 2px solid royalblue;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.5s linear;
+}
+
+.public-room-elem:hover {
+  border: 2px solid lightcoral;
+}
+.public-room-title {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.public-room-info {
+  display: inline-block;
+  width: 68%;
+}
+
+.public-room-player-num {
+  float: right;
+  width: 28%;
+  text-align: center;
+}
+
+.no-room {
+  text-align: center;
+  font-weight: bold;
+  font-family: "tawayair";
+  position: absolute;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

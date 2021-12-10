@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&family=Playfair+Display:wght@600&family=Secular+One&family=Yellowtail&display=swap");
+
+.user-search-result {
+  display: inline-block;
+  width: 100%;
+  height: 170px;
+  overflow: scroll;
+  margin: 10px 0;
+  border-radius: 4px;
+  background-color: #3f3f3f1f;
+}
+
+.search-result-row {
+  display: inline-block;
+  width: 100%;
+  margin: 5px 0;
+  color: #efefef;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-family: "twayair";
+  font-weight: bold;
+}
+
+.search-result-row div {
+  margin: 4px 0;
+}
+
+.add-user-entry {
+  color: crimson;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+}
+
+.add-user-entry:hover {
+  color: cornflowerblue;
+}
+
+.entry-board {
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: 220px;
+}
+
+.home-entry {
+  display: inline-block;
+  width: 40%;
+  margin: 0 4%;
+  height: 200px;
+}
+
+.away-entry {
+  display: inline-block;
+  width: 40%;
+  margin: 0 4%;
+  height: 200px;
+  float: right;
+}
+
+.entry-univ {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.entry-body {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  width: 100%;
+  height: 180px;
+  padding: 20px;
+}
+
+.modal-notice {
+  color: rgb(202, 74, 70);
+  font-family: "impact";
+  font-size: 18px;
+  text-align: center;
+}
+
+.entry-body-row {
+  font-weight: bold;
+  font-family: "tawayair";
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.numOfParty {
+  padding-right: 2px;
+}
+
+.mb-3:first-child {
+  margin-bottom: 0 !important;
+}

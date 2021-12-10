@@ -6,31 +6,42 @@
     <title>CampusRun</title>
     <link rel="shortcut icon" href="TemplateDataPlaza/favicon.ico" />
     <link rel="stylesheet" href="TemplateDataPlaza/style.css" />
-    <link rel="stylesheet" href="TemplateDataPlaza/progressbar.css" />
     <link rel="stylesheet" href="TemplateDataPlaza/plaza_style.css" />
     <link rel="stylesheet" href="../static/css/chat.css" />
     <link rel="stylesheet" href="../static/css/room.css" />
     <link rel="stylesheet" href="../static/css/modal.css" />
+    <link rel="stylesheet" href="../static/css/invite.css" />
+    <link rel="stylesheet" href="../static/css/progressbar.css" />
+    <link rel="stylesheet" href="../static/css/publicRoom.css" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
 
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script>
     <script src="TemplateDataPlaza/UnityProgress.js"></script>
-    <script src="BuildPlaza/UnityLoader1.js"></script>
+    <script src="BuildPlaza/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="../static/js/ajaxRequest.js"></script>
+    <script src="../static/js/invite.js"></script>
+    <script src="../static/js/publicRoom.js"></script>
 
     <!-- for UnityScene -->
     <script>
       var unityInstance = UnityLoader.instantiate(
         "unityContainer",
-        "BuildPlaza/[Capstone]_webgl_test.json",
+        "BuildPlaza/Downloads.json",
         { onProgress: UnityProgress }
       );
     </script>
   </head>
   <body>
     <!-- for Chatting Section -->
-    <div id="chatWrap" class="app__wrap" style="float: right; display:none">
+
+    <div id="chatWrap" class="app__wrap" style="float: right; display: none">
       <div id="info" class="app__info"></div>
       <div id="chatWindow" class="app__window"></div>
       <div class="app__input__wrap">
@@ -42,28 +53,40 @@
           placeholder="대화를 입력해주세요."
         />
         <button id="chatMessageSendBtn" class="app__button">전송</button>
-        <div id="roomWrap" class="room__wrap">
-        <button
-          class="createroom-btn"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          data-bs-whatever="@mdo"
-        >
-          방만들기
-        </button>
-        </div>
       </div>
     </div>
 
-    <!--로직: 방장이 팀원들을 최대 3인까지 해서 4:4로 초대를 진행
-      방생성 후 방장은 바로 대기실로 넘어가고
-      다른 참가자들은 home으로 redirect 되는데 home에 쪽지로 링크 전송
-      링크는 랜덤 해쉬값으로 뒷자리를 생성하고 싶었음..
-    -->
-    
+    <div id="roomWrap" class="room__wrap" style="display: none">
+      <button
+        class="createroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#publicRoomModal"
+        data-bs-whatever="@mdo"
+      >
+        방만들기
+      </button>
+      <button
+        class="inviteroom-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#privateRoomModal"
+        data-bs-whatever="@mdo"
+      >
+        초대하기
+      </button>
+      <button
+        class="roomlist-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#publicRoomListModal"
+        data-bs-whatever="@mdo"
+      >
+        방리스트
+      </button>
+    </div>
+
+    <!-- Private Room Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="privateRoomModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -71,7 +94,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Create Room</h5>
+            <h5 class="modal-title" id="exampleModalLabel">방 만들기</h5>
             <button
               type="button"
               class="btn-close"
@@ -80,7 +103,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form method="POST" name="roomMake" action="/room/add">
+            <form method="POST" name="roomMake">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label"
                   >게임방 제목</label
@@ -91,73 +114,151 @@
                   id="recipient-name"
                   name="title"
                 />
+                <label for="recipient-name" class="col-form-label"
+                  >참가인원</label
+                >
+                <select class="numOfParty" name="numOfParty">
+                  <option value="1:1">1 : 1</option>
+                  <option value="2:2">2 : 2</option>
+                  <option value="3:3">3 : 3</option>
+                  <option value="4:4">4 : 4</option>
+                </select>
               </div>
               <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">
-                  대전학교 선택
-                  </label>
-                <div class="mb-3">
-                  <select
-                    class="form-select"
-                    aria-label="Default select example"
-                    name="opponentUniversity"
-                  >
-                    <option selected>숭실대</option>
-                    <option value="1">건국대</option>
-                    <option value="2">서울대</option>
-                    <option value="3">한양대</option>
-                  </select>
-                </div>
-                <label for="recipient-name" class="col-form-label">
-                  우리팀
-                  </label>
+                <label for="recipient-name" class="col-form-label"
+                  >사용자 이름 검색</label
+                >
                 <input
                   type="text"
-                  class="form-control"
-                  id="opponent-name"
-                  name="opname"
-                  placeholder="팀원1"
-                  default=""
-                /><br>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="opponent-name"
-                  name="opname"
-                  placeholder="팀원2"
-                  default=""
+                  class="form-control user-search"
+                  id="recipient-name"
+                  name="user-search"
                 />
-              
-                <label for="recipient-name" class="col-form-label">
-                  상대팀
-                  </label>
-                  <input
-                  type="text"
-                  class="form-control"
-                  id="opponent-name"
-                  name="opname"
-                  placeholder="팀원1"
-                  default=""
-                /><br>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="opponent-name"
-                  name="opname"
-                  placeholder="팀원2"
-                  default=""
-                /><br>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="opponent-name"
-                  name="opname"
-                  placeholder="팀원3"
-                  default=""
-                />
+                <div class="user-search-result"></div>
               </div>
-              <button type="submit" class="btn btn-primary">만들기</button>
+
+              <div class="entry-board">
+                <div class="home-entry">
+                  <div class="entry-univ">
+                    Home Univ :
+                    <span class="entry-univ-span"></span>
+                  </div>
+                  <div class="entry-body home-entry-body"></div>
+                </div>
+                <div class="away-entry">
+                  <div class="entry-univ">
+                    Away Univ :
+                    <span class="entry-univ-span"></span>
+                  </div>
+                  <div class="entry-body away-entry-body"></div>
+                </div>
+              </div>
+              <div class="modal-body-tail"></div>
             </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary room-create-action"
+              onclick="createRoomAction()"
+            >
+              만들기
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Public Room Modal -->
+    <div
+      class="modal fade"
+      id="publicRoomModal"
+      tabindex="-1"
+      aria-labelledby="publicRoomModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">방 만들기</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" name="roomMake">
+              <div class="mb-3">
+                <label for="public-recipient-name" class="col-form-label"
+                  >게임방 제목</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="public-recipient-name"
+                  name="title"
+                />
+                <label for="recipient-name" class="col-form-label"
+                  >참가인원</label
+                >
+                <select class="public-numOfParty" name="numOfParty">
+                  <option value="1:1">1 : 1</option>
+                  <option value="2:2">2 : 2</option>
+                  <option value="3:3">3 : 3</option>
+                  <option value="4:4">4 : 4</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-primary room-create-action"
+              onclick="createPublicRoomAction()"
+            >
+              만들기
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Public Room List Modal -->
+    <div
+      class="modal fade"
+      id="publicRoomListModal"
+      tabindex="-1"
+      aria-labelledby="publicRoomModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">입장 가능 목록</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- List body -->
+            <div class="room-list"></div>
           </div>
           <div class="modal-footer">
             <button
@@ -172,30 +273,32 @@
       </div>
     </div>
 
-    <!-- ProgressBar for loading GameView -->
-    <div class="progresscontent">
-      <div class="progressbar">
-        <div class="color"></div>
-      </div>
+    <div class="progressview">
+      <img
+        src="../Assets/image/logo-long-black.png"
+        class="logo-left"
+        onclick="location.href='/home'"
+      />
+      <div class="progresstext">LOADING...</div>
+      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate" />
+    </div>
+
+    <div style="display: none">
+      <div style="display: none" class="userKakaoId"><%= kakaoId %></div>
+      <div style="display: none" class="userUniv"><%= univName %></div>
+      <div style="display: none" class="userName"><%= userName %></div>
+      <div style="display: none" class="userEmail"><%= kakaoEmail %></div>
     </div>
 
     <!-- Unity Game View rendering -->
-    <div class="webgl-content" style="margin: 0;">
+    <div class="webgl-content" style="margin: 0">
       <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
-      <!--<div class="footer">
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      </div>
-    -->
     </div>
-
-
-
 
     <!-- EmitJoin for connecting socket -->
     <button class="start-btn" id="btn_id" onclick="emitJoin()">
       GO TO PLAZA
     </button>
-
 
     <script src="../static/js/chat.js"></script>
   </body>
@@ -203,13 +306,33 @@
   <script>
     let timerInterv;
 
+    function getRandomArbitrary(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
     function emitJoin() {
+      const currentURL = location.href;
+      splittedURL = currentURL.split("/");
+      url = "";
+      for (let i = 3; i < splittedURL.length; i++) {
+        url += splittedURL[i];
+        if (i !== splittedURL.length - 1) {
+          url += "/";
+        }
+      }
+
+      plazaPosX = getRandomArbitrary(-10, 9);
+      plazaPosY = 2;
+      plazaPosZ = getRandomArbitrary(-14, 10);
+
       socket.emit(
         "LOGIN",
         JSON.stringify({
-          name: `<%= userName %>`,
-          position: "3.3:2.633828:0",
+          userName: `<%= userName %>`,
+          kakaoId: "<%= kakaoId %>",
+          position: `${plazaPosX}:${plazaPosY}:${plazaPosZ}`,
           avatar: "1",
+          url: url,
         })
       );
       document.getElementById("btn_id").style.display = "none";
@@ -257,7 +380,6 @@
     });
 
     function drawChatMessage(data) {
-      
       var wrap = document.createElement("p");
       var message = document.createElement("span");
       var name = document.createElement("span");

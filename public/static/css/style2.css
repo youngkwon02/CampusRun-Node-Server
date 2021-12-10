@@ -1,5 +1,11 @@
 html {
   scroll-behavior: smooth;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -174,7 +180,7 @@ a {
 #sec-04 .content {
   color: #565d66;
   position: absolute;
-  top: 36%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -203,6 +209,46 @@ a {
   background-color: #efefef;
 }
 
+.invitation {
+  animation-name: none;
+  animation-iteration-count: infinite;
+  animation-duration: 3s;
+  animation-timing-function: ease-in;
+}
+
+.invitation-board {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  overflow: scroll;
+  width: 500px;
+  max-height: 300px;
+  background-color: black;
+  z-index: 9;
+}
+
+.invitation-board .invitation-row {
+  border-bottom: 1px solid red;
+  font-family: "twayair";
+  text-align: center;
+  padding: 20px;
+}
+
+.invitation-board .invitation-row .inv-homeAway {
+  text-align: center;
+  font-size: 14px;
+}
+
+.invitation-board .invitation-row .inv-title {
+  text-align: center;
+  font-size: 16px;
+}
+
+.invitation-board .invitation-row a {
+  color: rgb(187, 70, 216);
+}
+
 @font-face {
   font-family: "impact";
   src: url("../fonts/impact.ttf");
@@ -214,4 +260,25 @@ a {
     format("woff");
   font-weight: normal;
   font-style: normal;
+}
+
+@keyframes rainbow {
+  0% {
+    color: rgb(216, 70, 70);
+  }
+  20% {
+    color: rgb(216, 148, 70);
+  }
+  40% {
+    color: rgb(153, 216, 70);
+  }
+  60% {
+    color: rgb(70, 216, 148);
+  }
+  80% {
+    color: rgb(187, 70, 216);
+  }
+  100% {
+    color: rgb(216, 70, 70);
+  }
 }

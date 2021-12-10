@@ -1,66 +1,89 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>CampusRun</title>
-  </head>
-  <body>
-    <h1>Campus Run</h1>
-    <p>Campus Run 사이트 입니다.</p>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>CampusRun</title>
-    <link rel="shortcut icon" href="TemplateDataGameView/favicon.ico" />
-    <link rel="stylesheet" href="TemplateDataGameView/style.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/progressbar.css" />
-    <link rel="stylesheet" href="TemplateDataGameView/plaza_style.css" />
-    <script src="TemplateDataGameView/UnityProgress.js"></script>
-    <script src="BuildGameView/UnityLoader.js"></script>
+    <link rel="shortcut icon" href="TemplateDataNewGameView/favicon.ico" />
+    <link rel="stylesheet" href="TemplateDataNewGameView/style.css" />
+    <link rel="stylesheet" href="../static/css/progressbar.css" />
+    <link rel="stylesheet" href="../static/css/gameresult.css" />
+    <link rel="stylesheet" href="../static/css/gameScene.css" />
+    <script src="TemplateDataNewGameView/UnityProgress.js"></script>
+    <script src="BuildNewGameView/UnityLoader.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
-    <!-- <script src="test.js"></script> -->
-
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="../static/js/gameManager.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"
+    ></script>
     <script>
       var unityInstance = UnityLoader.instantiate(
         "unityContainer",
-        "BuildGameView/Downloads.json",
+        "BuildNewGameView/Desktop.json",
         { onProgress: UnityProgress }
       );
     </script>
   </head>
   <body>
-    <div class="progresscontent">
-      <div class="progressbar">
-        <div class="color"></div>
-      </div>
+    <div class="progressview" style="display: block;">
+      <img src="../Assets/image/logo-long-black.png" class="logo-left" onclick="location.href='/home'">
+      <div class="progresstext">LOADING...</div>
+      <img src="../TemplateDataPlaza/wheel.png" class="tire tire-rotate">
     </div>
-    <div class="webgl-content">
-      <div id="unityContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-      </div>
+
+    <div class="webgl-content" id ="webgl-id" style="margin: 0; display:none;">
+      <div id="unityContainer" style="width: 100vw; height: 100vh"></div>
     </div>
-    <button class="start-btn" id="btn_id" onclick="emitJoin()">
-      GO TO PLAZA
-    </button>
+
+    <div class="winnerPopUp">
+      <span class="winnerName"></span>님이 1등으로 결승선을 통과하였습니다!<br>
+      잠시 후 경기가 종료됩니다.
+    </div>
+
+    <div class="endCountDown">
+      10
+    </div>
+
+
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="ranking-title">
+          <img src="../Assets/image/WIN.png">
+        </div>
+        <div class="ranking-body">
+          <table>
+            <thead>
+              <tr>
+                <td>순위</td>
+                <td>닉네임</td>
+                <td>대학교</td>
+                <td>랩타임</td>
+              </tr>
+            </thead>
+            <tbody class="resultTableBody">
+              <tr class="spacer">
+                <td>&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="univ-logo">
+          <div class='winner' style="font-family: 'impact'; font-size: 30px; font-weight: bold; letter-spacing: 4px;">우승 학교</div>
+          <img src="../Assets/image/caulogo.png">
+        </div>
+        <button class="close-btn" onClick="close_pop();">CLOSE</button>
+      </div>
+ 
+    </div>
+
   </body>
-  <script>
-    function emitJoin() {
-      socket.emit(
-        "LOGIN",
-        JSON.stringify({
-          name: `<%= kakaoEmail %>`,
-          position: "-50:124.633828:2",
-          avatar: "1"
-        })
-      );
-      document.getElementById("btn_id").style.display = "none";
-    }
-  </script>
+    <div class="KAKAOID" style="display: none"><%= kakaoId %></div>
+    <div class="username" style="display: none"><%= userName %></div>
+  </body>
+  
 </html>
