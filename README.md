@@ -1,7 +1,7 @@
 # 🏫 Campus-Run
 > Campus-Run is a 3D racing game set on a college campus. <br>
-> We proposed this service to comfort university students who are unable to visit the campus in person due to COVID-19. <br>
-> We're providing various ways to communicate with people from different universities such as text-chat and video-chat. <br>
+> Designed this service to comfort university students who are unable to visit the campus in person due to the COVID-19. <br>
+> Providing various ways(text and video chat) to communicate with people from different universities <br>
 > **Enjoy your sprint!** and never miss the chance to socialize with people without a mask 😷.
 
 <div align="center">
