@@ -5,7 +5,7 @@ window.onload = async () => {
 
   let verifyNickName = await ajaxRequest(
     "GET",
-    "http://10.210.96.142:8000/api/nickname",
+    "http://172.30.1.33:8000/api/nickname",
     { id, nickname }
   );
 

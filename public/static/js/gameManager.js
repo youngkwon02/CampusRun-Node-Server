@@ -39,7 +39,7 @@ const emitJoin = async () => {
   let now = new Date().getTime() + 10000;
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.96.142:8000/game/api/new-record",
+    "http://172.30.1.33:8000/game/api/new-record",
     {
       kakaoId: KAKAOID,
       currentURL: currentURL,
@@ -51,7 +51,7 @@ const emitJoin = async () => {
 const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.96.142:8000/game/api/room-status-by-url",
+    "http://172.30.1.33:8000/game/api/room-status-by-url",
     {
       currentURL: currentURL,
     }
@@ -67,7 +67,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
         emitJoin();
       }
       clearInterval(checkInterv);
-    }, 28000);
+    }, 30000);
   } else {
     console.log("Not yet..");
   }
@@ -77,7 +77,7 @@ const checkGameStart = async (currentURL, checkInterv, emitJoinCall) => {
 const checkGameEnd = async (currentURL, checkInterv) => {
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.96.142:8000/game/api/end-check",
+    "http://172.30.1.33:8000/game/api/end-check",
     {
       gameURL: currentURL,
     }
@@ -122,7 +122,7 @@ const endCountDown = (currentURL) => {
 const updateResultBoard = async (currentURL) => {
   let res = await ajaxRequest(
     "GET",
-    "http://10.210.96.142:8000/game/api/result-board",
+    "http://172.30.1.33:8000/game/api/result-board",
     {
       gameURL: currentURL,
     }
